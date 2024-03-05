@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA6D79662B97A9DD0054535A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D79652B97A9DD0054535A /* LocationManager.swift */; };
 		FAF6E6072B970BF600CAAD7E /* DrivUsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E6062B970BF600CAAD7E /* DrivUsApp.swift */; };
 		FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E6082B970BF600CAAD7E /* ContentView.swift */; };
 		FAF6E60B2B970BF800CAAD7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF6E60A2B970BF800CAAD7E /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA6D79652B97A9DD0054535A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FAF6E6032B970BF600CAAD7E /* DrivUs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrivUs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF6E6062B970BF600CAAD7E /* DrivUsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivUsApp.swift; sourceTree = "<group>"; };
 		FAF6E6082B970BF600CAAD7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				FAF6E6082B970BF600CAAD7E /* ContentView.swift */,
 				FAF6E60A2B970BF800CAAD7E /* Assets.xcassets */,
 				FAF6E60C2B970BF800CAAD7E /* Preview Content */,
+				FA6D79652B97A9DD0054535A /* LocationManager.swift */,
 			);
 			path = DrivUs;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			files = (
 				FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */,
 				FAF6E6072B970BF600CAAD7E /* DrivUsApp.swift in Sources */,
+				FA6D79662B97A9DD0054535A /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
