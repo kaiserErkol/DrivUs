@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct DrivUsApp: App {
+    var viewModel = MatchViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-        }
+                    ContentView() // Dein Hauptansicht
+                        .environmentObject(viewModel)
+                }
     }
 }
