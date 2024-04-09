@@ -14,32 +14,62 @@ struct ContentView: View {
     @StateObject var locationManager = LocationManager()
     
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                                           latitudinalMeters: 1000, longitudinalMeters: 1000)
+                                           latitudinalMeters: 10000000, longitudinalMeters: 5000000)
     @State var userLocationAnnotations: [UserLocationAnnotation] = []
     
+    let stationaryLocation = UserLocationAnnotation(coordinate: CLLocationCoordinate2D(latitude: 60.12312, longitude: 122.4194))
+    
+    var combinedAnnotations: [UserLocationAnnotation] {
+        userLocationAnnotations + [stationaryLocation]
+    }
+    
+    private let places = [
+        UserLocationAnnotation(coordinate: CLLocationCoordinate2D(latitude: 40.83859036140747, longitude: 14.24945566830365)),
+        UserLocationAnnotation(coordinate: CLLocationCoordinate2D(latitude: 40.828206, longitude: 14.247549)),
+    ]
+    
     let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    
+    let walkingRoute: [CLLocationCoordinate2D] = [
+        CLLocationCoordinate2D(latitude: 40.836456,longitude: 14.307014),
+        CLLocationCoordinate2D(latitude: 40.835654,longitude: 14.304346),
+        CLLocationCoordinate2D(latitude: 40.836478,longitude: 14.302593),
+        CLLocationCoordinate2D(latitude: 40.836936,longitude: 14.302464)
+    ]
     
     var body: some View {
         VStack {
             
-            Map(coordinateRegion: $region, annotationItems: userLocationAnnotations) { location in
-                MapAnnotation(coordinate: location.coordinate) {
-                    // Hier können Sie ein benutzerdefiniertes SwiftUI-View für die Annotation angeben.
-                    Circle()
-                        .strokeBorder(Color.blue, lineWidth: 3)
-                        .background(Circle().fill(Color.blue.opacity(0.5)))
-                        .frame(width: 30, height: 30)
+                Map {
+                    /// The Map Polyline map content object
+                    MapPolyline(coordinates: walkingRoute)
+                        .stroke(.blue, lineWidth: 5)
                 }
-            }
-            .frame(height: 600)
             
+            
+            /*
+            Map(coordinateRegion: $region, annotationItems: userLocationAnnotations) { location in
+                
+                
+                 MapAnnotation(coordinate: location.coordinate) {
+                    Circle()
+                        .strokeBorder(Color.blue, lineWidth: 2)
+                        .background(Circle().fill(Color.blue.opacity(0.5)))
+                        .frame(width: 20, height: 20)
+                }
+                
+                
+                //MapPolyline(coordinates: location.coordinate)
+            }
+            */
+    
             if let location = locationManager.location {
                             Text("Your location: \(location.latitude), \(location.longitude)")
-                        }
+            }
             LocationButton {
                 locationManager.requestLocation()
             }
-            .frame(height: 44)
+            .frame(height: 30)
         }
         .padding()
         .onReceive(locationManager.$location) { newLocation in

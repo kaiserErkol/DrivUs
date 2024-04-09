@@ -25,13 +25,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.first?.coordinate
-        print(location.self as Any)
+        //print(location.self as Any)
         
-        // Example calculation of Haversine distance
-        let lat1 = 51.5007
-        let lon1 = 0.1246
+        // Haversine distance calculation
+        
+        // person A
+        let lat1 = 48.2590
+        let lon1 = 14.2439
+        
+        // person B
         let lat2 = location?.latitude ?? 0.0
         let lon2 = location?.longitude ?? 0.0
+        
         let distance = haversine(lat1: lat1, lon1: lon1, lat2: lat2, lon2: lon2)
         print("Distance from fixed location: \(distance) km")
     }
