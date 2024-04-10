@@ -178,11 +178,15 @@ struct MapView: UIViewRepresentable {
         
         let directions = MKDirections(request: request)
         directions.calculate { response, error in
-            guard let route = response?.routes.first else { return }
-            mapView.addAnnotation([p1,p2] as! MKAnnotation)
-            mapView.addOverlay(route.polyline)
-            mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-            
+            DispatchQueue.main.async {
+                guard let route = response?.routes.first, error == nil else { return }
+                //mapView.addAnnotation([p1,p2] as! MKAnnotation)
+                mapView.addOverlay(route.polyline)
+                mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                
+                let annotations = [p1, p2].compactMap{MKPlacemark(placemark: $0)}
+                mapView.addAnnotations(annotations)
+            }
         }
         
         return mapView
