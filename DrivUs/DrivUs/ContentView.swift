@@ -159,13 +159,11 @@ struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     
     func makeCoordinator() -> MapViewCoordinator {
-        
         return MapViewCoordinator()
     }
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
-        mapView.delegate = context.coordinator
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
                                         latitudinalMeters: 10000000, longitudinalMeters: 5000000)
         mapView.setRegion(region, animated: true)
@@ -176,10 +174,11 @@ struct MapView: UIViewRepresentable {
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: p1)
         request.destination = MKMapItem(placemark: p2)
+        request.transportType = .automobile
         
         let directions = MKDirections(request: request)
         directions.calculate { response, error in
-            guard let route = response?.routes.first else {return }
+            guard let route = response?.routes.first else { return }
             mapView.addAnnotation([p1,p2] as! MKAnnotation)
             mapView.addOverlay(route.polyline)
             mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
