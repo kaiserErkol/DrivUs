@@ -10,6 +10,11 @@ import MapKit
 struct SwipeView: View {
     @State private var currentIndex: Int = 0
     @State private var isMatchShown: Bool = false
+    @StateObject var locationManager = LocationManager()
+    @State var userLocations: [UserLocation] = []
+    @State var route: MKRoute?
+    @State var routeDisplaying = false
+    
     @EnvironmentObject var viewModel: MatchViewModel
     let carpoolData: [Carpool]
     //fiar standort
@@ -32,12 +37,15 @@ struct SwipeView: View {
                     
                     if currentIndex < carpoolData.count {
                         let carpool = carpoolData[currentIndex]
-                        Map(coordinateRegion: $region)
-                            .frame(height: UIScreen.main.bounds.height / 2)
-                            .frame(width: UIScreen.main.bounds.width) // 1/3 des Bildschirmes
+                        
+                        MapView()
+                        
+                       // Map(coordinateRegion: $region)
+                         //   .frame(height: UIScreen.main.bounds.height / 2)
+                           // .frame(width: UIScreen.main.bounds.width) // 1/3 des Bildschirmes
                             
                             
-                        Color.blue
+                        Color.white.opacity(0.9)
                                 // Ignore just for the color
                                 .overlay(
                         VStack {
@@ -145,4 +153,87 @@ struct SwipeView_Previews: PreviewProvider {
         return SwipeView(carpoolData: sampleCarpoolData)
             .environmentObject(MatchViewModel()) // Wenn du einen MatchViewModel benötigst
     }
+}
+
+extension CLLocationCoordinate2D {
+    static var userLocation: CLLocationCoordinate2D {
+        return .init(latitude: 48.2590, longitude: 14.2439)
+    }
+}
+
+
+struct UserLocation: Identifiable, Hashable {
+    let id = UUID()
+    var coordinate: CLLocationCoordinate2D
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: UserLocation, rhs: UserLocation) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+struct MapView: UIViewRepresentable {
+    typealias UIViewType = MKMapView
+    
+    //@Binding var directions: [String]
+    
+    func makeCoordinator() -> MapViewCoordinator {
+        return MapViewCoordinator()
+    }
+    
+    func makeUIView(context: Context) -> MKMapView {
+        let mapView = MKMapView()
+        mapView.delegate = context.coordinator
+        
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                                        latitudinalMeters: 10000000, longitudinalMeters: 5000000)
+        mapView.setRegion(region, animated: true)
+        
+        let newHeight = UIScreen.main.bounds.height / 2
+        let newWidth = UIScreen.main.bounds.width / 3
+        mapView.frame = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+        
+            
+        
+        let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.3069, longitude: 14.2858))
+        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 47.8095, longitude: 13.0550))
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: p1)
+        request.destination = MKMapItem(placemark: p2)
+        request.transportType = .automobile
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { response, error in
+            DispatchQueue.main.async {
+                guard let route = response?.routes.first, error == nil else { return }
+                //mapView.addAnnotation([p1,p2] as! MKAnnotation)
+                mapView.addOverlay(route.polyline)
+                mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                //self.directions = route.steps.map { $0.instructions }.filter{ !$0.isEmpty }
+                
+                let annotations = [p1, p2].compactMap{MKPlacemark(placemark: $0)}
+                mapView.addAnnotations(annotations)
+            }
+        }
+        
+        return mapView
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        // Update the view
+    }
+}
+
+class MapViewCoordinator: NSObject, MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = .blue
+        renderer.lineWidth = 3
+        return renderer
+    }
+    
 }
