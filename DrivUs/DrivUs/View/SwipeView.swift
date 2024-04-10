@@ -28,22 +28,56 @@ struct SwipeView: View {
                         currentIndex += 1
                     })
             } else {
-                VStack {
-                    Map(coordinateRegion: $region)
-                        .frame(height: UIScreen.main.bounds.height / 3) // 1/3 des Bildschirmes
-                        .edgesIgnoringSafeArea(.top)
-                    Spacer()
+                VStack(spacing:0) {
+                    
                     if currentIndex < carpoolData.count {
                         let carpool = carpoolData[currentIndex]
+                        Map(coordinateRegion: $region)
+                            .frame(height: UIScreen.main.bounds.height / 2)
+                            .frame(width: UIScreen.main.bounds.width) // 1/3 des Bildschirmes
+                            
+                            
+                        Color.blue
+                                // Ignore just for the color
+                                .overlay(
                         VStack {
-                            Text("\(carpool.from) nach \(carpool.to)").padding()
+                            //buttons
+                            HStack (spacing:100){
+                                Button(action: {
+                                    rejectCurrent()
+                                }) {
+                                    Image(systemName: "xmark")
+                                        .padding()
+                                        .background(Color.red)
+                                        .foregroundColor(.white)
+                                        .clipShape(Circle())
+                                        
+                                }
+
+                                Button(action: {
+                                    acceptCurrent()
+                                }) {
+                                    Image(systemName: "checkmark")
+                                        .padding()
+                                        .background(Color.green)
+                                        .foregroundColor(.white)
+                                        .clipShape(Circle())
+                                }
+                            }.padding(.top,5)
+                            
+                            Text("\(carpool.from) - \(carpool.to)").padding(.top,20)
                             Text("\(carpool.time)").bold().padding()
-                            Text("\(carpool.driver)").padding()
-                        }
-                        .padding()
-                        .background(Color.mint)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
+                            Text("\(carpool.driver)").padding(5)
+                            // check or x
+                            
+                        }.frame(width: UIScreen.main.bounds.width)
+                        .padding(.bottom,10)
+                        .frame(height: UIScreen.main.bounds.height*1.5))
+                        
+                                
+                        .cornerRadius(20)
+                        .shadow(color: .black, radius: 15,x:-0,y:-5)
+                        .frame(width: UIScreen.main.bounds.width)
                         .gesture(
                             DragGesture()
                                 .onEnded { gesture in
@@ -58,37 +92,19 @@ struct SwipeView: View {
                         )
                         .animation(.easeInOut, value: currentIndex)
                         .transition(.slide)
+                        .frame(height: UIScreen.main.bounds.height / 3)
+                        
                     } else {
                         // Anzeigen, dass keine weiteren Matches vorhanden sind
                         Text("No Matches More")
                     }
                     Spacer()
-                    HStack {
-                        Button(action: {
-                            rejectCurrent()
-                        }) {
-                            Image(systemName: "xmark")
-                                .padding()
-                                .background(Color.red)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                                
-                        }
-
-                        Button(action: {
-                            acceptCurrent()
-                        }) {
-                            Image(systemName: "checkmark")
-                                .padding()
-                                .background(Color.green)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                        }
-                    }.padding()
-                }
+                    
+                }.frame(width: UIScreen.main.bounds.width)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.bottom,20)
         
     }
 
@@ -115,5 +131,18 @@ struct SwipeView: View {
     
             isMatchShown = false
         }
+    }
+}
+
+
+struct SwipeView_Previews: PreviewProvider {
+    static var previews: some View {
+        let sampleCarpoolData = [
+            Carpool(from: "GMUNDEN", to: "THENING", time: "10:00", driver: "Natalie Schmitzberger", swipe: true),
+            Carpool(from: "C", to: "D", time: "12:00", driver: "Alice P.", swipe: false)
+        ]
+        
+        return SwipeView(carpoolData: sampleCarpoolData)
+            .environmentObject(MatchViewModel()) // Wenn du einen MatchViewModel benötigst
     }
 }

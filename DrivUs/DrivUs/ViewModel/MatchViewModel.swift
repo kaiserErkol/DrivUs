@@ -27,9 +27,9 @@ struct Carpool: Hashable {
 
 // Beispiel-Daten
 let sampleCarpoolData = [
-    Carpool(from: "München", to: "Berlin", time: "08:00", driver: "Max Mustermann", swipe: true),
-    Carpool(from: "Thening", to: "Leonding", time: "09:30", driver: "Maria Musterfrau", swipe: true),
-    Carpool(from: "Thening", to: "Leonding", time: "11:15", driver: "John Doe", swipe: false),
-    Carpool(from: "Hitzing", to: "Fumfum", time: "11:15", driver: "John Doe", swipe: false),
-    Carpool(from: "Stadt Eiiiii", to: "Stadt F", time: "11:15", driver: "John Doe", swipe: true)
+    Carpool(from: "MÜNCHEN", to: "BERLIN", time: "08:00", driver: "Max Mustermann", swipe: true),
+    Carpool(from: "THENING", to: "LEONDING", time: "09:30", driver: "Maria Musterfrau", swipe: true),
+    Carpool(from: "THENING", to: "LEONDING", time: "11:15", driver: "John Doe", swipe: false),
+    Carpool(from: "HITZING", to: "THENING", time: "11:15", driver: "John Doe", swipe: false),
+    Carpool(from: "OTTENSHEIM", to: "LINZ", time: "11:15", driver: "John Doe", swipe: true)
 ]
