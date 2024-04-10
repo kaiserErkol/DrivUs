@@ -17,6 +17,8 @@ struct ContentView: View{
     @State var userLocations: [UserLocation] = []
     @State var route: MKRoute?
     @State var routeDisplaying = false
+    @State var directions: [String] = []
+    @State var showDirections = false
     //@State var routeDestination: UserLocation
     
     /*
@@ -45,13 +47,14 @@ struct ContentView: View{
     
     var body: some View {
         VStack {
-            MapView()
+            MapView(directions: $directions)
             
             Button(action: {
-                
+                self.showDirections.toggle()
             }, label: {
                 Text("DrvUs Yeaah !")
             })
+            .disabled(directions.isEmpty)
             .padding()
             /*
             Map(position: $cameraPosition) {
@@ -111,6 +114,23 @@ struct ContentView: View{
              */
         }
         .padding()
+        .sheet(isPresented: $showDirections, content: {
+            VStack {
+                Text("Directions")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
+                
+                Divider().background(Color.blue)
+                
+                List {
+                    ForEach(0..<self.directions.count, id: \.self) { i in
+                        Text(self.directions[i])
+                            .padding()
+                    }
+                }
+            }
+        })
         /*
         .onReceive(locationManager.$location) { newLocation in
             DispatchQueue.main.async {
@@ -125,6 +145,7 @@ struct ContentView: View{
         }
          */
     }
+    
 }
 
 extension CLLocationCoordinate2D {
@@ -158,13 +179,15 @@ struct UserLocation: Identifiable, Hashable {
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     
+    @Binding var directions: [String]
+    
     func makeCoordinator() -> MapViewCoordinator {
         return MapViewCoordinator()
     }
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
-        mapView.delegate = context.coordinator 
+        mapView.delegate = context.coordinator
         
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
                                         latitudinalMeters: 10000000, longitudinalMeters: 5000000)
@@ -185,6 +208,7 @@ struct MapView: UIViewRepresentable {
                 //mapView.addAnnotation([p1,p2] as! MKAnnotation)
                 mapView.addOverlay(route.polyline)
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                self.directions = route.steps.map { $0.instructions }.filter{ !$0.isEmpty }
                 
                 let annotations = [p1, p2].compactMap{MKPlacemark(placemark: $0)}
                 mapView.addAnnotations(annotations)
