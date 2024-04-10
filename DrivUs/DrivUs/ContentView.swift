@@ -17,8 +17,8 @@ struct ContentView: View{
     @State var userLocations: [UserLocation] = []
     @State var route: MKRoute?
     @State var routeDisplaying = false
-    @State var directions: [String] = []
-    @State var showDirections = false
+   // @State var directions: [String] = []
+   // @State var showDirections = false
     //@State var routeDestination: UserLocation
     
     /*
@@ -47,14 +47,15 @@ struct ContentView: View{
     
     var body: some View {
         VStack {
-            MapView(directions: $directions)
-            
+            MapView(/*directions: $directions*/)
+            /*
             Button(action: {
                 self.showDirections.toggle()
             }, label: {
                 Text("DrvUs Yeaah !")
             })
-            .disabled(directions.isEmpty)
+             */
+            //.disabled(directions.isEmpty)
             .padding()
             /*
             Map(position: $cameraPosition) {
@@ -114,7 +115,7 @@ struct ContentView: View{
              */
         }
         .padding()
-        .sheet(isPresented: $showDirections, content: {
+        /*.sheet(isPresented: $showDirections, content: {
             VStack {
                 Text("Directions")
                     .font(.largeTitle)
@@ -130,7 +131,7 @@ struct ContentView: View{
                     }
                 }
             }
-        })
+        })*/
         /*
         .onReceive(locationManager.$location) { newLocation in
             DispatchQueue.main.async {
@@ -179,7 +180,7 @@ struct UserLocation: Identifiable, Hashable {
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     
-    @Binding var directions: [String]
+    //@Binding var directions: [String]
     
     func makeCoordinator() -> MapViewCoordinator {
         return MapViewCoordinator()
@@ -208,7 +209,7 @@ struct MapView: UIViewRepresentable {
                 //mapView.addAnnotation([p1,p2] as! MKAnnotation)
                 mapView.addOverlay(route.polyline)
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                self.directions = route.steps.map { $0.instructions }.filter{ !$0.isEmpty }
+                //self.directions = route.steps.map { $0.instructions }.filter{ !$0.isEmpty }
                 
                 let annotations = [p1, p2].compactMap{MKPlacemark(placemark: $0)}
                 mapView.addAnnotations(annotations)
