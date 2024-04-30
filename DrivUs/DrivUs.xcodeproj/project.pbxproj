@@ -13,6 +13,12 @@
 		E01329E22BBCF0F9007D6F30 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01329E12BBCF0F9007D6F30 /* MatchViewModel.swift */; };
 		E01329E52BBD014C007D6F30 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01329E42BBD014C007D6F30 /* MatchView.swift */; };
 		E01573C92BC61241009588A1 /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01573C82BC61241009588A1 /* SwipeView.swift */; };
+		FA6BF4162BE0CC6900D08CF7 /* RidesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4152BE0CC6900D08CF7 /* RidesService.swift */; };
+		FA6BF4192BE0CDA000D08CF7 /* MatchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4182BE0CDA000D08CF7 /* MatchesService.swift */; };
+		FA6BF41C2BE0CF3800D08CF7 /* RideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF41B2BE0CF3800D08CF7 /* RideModel.swift */; };
+		FA6BF41E2BE0CF4700D08CF7 /* MatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF41D2BE0CF4700D08CF7 /* MatchModel.swift */; };
+		FA6BF4212BE0D6EC00D08CF7 /* ViewModel_Rides.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4202BE0D6EC00D08CF7 /* ViewModel_Rides.swift */; };
+		FA6BF4232BE0D83F00D08CF7 /* ViewModel_Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4222BE0D83F00D08CF7 /* ViewModel_Matches.swift */; };
 		FA6D79662B97A9DD0054535A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D79652B97A9DD0054535A /* LocationManager.swift */; };
 		FAF6E6072B970BF600CAAD7E /* DrivUsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E6062B970BF600CAAD7E /* DrivUsApp.swift */; };
 		FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E6082B970BF600CAAD7E /* ContentView.swift */; };
@@ -47,6 +53,12 @@
 		E01329E12BBCF0F9007D6F30 /* MatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
 		E01329E42BBD014C007D6F30 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		E01573C82BC61241009588A1 /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
+		FA6BF4152BE0CC6900D08CF7 /* RidesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidesService.swift; sourceTree = "<group>"; };
+		FA6BF4182BE0CDA000D08CF7 /* MatchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesService.swift; sourceTree = "<group>"; };
+		FA6BF41B2BE0CF3800D08CF7 /* RideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideModel.swift; sourceTree = "<group>"; };
+		FA6BF41D2BE0CF4700D08CF7 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
+		FA6BF4202BE0D6EC00D08CF7 /* ViewModel_Rides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel_Rides.swift; sourceTree = "<group>"; };
+		FA6BF4222BE0D83F00D08CF7 /* ViewModel_Matches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel_Matches.swift; sourceTree = "<group>"; };
 		FA6D79652B97A9DD0054535A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FAF6E6032B970BF600CAAD7E /* DrivUs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrivUs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF6E6062B970BF600CAAD7E /* DrivUsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivUsApp.swift; sourceTree = "<group>"; };
@@ -100,8 +112,28 @@
 			isa = PBXGroup;
 			children = (
 				E01329E12BBCF0F9007D6F30 /* MatchViewModel.swift */,
+				FA6BF4202BE0D6EC00D08CF7 /* ViewModel_Rides.swift */,
+				FA6BF4222BE0D83F00D08CF7 /* ViewModel_Matches.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA6BF41A2BE0CDA800D08CF7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				FA6BF4152BE0CC6900D08CF7 /* RidesService.swift */,
+				FA6BF4182BE0CDA000D08CF7 /* MatchesService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		FA6BF41F2BE0CF4E00D08CF7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA6BF41D2BE0CF4700D08CF7 /* MatchModel.swift */,
+				FA6BF41B2BE0CF3800D08CF7 /* RideModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FAF6E5FA2B970BF600CAAD7E = {
@@ -135,6 +167,8 @@
 				FAF6E60A2B970BF800CAAD7E /* Assets.xcassets */,
 				FAF6E60C2B970BF800CAAD7E /* Preview Content */,
 				FA6D79652B97A9DD0054535A /* LocationManager.swift */,
+				FA6BF41A2BE0CDA800D08CF7 /* Service */,
+				FA6BF41F2BE0CF4E00D08CF7 /* Model */,
 			);
 			path = DrivUs;
 			sourceTree = "<group>";
@@ -294,15 +328,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA6BF4232BE0D83F00D08CF7 /* ViewModel_Matches.swift in Sources */,
+				FA6BF4162BE0CC6900D08CF7 /* RidesService.swift in Sources */,
 				E01329D52BBCE3E1007D6F30 /* Model.swift in Sources */,
+				FA6BF41E2BE0CF4700D08CF7 /* MatchModel.swift in Sources */,
 				FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */,
 				E01329E22BBCF0F9007D6F30 /* MatchViewModel.swift in Sources */,
 				E01573C92BC61241009588A1 /* SwipeView.swift in Sources */,
 				E01329E52BBD014C007D6F30 /* MatchView.swift in Sources */,
+				FA6BF4192BE0CDA000D08CF7 /* MatchesService.swift in Sources */,
 				E01329DD2BBCECBB007D6F30 /* HomeView.swift in Sources */,
 				FAF6E6072B970BF600CAAD7E /* DrivUsApp.swift in Sources */,
 				FA6D79662B97A9DD0054535A /* LocationManager.swift in Sources */,
 				E01329DF2BBCED48007D6F30 /* PersonView.swift in Sources */,
+				FA6BF4212BE0D6EC00D08CF7 /* ViewModel_Rides.swift in Sources */,
+				FA6BF41C2BE0CF3800D08CF7 /* RideModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

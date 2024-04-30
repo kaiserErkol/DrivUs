@@ -10,11 +10,12 @@ import MapKit
 struct SwipeView: View {
     @State private var currentIndex: Int = 0
     @State private var isMatchShown: Bool = false
+    
     @StateObject var locationManager = LocationManager()
     @State var userLocations: [UserLocation] = []
     @State var route: MKRoute?
     @State var routeDisplaying = false
-    
+        
     @EnvironmentObject var viewModel: MatchViewModel
     let carpoolData: [Carpool]
     //fiar standort
