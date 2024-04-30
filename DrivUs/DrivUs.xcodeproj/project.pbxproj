@@ -19,6 +19,7 @@
 		FA6BF41E2BE0CF4700D08CF7 /* MatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF41D2BE0CF4700D08CF7 /* MatchModel.swift */; };
 		FA6BF4212BE0D6EC00D08CF7 /* ViewModel_Rides.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4202BE0D6EC00D08CF7 /* ViewModel_Rides.swift */; };
 		FA6BF4232BE0D83F00D08CF7 /* ViewModel_Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4222BE0D83F00D08CF7 /* ViewModel_Matches.swift */; };
+		FA6BF4252BE0E0E200D08CF7 /* MatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4242BE0E0E200D08CF7 /* MatchManager.swift */; };
 		FA6D79662B97A9DD0054535A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D79652B97A9DD0054535A /* LocationManager.swift */; };
 		FAF6E6072B970BF600CAAD7E /* DrivUsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E6062B970BF600CAAD7E /* DrivUsApp.swift */; };
 		FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E6082B970BF600CAAD7E /* ContentView.swift */; };
@@ -59,6 +60,7 @@
 		FA6BF41D2BE0CF4700D08CF7 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
 		FA6BF4202BE0D6EC00D08CF7 /* ViewModel_Rides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel_Rides.swift; sourceTree = "<group>"; };
 		FA6BF4222BE0D83F00D08CF7 /* ViewModel_Matches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel_Matches.swift; sourceTree = "<group>"; };
+		FA6BF4242BE0E0E200D08CF7 /* MatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchManager.swift; sourceTree = "<group>"; };
 		FA6D79652B97A9DD0054535A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FAF6E6032B970BF600CAAD7E /* DrivUs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrivUs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF6E6062B970BF600CAAD7E /* DrivUsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivUsApp.swift; sourceTree = "<group>"; };
@@ -136,6 +138,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		FA6BF4262BE0E0E700D08CF7 /* Management */ = {
+			isa = PBXGroup;
+			children = (
+				FA6BF4242BE0E0E200D08CF7 /* MatchManager.swift */,
+				FA6D79652B97A9DD0054535A /* LocationManager.swift */,
+			);
+			path = Management;
+			sourceTree = "<group>";
+		};
 		FAF6E5FA2B970BF600CAAD7E = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +177,7 @@
 				E01329D42BBCE3E1007D6F30 /* Model.swift */,
 				FAF6E60A2B970BF800CAAD7E /* Assets.xcassets */,
 				FAF6E60C2B970BF800CAAD7E /* Preview Content */,
-				FA6D79652B97A9DD0054535A /* LocationManager.swift */,
+				FA6BF4262BE0E0E700D08CF7 /* Management */,
 				FA6BF41A2BE0CDA800D08CF7 /* Service */,
 				FA6BF41F2BE0CF4E00D08CF7 /* Model */,
 			);
@@ -333,6 +344,7 @@
 				E01329D52BBCE3E1007D6F30 /* Model.swift in Sources */,
 				FA6BF41E2BE0CF4700D08CF7 /* MatchModel.swift in Sources */,
 				FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */,
+				FA6BF4252BE0E0E200D08CF7 /* MatchManager.swift in Sources */,
 				E01329E22BBCF0F9007D6F30 /* MatchViewModel.swift in Sources */,
 				E01573C92BC61241009588A1 /* SwipeView.swift in Sources */,
 				E01329E52BBD014C007D6F30 /* MatchView.swift in Sources */,
