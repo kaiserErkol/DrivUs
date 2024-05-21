@@ -10,15 +10,16 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         VStack {
-            Image(systemName: "mappin")
+            Image(systemName: "car.rear")
                 .resizable()
-                .frame(width: 150, height: 150)
+                .frame(width: 150, height: 130)
                 .padding(50)
-                .background(Color.green)
-                .foregroundColor(.black)
+                .background(Color.drivusBlue)
+                .foregroundColor(.white)
                 .clipShape(Circle())
-                .padding(.horizontal,80)
+                .padding(.top,80)
                 .padding(.vertical,20)
+                .shadow(color: .black, radius: -15,x:5,y:5)
                 
                 // Zwei Hauptbuttons in der Mitte
                 VStack(spacing: -15) {
@@ -27,8 +28,8 @@ struct HomeView: View {
                     }
                     .padding(.horizontal,80)
                     .padding(.vertical,20)
-                    .background(Color.green)
-                    .foregroundColor(.white)
+                    .background(Color.gray)
+                    .foregroundColor(.black)
                     .cornerRadius(20)
                     .shadow(color: .black, radius: 3,x:3,y:3)
                     .frame(width: UIScreen.main.bounds.width/1)
@@ -38,13 +39,13 @@ struct HomeView: View {
                     }
                     .padding(.horizontal,100)
                     .padding(.vertical,20)
-                    .background(Color.green)
+                    .background(Color.drivusBlue)
                     .foregroundColor(.white)
                     .cornerRadius(20)
                     .shadow(color: .black, radius: 3,x:3,y:3)
                     .frame(width: UIScreen.main.bounds.width/1)
                     .frame(height: 100)
-                }
+                }.padding(.top,30)
             Spacer()
             
             // Eine "Fake"-TabBar könnte man hier am unteren Rand platzieren,

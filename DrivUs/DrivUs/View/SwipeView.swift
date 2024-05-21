@@ -8,6 +8,7 @@ import SwiftUI
 import MapKit
 
 struct SwipeView: View {
+    fileprivate let urlString = "http://localhost:3000"
     @State private var currentIndex: Int = 0
     @State private var isMatchShown: Bool = false
     
@@ -46,9 +47,8 @@ struct SwipeView: View {
                            // .frame(width: UIScreen.main.bounds.width) // 1/3 des Bildschirmes
                             
                             
-                        Color.white.opacity(0.9)
-                                // Ignore just for the color
-                                .overlay(
+                        Color.drivusBlue.overlay(
+                                
                         VStack {
                             //buttons
                             HStack (spacing:100){
@@ -57,8 +57,8 @@ struct SwipeView: View {
                                 }) {
                                     Image(systemName: "xmark")
                                         .padding()
-                                        .background(Color.red)
-                                        .foregroundColor(.white)
+                                        .background(Color.white)
+                                        .foregroundColor(.black)
                                         .clipShape(Circle())
                                         
                                 }
@@ -68,24 +68,25 @@ struct SwipeView: View {
                                 }) {
                                     Image(systemName: "checkmark")
                                         .padding()
-                                        .background(Color.green)
-                                        .foregroundColor(.white)
+                                        .background(Color.white)
+                                        .foregroundColor(.black)
                                         .clipShape(Circle())
                                 }
-                            }.padding(.top,5)
+                            }.padding(.top,5).background(.drivusBlue)
                             
-                            Text("\(carpool.from) - \(carpool.to)").padding(.top,20)
-                            Text("\(carpool.time)").bold().padding()
-                            Text("\(carpool.driver)").padding(5)
+                            Text("\(carpool.from) - \(carpool.to)").padding(.top,20).foregroundColor(.white).kerning(7)
+                            Text("\(carpool.time)").bold().padding().foregroundColor(.white)
+                            Text("\(carpool.driver)").padding(5).foregroundColor(.white)
                             // check or x
                             
                         }.frame(width: UIScreen.main.bounds.width)
-                        .padding(.bottom,10)
-                        .frame(height: UIScreen.main.bounds.height*1.5))
                         
-                                
+                        .padding(.bottom,10)
+                        .background(.drivusBlue)
+                        .frame(height: UIScreen.main.bounds.height*1.5))
+                         
                         .cornerRadius(20)
-                        .shadow(color: .black, radius: 15,x:-0,y:-5)
+                        .shadow(color: .white, radius: 15,x:-0,y:-5)
                         .frame(width: UIScreen.main.bounds.width)
                         .gesture(
                             DragGesture()
@@ -238,3 +239,5 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
     }
     
 }
+
+

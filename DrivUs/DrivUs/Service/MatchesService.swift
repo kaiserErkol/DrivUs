@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 fileprivate let urlString = "http://localhost:3000/matches"
 
 func loadAllMatches() async -> [MatchObject]{
