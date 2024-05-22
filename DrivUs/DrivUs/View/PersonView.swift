@@ -13,7 +13,7 @@ struct PersonView: View {
         NavigationView {
             List(viewModel.matches, id: \.self) { match in
                 VStack(alignment: .leading) {
-                    Text("Von: \(match.from) nach \(match.to)")
+                    Text("Von: \(match.from) - \(match.to)")
                     Text("Uhrzeit: \(match.time)")
                     Text("Fahrer: \(match.driver)")
                 }

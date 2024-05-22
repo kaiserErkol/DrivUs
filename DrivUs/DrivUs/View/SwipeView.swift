@@ -7,6 +7,12 @@
 import SwiftUI
 import MapKit
 
+public var lat1 : Double = 0.0
+public var lat2: Double = 0
+var lon1: Double = 0
+var lon2: Double = 0
+var count : Int = 0
+
 struct SwipeView: View {
     fileprivate let urlString = "http://localhost:3000"
     @State private var currentIndex: Int = 0
@@ -16,6 +22,8 @@ struct SwipeView: View {
     @State var userLocations: [UserLocation] = []
     @State var route: MKRoute?
     @State var routeDisplaying = false
+    
+    
         
     @EnvironmentObject var viewModel: MatchViewModel
     let carpoolData: [Carpool]
@@ -24,8 +32,10 @@ struct SwipeView: View {
             center: CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060),
             span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
         )
-
+    
+    
     var body: some View {
+        
         ZStack {
             if isMatchShown, let match = viewModel.matches.last {
                 // MatchView anzeigen, wenn es ein Match gibt
@@ -40,6 +50,7 @@ struct SwipeView: View {
                     if currentIndex < carpoolData.count {
                         let carpool = carpoolData[currentIndex]
                         
+                         
                         MapView()
                         
                        // Map(coordinateRegion: $region)
@@ -79,7 +90,8 @@ struct SwipeView: View {
                             Text("\(carpool.driver)").padding(5).foregroundColor(.white)
                             // check or x
                             
-                        }.frame(width: UIScreen.main.bounds.width)
+                        }.frame(width: UIScreen.main.bounds.width).animation(.easeInOut, value: currentIndex)
+                            .transition(.slide)
                         
                         .padding(.bottom,10)
                         .background(.drivusBlue)
@@ -103,14 +115,15 @@ struct SwipeView: View {
                         .animation(.easeInOut, value: currentIndex)
                         .transition(.slide)
                         .frame(height: UIScreen.main.bounds.height / 3)
-                        
+                        .indexViewStyle(.page(backgroundDisplayMode: .never))
                     } else {
                         // Anzeigen, dass keine weiteren Matches vorhanden sind
                         Text("No Matches More")
                     }
                     Spacer()
                     
-                }.frame(width: UIScreen.main.bounds.width)
+                }.frame(width: UIScreen.main.bounds.width).animation(.easeInOut, value: currentIndex)
+                    .transition(.slide)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -198,10 +211,34 @@ struct MapView: UIViewRepresentable {
         let newWidth = UIScreen.main.bounds.width / 3
         mapView.frame = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
         
+        count += 1;
+        var p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.137154, longitude: 11.576124))
+        var p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 52.520008, longitude: 13.404954))
+        if count == 1 {
             
+            p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.137154, longitude: 11.576124))
+            p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 52.520008, longitude: 13.404954))
+        }
+         if count == 2 {
+             p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.25632000, longitude: 14.16263000))
+             p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.267, longitude: 14.250))
+         }
+        if count == 3 {
+            p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.25632000, longitude: 14.16263000))
+            p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.267, longitude: 14.250))
+       }
+        if count == 4 {
+            p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.25632000, longitude: 14.16263000))
+            p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.274200, longitude: 14.199200))
+       }
+        if count == 5 {
+            p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.33223000, longitude: 14.17428000))
+            p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.3000, longitude: 14.2833
+))
+       }
         
-        let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.3069, longitude: 14.2858))
-        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 47.8095, longitude: 13.0550))
+        
+        
         
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: p1)
