@@ -13,6 +13,9 @@
 		E01329E22BBCF0F9007D6F30 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01329E12BBCF0F9007D6F30 /* MatchViewModel.swift */; };
 		E01329E52BBD014C007D6F30 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01329E42BBD014C007D6F30 /* MatchView.swift */; };
 		E01573C92BC61241009588A1 /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01573C82BC61241009588A1 /* SwipeView.swift */; };
+		E047030F2BFD039B0071131C /* SwipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E047030E2BFD039B0071131C /* SwipeModel.swift */; };
+		E04703112BFD043F0071131C /* SwipesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04703102BFD043F0071131C /* SwipesService.swift */; };
+		E04703132BFD04A90071131C /* ViewModel_Swipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04703122BFD04A90071131C /* ViewModel_Swipes.swift */; };
 		FA6BF4162BE0CC6900D08CF7 /* RidesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4152BE0CC6900D08CF7 /* RidesService.swift */; };
 		FA6BF4192BE0CDA000D08CF7 /* MatchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF4182BE0CDA000D08CF7 /* MatchesService.swift */; };
 		FA6BF41C2BE0CF3800D08CF7 /* RideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BF41B2BE0CF3800D08CF7 /* RideModel.swift */; };
@@ -54,6 +57,9 @@
 		E01329E12BBCF0F9007D6F30 /* MatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
 		E01329E42BBD014C007D6F30 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		E01573C82BC61241009588A1 /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
+		E047030E2BFD039B0071131C /* SwipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeModel.swift; sourceTree = "<group>"; };
+		E04703102BFD043F0071131C /* SwipesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipesService.swift; sourceTree = "<group>"; };
+		E04703122BFD04A90071131C /* ViewModel_Swipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel_Swipes.swift; sourceTree = "<group>"; };
 		FA6BF4152BE0CC6900D08CF7 /* RidesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidesService.swift; sourceTree = "<group>"; };
 		FA6BF4182BE0CDA000D08CF7 /* MatchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesService.swift; sourceTree = "<group>"; };
 		FA6BF41B2BE0CF3800D08CF7 /* RideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideModel.swift; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 				E01329E12BBCF0F9007D6F30 /* MatchViewModel.swift */,
 				FA6BF4202BE0D6EC00D08CF7 /* ViewModel_Rides.swift */,
 				FA6BF4222BE0D83F00D08CF7 /* ViewModel_Matches.swift */,
+				E04703122BFD04A90071131C /* ViewModel_Swipes.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 			children = (
 				FA6BF4152BE0CC6900D08CF7 /* RidesService.swift */,
 				FA6BF4182BE0CDA000D08CF7 /* MatchesService.swift */,
+				E04703102BFD043F0071131C /* SwipesService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -134,6 +142,7 @@
 			children = (
 				FA6BF41D2BE0CF4700D08CF7 /* MatchModel.swift */,
 				FA6BF41B2BE0CF3800D08CF7 /* RideModel.swift */,
+				E047030E2BFD039B0071131C /* SwipeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -340,12 +349,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA6BF4232BE0D83F00D08CF7 /* ViewModel_Matches.swift in Sources */,
+				E04703132BFD04A90071131C /* ViewModel_Swipes.swift in Sources */,
 				FA6BF4162BE0CC6900D08CF7 /* RidesService.swift in Sources */,
 				E01329D52BBCE3E1007D6F30 /* Model.swift in Sources */,
 				FA6BF41E2BE0CF4700D08CF7 /* MatchModel.swift in Sources */,
+				E047030F2BFD039B0071131C /* SwipeModel.swift in Sources */,
 				FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */,
 				FA6BF4252BE0E0E200D08CF7 /* MatchManager.swift in Sources */,
 				E01329E22BBCF0F9007D6F30 /* MatchViewModel.swift in Sources */,
+				E04703112BFD043F0071131C /* SwipesService.swift in Sources */,
 				E01573C92BC61241009588A1 /* SwipeView.swift in Sources */,
 				E01329E52BBD014C007D6F30 /* MatchView.swift in Sources */,
 				FA6BF4192BE0CDA000D08CF7 /* MatchesService.swift in Sources */,
