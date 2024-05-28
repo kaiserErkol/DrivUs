@@ -19,6 +19,6 @@ struct SwipeObject: Codable, Identifiable, Hashable {
     var id: Int
     var firstUserId: Int
     var secondUserId: Int
-    var firstAnswer: String
-    var secondAnswer: Double
+    var firstAnswer: Bool
+    var secondAnswer: Bool
 }

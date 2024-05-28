@@ -1,36 +1,36 @@
 {
     "users": [
-        {"id": 1, "name": "Yasin", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
-        {"id": 2, "name": "Nati", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
-        {"id": 3, "name": "Chrisi", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
-        {"id": 4, "name": "Felix", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": false},
-        {"id": 5, "name": "Ahmet", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": false}
+        {"id": "1", "name": "Yasin", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
+        {"id": "2", "name": "Nati", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
+        {"id": "3", "name": "Chrisi", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
+        {"id": "4", "name": "Felix", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": false},
+        {"id": "5", "name": "Ahmet", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": false}
     ],
     "rides": [
-        {"id": 1, "user_id": 1, "startpunkt_ort": "Enns", "startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Linz" ,"endpunkt_longitude": 14.2861, "endpunkt_latitude": 48.3064},
-        {"id": 2, "user_id": 2, "startpunkt_ort": "Enns" ,"startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215, "endpunkt_ort": "Linz", "endpunkt_longitude": 14.2861, "endpunkt_latitude": 48.3064},
-        {"id": 3, "user_id": 3, "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Wien","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082},
-        {"id": 4, "user_id": 4, "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Linz","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082},
-        {"id": 5, "user_id": 5, "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Wien","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082}
+        {"id": "1", "user_id": "1", "startpunkt_ort": "Enns", "startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Linz" ,"endpunkt_longitude": 14.2861, "endpunkt_latitude": 48.3064},
+        {"id": "2", "user_id": "2", "startpunkt_ort": "Enns" ,"startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215, "endpunkt_ort": "Linz", "endpunkt_longitude": 14.2861, "endpunkt_latitude": 48.3064},
+        {"id": "3", "user_id": "3", "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Wien","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082},
+        {"id": "4", "user_id": "4", "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Linz","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082},
+        {"id": "5", "user_id": "5", "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Wien","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082}
     ],
     "swipes":[
         {
-            "id":1,
-            "firstUserId":1,
-            "secondUserId":2,
-            "firstAnswer":".",
-            "secondAnswer":"."
+            "id":"1",
+            "firstUserId":"1",
+            "secondUserId":"2",
+            "firstAnswer":false,
+            "secondAnswer":false
         },
         {
-            "id":2,
-            "firstUserId":1,
-            "secondUserId":4,
-            "firstAnswer":".",
-            "secondAnswer":"."
-        },
+            "id":"2",
+            "firstUserId":"1",
+            "secondUserId":"4",
+            "firstAnswer":false,
+            "secondAnswer":false
+        }
     ],
     "matches": [
-        {"id": 1, "user_id_1": 1, "user_id_2": 4},
-        {"id": 2, "user_id_1": 2, "user_id_2": 4}
+        {"id": "1", "user_id_1": "1", "user_id_2": "4"},
+        {"id": "2", "user_id_1": "2", "user_id_2": "4"}
     ]
 }

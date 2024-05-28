@@ -8,17 +8,27 @@
 import Foundation
 
 class ViewModel_Swipes: ObservableObject {
-    @Published private(set) var model: SwipeModel
+    @Published private(set) var model = SwipeModel()
     
-    init(model: SwipeModel) {
-        self.model = model
-    }
     
-    var rides: [SwipeObject] {
+    var swipes: [SwipeObject] {
         model.swipes
     }
     
-    func ridesLoaded(_ swipes: [SwipeObject]) {
+    func setSwipes(swipes: [SwipeObject]) {
         model.setSwipes(swipes)
+        print("Swipes loadedL: \(swipes)")
+    }
+    
+    func swipesLoaded(_ swipes: [SwipeObject]) {
+        model.setSwipes(swipes)
+    }
+    
+    func fetchSwipes() {
+        SwipesService.shared.fetchSwipes { [weak self] swipes in
+            DispatchQueue.main.async {
+                self?.setSwipes(swipes: swipes ?? [])
+            }
+        }
     }
 }

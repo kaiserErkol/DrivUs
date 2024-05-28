@@ -1,17 +1,19 @@
 //
-//  RidesService.swift
+//  UserService.swift
 //  DrivUs
 //
-//  Created by MacBook on 30.04.24.
+//  Created by MacBook on 28.05.24.
 //
 
 import Foundation
 
-class RidesService {
-    static let shared = RidesService()
+fileprivate let urlString = "http://localhost:3000/users"
+
+class UserService {
+    static let shared = UserService()
     
-    func fetchRides(completion: @escaping ([RideObject]?) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/rides") else {
+    func fetchUsers(completion: @escaping ([UserObject]?) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/users") else {
             completion(nil)
             return
         }
@@ -32,8 +34,8 @@ class RidesService {
             }
             
             do {
-                let loadedRides = try JSONDecoder().decode([RideObject].self, from: data)
-                completion(loadedRides)
+                let loadedUsers = try JSONDecoder().decode([UserObject].self, from: data)
+                completion(loadedUsers)
             } catch {
                 print("Error decoding posts: \(error)")
                 completion(nil)

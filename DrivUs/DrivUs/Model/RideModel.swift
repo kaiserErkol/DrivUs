@@ -16,12 +16,16 @@ struct RideModel {
 }
 
 struct RideObject: Codable, Identifiable, Hashable {
-    var id: Int
-    var userId: Int
+    var id: String
+    var userId: String
     var startPointOrt: String
     var startPointLongitude: Double
     var startPointLatitude: Double
     var endPointOrt: String
     var endPointLongitude: Double
     var endPointLatitude: Double
+    
+    static var `simulation`: RideObject {
+        return RideObject(id: "0", userId: "0", startPointOrt: "Enns", startPointLongitude: 14.4791, startPointLatitude: 48.2215, endPointOrt: "Linz", endPointLongitude: 14.2861, endPointLatitude: 48.3064)
+    }
 }

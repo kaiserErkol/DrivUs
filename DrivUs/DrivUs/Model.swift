@@ -7,6 +7,7 @@
 
 import Foundation
 
+/*
 class User {
     var username: String
     var profileImageName: String
@@ -16,6 +17,7 @@ class User {
         self.profileImageName = profileImageName
     }
 }
+
 
 class Ride {
     var from: String
@@ -31,3 +33,4 @@ class Ride {
         self.driver = driver
     }
 }
+ */

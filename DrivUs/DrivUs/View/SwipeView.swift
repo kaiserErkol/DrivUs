@@ -23,16 +23,13 @@ struct SwipeView: View {
     @State var route: MKRoute?
     @State var routeDisplaying = false
     
-    
-        
     @EnvironmentObject var viewModel: MatchViewModel
     let carpoolData: [Carpool]
-    //fiar standort
+    
     @State private var region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060),
             span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
         )
-    
     
     var body: some View {
         
@@ -211,34 +208,9 @@ struct MapView: UIViewRepresentable {
         let newWidth = UIScreen.main.bounds.width / 3
         mapView.frame = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
         
-        count += 1;
+        
         var p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.137154, longitude: 11.576124))
         var p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 52.520008, longitude: 13.404954))
-        if count == 1 {
-            
-            p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.137154, longitude: 11.576124))
-            p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 52.520008, longitude: 13.404954))
-        }
-         if count == 2 {
-             p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.25632000, longitude: 14.16263000))
-             p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.267, longitude: 14.250))
-         }
-        if count == 3 {
-            p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.25632000, longitude: 14.16263000))
-            p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.267, longitude: 14.250))
-       }
-        if count == 4 {
-            p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.25632000, longitude: 14.16263000))
-            p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.274200, longitude: 14.199200))
-       }
-        if count == 5 {
-            p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.33223000, longitude: 14.17428000))
-            p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 48.3000, longitude: 14.2833
-))
-       }
-        
-        
-        
         
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: p1)
@@ -246,13 +218,12 @@ struct MapView: UIViewRepresentable {
         request.transportType = .automobile
         
         let directions = MKDirections(request: request)
+        
         directions.calculate { response, error in
             DispatchQueue.main.async {
                 guard let route = response?.routes.first, error == nil else { return }
-                //mapView.addAnnotation([p1,p2] as! MKAnnotation)
                 mapView.addOverlay(route.polyline)
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                //self.directions = route.steps.map { $0.instructions }.filter{ !$0.isEmpty }
                 
                 let annotations = [p1, p2].compactMap{MKPlacemark(placemark: $0)}
                 mapView.addAnnotations(annotations)

@@ -14,11 +14,24 @@ class ViewModel_Matches: ObservableObject {
         self.model = model
     }
     
-    var rides: [MatchObject] {
+    var matches: [MatchObject] {
         model.matches
     }
     
-    func ridesLoaded(_ matches: [MatchObject]) {
+    func setMatches(matches: [MatchObject]) {
         model.setMatches(matches)
+        print("Matches loaded: \(matches)")
+    }
+    
+    func matchesLoaded(_ matches: [MatchObject]) {
+        model.setMatches(matches)
+    }
+    
+    func fetchMatches() {
+        MatchesService.shared.fetchMatches { [weak self] matches in
+            DispatchQueue.main.async {
+                self?.setMatches(matches: matches ?? [])
+            }
+        }
     }
 }

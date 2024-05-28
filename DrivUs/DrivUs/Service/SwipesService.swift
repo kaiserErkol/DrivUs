@@ -7,23 +7,37 @@
 
 import Foundation
 
-import Foundation
-
-fileprivate let urlString = "http://localhost:3000/swipes"
-
-func loadAllSwipes() async -> [SwipeObject]{
-    var swipes = [SwipeObject]()
-    let url = URL(string: urlString)!
+class SwipesService {
+    static let shared = SwipesService()
     
-    if let (data, _) = try? await URLSession.shared.data(from: url) {
-        if let loadedSwipes = try? JSONDecoder().decode([SwipeObject].self, from: data) {
-            swipes = loadedSwipes
-        } else {
-            print("failed to decode")
+    func fetchSwipes(completion: @escaping ([SwipeObject]?) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/swipes") else {
+            completion(nil)
+            return
         }
-    } else {
-        print("failed to load url")
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET" // Specify GET method
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error fetching posts: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+            
+            do {
+                let loadedSwipes = try JSONDecoder().decode([SwipeObject].self, from: data)
+                completion(loadedSwipes)
+            } catch {
+                print("Error decoding posts: \(error)")
+                completion(nil)
+            }
+        }.resume()
     }
-    print(swipes)
-    return swipes
 }

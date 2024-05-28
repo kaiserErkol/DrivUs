@@ -7,21 +7,37 @@
 
 import Foundation
 
-fileprivate let urlString = "http://localhost:3000/matches"
-
-func loadAllMatches() async -> [MatchObject]{
-    var matches = [MatchObject]()
-    let url = URL(string: urlString)!
+class MatchesService {
+    static let shared = MatchesService()
     
-    if let (data, _) = try? await URLSession.shared.data(from: url) {
-        if let loadedMatches = try? JSONDecoder().decode([MatchObject].self, from: data) {
-            matches = loadedMatches
-        } else {
-            print("failed to decode")
+    func fetchMatches(completion: @escaping ([MatchObject]?) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/matches") else {
+            completion(nil)
+            return
         }
-    } else {
-        print("failed to load url")
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET" // Specify GET method
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error fetching posts: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+            
+            do {
+                let loadedMatches = try JSONDecoder().decode([MatchObject].self, from: data)
+                completion(loadedMatches)
+            } catch {
+                print("Error decoding posts: \(error)")
+                completion(nil)
+            }
+        }.resume()
     }
-    print(matches)
-    return matches
 }

@@ -7,18 +7,21 @@
 import SwiftUI
 
 struct PersonView: View {
-    @EnvironmentObject var viewModel: MatchViewModel
+    @ObservedObject var viewModel_rides = ViewModel_Rides()
+    @ObservedObject var viewModel_user = ViewModel_User()
     
     var body: some View {
         NavigationView {
-            List(viewModel.matches, id: \.self) { match in
+            List(viewModel_rides.rides, id: \.self) { ride in
                 VStack(alignment: .leading) {
-                    Text("Von: \(match.from) - \(match.to)")
-                    Text("Uhrzeit: \(match.time)")
-                    Text("Fahrer: \(match.driver)")
+                    Text("Von: \(ride.startPointOrt) - \(ride.endPointOrt)")
+                    Text("Fahrer: \(viewModel_user.getUserById(id: ride.userId).name)")
                 }
             }
             .navigationTitle("Meine Matches")
+            .task {
+                viewModel_rides.fetchRides()
+            }
         }
     }
 }
