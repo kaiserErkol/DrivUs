@@ -15,10 +15,16 @@ struct UserModel {
         users = loadedUsers
     }
     
+    
+    
     mutating func setCurrUser(_ userId: String) {
+        print("in set curr user 1", userId)
+        print("users:",users)
         for user in users {
+            print("in set curr user 2")
             if userId == user.id {
                 curr_user = user
+                print("cuur user in modl: ",curr_user)
             }
         }
     }
@@ -30,12 +36,12 @@ struct UserObject: Codable, Identifiable, Hashable {
     var pos_longitude: Double
     var pos_latitude: Double
     var driver: Bool
-    /*
-    static var `simulation`: UserObject {
-        return UserObject(id: 0, name: "Simulation", pos_longitude: 0.0, pos_latitude: 0.0, driver: false)
-    }
-     */
 }
+/*
+static var `simulation`: UserObject {
+    return UserObject(id: 0, name: "Simulation", pos_longitude: 0.0, pos_latitude: 0.0, driver: false)
+}
+ */
 
 struct UserDTO: Codable {
     var users: [UserObject]

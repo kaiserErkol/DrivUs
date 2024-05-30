@@ -27,6 +27,11 @@ struct ContentView: View {
                     .tabItem {
                         Label("Rides", systemImage: "car.fill")
                     }
+                
+                UserView()
+                    .tabItem {
+                        Label("Users", systemImage: "person.fill")
+                    }
             }.tabViewStyle(DefaultTabViewStyle())
                 .frame(width: UIScreen.main.bounds.width) // 3/4 der Breite des Bildschirms
                 .background(Color.white)

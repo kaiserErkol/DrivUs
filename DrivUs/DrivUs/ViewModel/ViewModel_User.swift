@@ -18,10 +18,20 @@ class ViewModel_User: ObservableObject {
         model.curr_user
     }
     
+    func getCurrUser() -> UserObject {
+        return model.curr_user
+    }
+    
     func setUsers(users: [UserObject]) {
         model.setUsers(users)
         print("Users loaded: \(users)")
     }
+    
+    func setCurrUser(_ userId: String) {
+        model.setCurrUser(userId)
+        print("User curr : \(userId)")
+    }
+    
     
     func usersLoaded(_ users: [UserObject]) {
         model.setUsers(users)

@@ -9,6 +9,7 @@ import Foundation
 
 fileprivate let urlString = "http://localhost:3000/users"
 
+
 class UserService {
     static let shared = UserService()
     
@@ -35,6 +36,7 @@ class UserService {
             
             do {
                 let loadedUsers = try JSONDecoder().decode([UserObject].self, from: data)
+                
                 completion(loadedUsers)
             } catch {
                 print("Error decoding posts: \(error)")

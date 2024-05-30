@@ -40,6 +40,8 @@ struct HomeView: View {
                 .shadow(color: .black, radius: 3, x: 3, y: 3)
                 .frame(width: UIScreen.main.bounds.width / 1)
                 .frame(height: 100)
+                
+                
             }
             .padding(.top, 30)
             
