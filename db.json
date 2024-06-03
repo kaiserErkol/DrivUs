@@ -1,6 +1,6 @@
 {
     "users": [
-        {"id": "1","age":18,"wohnort":"Enns","zitat":"yolo ride", "pictureURL":"./assets/images/yasin.jpg", "name": "Yasin", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
+        {"id": "1","age":18,"wohnort":"Enns","zitat":"yolo ride", "pictureURL":"../assets/images/yasin.jpg", "name": "Yasin", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
         {"id": "2","age":18,"wohnort":"Thening","zitat":"go fast or go home", "pictureURL":"./assets/images/nati.jpeg", "name": "Nati", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
         {"id": "3","age":18,"wohnort":"Enns","zitat":"überholspur einzige spur", "pictureURL":"./assets/images/tommy.jpeg", "name": "Tommy", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": true},
         {"id": "4","age":18,"wohnort":"Enns","zitat":"langsam is besser", "pictureURL":"./assets/images/felix.jpeg", "name": "Felix", "pos_longitude": 0.0, "pos_latitude": 0.0 ,"driver": false},

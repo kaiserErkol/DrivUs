@@ -32,6 +32,10 @@ struct UserModel {
 
 struct UserObject: Codable, Identifiable, Hashable {
     var id: String
+    var age: Int
+    var wohnort: String
+    var zitat: String
+    var pictureURL: String
     var name: String
     var pos_longitude: Double
     var pos_latitude: Double
@@ -50,7 +54,7 @@ struct UserDTO: Codable {
 
 struct StandardObject {
     static var `default`: UserObject {
-        return UserObject(id: "-1", name: "No User Found", pos_longitude: 0.0, pos_latitude: 0.0, driver: false)
+        return UserObject(id: "-1",age: 12,wohnort: "Thening",zitat: "yolo rides",pictureURL: "./", name: "No User Found", pos_longitude: 0.0, pos_latitude: 0.0, driver: false)
     }
 }
 
