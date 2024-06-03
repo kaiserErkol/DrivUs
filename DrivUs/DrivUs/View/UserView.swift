@@ -19,6 +19,31 @@ struct UserView: View {
     var body: some View {
         
         
+        if sent == false {
+            VStack {
+                TextField("User ID eingeben", text: $userIdInput)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(5)
+                    .background(Color.drivusBlue)
+                    .cornerRadius(8)
+                
+                Button(action: {
+                    viewModel_user.setCurrUser(userIdInput)
+                    sent = true
+                }) {
+                    Text("einloggen")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.drivusBlue)
+                        .cornerRadius(8)
+                }
+            }
+            .task {
+                viewModel_user.fetchUsers()
+            }
+            .padding()
+        }else{
+            
             
             VStack {
                 //buttons
@@ -29,7 +54,7 @@ struct UserView: View {
                     .background(Color.drivusBlue)
                     .foregroundColor(.white)
                     .clipShape(Circle())
-                    .shadow(color: .black, radius: 10, y: 10)
+                    .shadow(color: .black, radius: 10)
                     .padding(.top,50)
                     .padding(.bottom,50)
                 Text("\(viewModel_user.currUser.name)")
@@ -71,8 +96,9 @@ struct UserView: View {
                         .cornerRadius(10)
                         .font(.title)
                         .fontWeight(.ultraLight)
-                        
+                    
                 }.frame(width: 400)
+
                 // check or x
                 
             }
@@ -81,7 +107,6 @@ struct UserView: View {
             .padding(150)
             .padding(.bottom,150)
             .padding(.top,100)
-            
             .background(.drivusBlue)
             .frame(height: UIScreen.main.bounds.height*1.5)
             .ignoresSafeArea()
@@ -91,9 +116,11 @@ struct UserView: View {
             
             
             Spacer()
-            
-            
+                .task {
+                    viewModel_user.fetchUsers()
+                }
         }
+    }
     }
 
 

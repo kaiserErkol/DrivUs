@@ -28,7 +28,7 @@ struct ContentView: View {
                         Label("Rides", systemImage: "car.fill")
                     }
                 
-                EinloggView()
+                UserView()
                     .tabItem {
                         Label("Users", systemImage: "person.fill")
                     }

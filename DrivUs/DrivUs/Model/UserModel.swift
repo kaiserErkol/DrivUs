@@ -21,13 +21,14 @@ struct UserModel {
         print("in set curr user 1", userId)
         print("users:",users)
         for user in users {
-            print("in set curr user 2")
+            print("in set curr user 2 : ", user.id, " : " , userId)
             if userId == user.id {
                 curr_user = user
                 print("cuur user in modl: ",curr_user)
             }
         }
     }
+    
 }
 
 struct UserObject: Codable, Identifiable, Hashable {
