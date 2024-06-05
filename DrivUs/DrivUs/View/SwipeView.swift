@@ -23,77 +23,79 @@ struct SwipeView: View {
     @State var route: MKRoute?
     @State var routeDisplaying = false
     
-    @EnvironmentObject var viewModel: MatchViewModel
-    let carpoolData: [Carpool]
+    //@EnvironmentObject var viewModel: MatchViewModel
+    //let carpoolData: [Carpool]
     
     @State private var region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060),
-            span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-        )
+        center: CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060),
+        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    )
     
     var body: some View {
+        Text("This is Swipe View")
         
         ZStack {
+            
             if isMatchShown, let match = viewModel.matches.last {
                 // MatchView anzeigen, wenn es ein Match gibt
                 MatchView(carpool: carpoolData[currentIndex], onClose: { isMatchShown = false }, onNext: {
-                        // Beim Schließen zum nächsten Eintrag springen
-                        isMatchShown = false
-                        currentIndex += 1
-                    })
+                    // Beim Schließen zum nächsten Eintrag springen
+                    isMatchShown = false
+                    currentIndex += 1
+                })
             } else {
                 VStack(spacing:0) {
                     
                     if currentIndex < carpoolData.count {
                         let carpool = carpoolData[currentIndex]
                         
-                         
+                        
                         MapView()
                         
-                       // Map(coordinateRegion: $region)
-                         //   .frame(height: UIScreen.main.bounds.height / 2)
-                           // .frame(width: UIScreen.main.bounds.width) // 1/3 des Bildschirmes
-                            
-                            
-                        Color.drivusBlue.overlay(
-                                
-                        VStack {
-                            //buttons
-                            HStack (spacing:100){
-                                Button(action: {
-                                    rejectCurrent()
-                                }) {
-                                    Image(systemName: "xmark")
-                                        .padding()
-                                        .background(Color.white)
-                                        .foregroundColor(.black)
-                                        .clipShape(Circle())
-                                        
-                                }
-
-                                Button(action: {
-                                    acceptCurrent()
-                                }) {
-                                    Image(systemName: "checkmark")
-                                        .padding()
-                                        .background(Color.white)
-                                        .foregroundColor(.black)
-                                        .clipShape(Circle())
-                                }
-                            }.padding(.top,5).background(.drivusBlue)
-                            
-                            Text("\(carpool.from) - \(carpool.to)").padding(.top,20).foregroundColor(.white).kerning(7)
-                            Text("\(carpool.time)").bold().padding().foregroundColor(.white)
-                            Text("\(carpool.driver)").padding(5).foregroundColor(.white)
-                            // check or x
-                            
-                        }.frame(width: UIScreen.main.bounds.width).animation(.easeInOut, value: currentIndex)
-                            .transition(.slide)
+                        // Map(coordinateRegion: $region)
+                        //   .frame(height: UIScreen.main.bounds.height / 2)
+                        // .frame(width: UIScreen.main.bounds.width) // 1/3 des Bildschirmes
                         
-                        .padding(.bottom,10)
-                        .background(.drivusBlue)
-                        .frame(height: UIScreen.main.bounds.height*1.5))
-                         
+                        
+                        Color.drivusBlue.overlay(
+                            
+                            VStack {
+                                //buttons
+                                HStack (spacing:100){
+                                    Button(action: {
+                                        rejectCurrent()
+                                    }) {
+                                        Image(systemName: "xmark")
+                                            .padding()
+                                            .background(Color.white)
+                                            .foregroundColor(.black)
+                                            .clipShape(Circle())
+                                        
+                                    }
+                                    
+                                    Button(action: {
+                                        acceptCurrent()
+                                    }) {
+                                        Image(systemName: "checkmark")
+                                            .padding()
+                                            .background(Color.white)
+                                            .foregroundColor(.black)
+                                            .clipShape(Circle())
+                                    }
+                                }.padding(.top,5).background(.drivusBlue)
+                                
+                                Text("\(carpool.from) - \(carpool.to)").padding(.top,20).foregroundColor(.white).kerning(7)
+                                Text("\(carpool.time)").bold().padding().foregroundColor(.white)
+                                Text("\(carpool.driver)").padding(5).foregroundColor(.white)
+                                // check or x
+                                
+                            }.frame(width: UIScreen.main.bounds.width).animation(.easeInOut, value: currentIndex)
+                                .transition(.slide)
+                            
+                                .padding(.bottom,10)
+                                .background(.drivusBlue)
+                                .frame(height: UIScreen.main.bounds.height*1.5))
+                        
                         .cornerRadius(20)
                         .shadow(color: .white, radius: 15,x:-0,y:-5)
                         .frame(width: UIScreen.main.bounds.width)
@@ -127,7 +129,7 @@ struct SwipeView: View {
         .padding(.bottom,20)
         
     }
-
+    
     private func acceptCurrent() {
         if currentIndex < carpoolData.count {
             let carpool = carpoolData[currentIndex]
@@ -139,16 +141,16 @@ struct SwipeView: View {
             }
         }
     }
-
+    
     private func rejectCurrent() {
         moveToNext()
     }
-
+    
     private func moveToNext() {
         if currentIndex < carpoolData.count - 1 {
             currentIndex += 1
         } else {
-    
+            
             isMatchShown = false
         }
     }
@@ -247,5 +249,4 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
     }
     
 }
-
 

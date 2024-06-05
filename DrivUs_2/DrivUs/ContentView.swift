@@ -1,17 +1,8 @@
-//
-//  ContentView.swift
-//  DrivUs
-//
-//  Created by MacBook on 05.03.24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        
         ZStack {
-             // Hintergrundfarbe der TabView
             TabView {
                 HomeView()
                     .tabItem {
@@ -32,14 +23,9 @@ struct ContentView: View {
                     .tabItem {
                         Label("Users", systemImage: "person.fill")
                     }
-            }.tabViewStyle(DefaultTabViewStyle())
-                .frame(width: UIScreen.main.bounds.width) // 3/4 der Breite des Bildschirms
-                .background(Color.white)
-                .cornerRadius(20)
-                .padding(.bottom, 20)
-                .padding(.top, 0)
-                .padding(.vertical, 0)
+            }
         }
+
     }
 }
 

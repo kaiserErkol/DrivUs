@@ -1,5 +1,5 @@
 //
-//  RidesService.swift
+//  MatchesService.swift
 //  DrivUs
 //
 //  Created by MacBook on 30.04.24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-class RidesService {
-    static let shared = RidesService()
+class MatchesService {
+    static let shared = MatchesService()
     
-    func fetchUsers(completion: @escaping ([RideObject]?) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/rides") else {
+    func fetchMatches(completion: @escaping ([MatchObject]?) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/matches") else {
             completion(nil)
             return
         }
@@ -21,7 +21,6 @@ class RidesService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error fetching posts: \(error)")
                 completion(nil)
                 return
             }
@@ -32,18 +31,16 @@ class RidesService {
             }
             
             do {
-                let loadedRides = try JSONDecoder().decode([RideObject].self, from: data)
-                
-                completion(loadedRides)
+                let loadedMatches = try JSONDecoder().decode([MatchObject].self, from: data)
+                completion(loadedMatches)
             } catch {
-                print("Error decoding posts: \(error)")
                 completion(nil)
             }
         }.resume()
     }
     
-    func createRide(ride: RideObject, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/rides") else {
+    func createMatch(match: MatchObject, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/matches") else {
             completion(false)
             return
         }
@@ -53,17 +50,15 @@ class RidesService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            let jsonData = try JSONEncoder().encode(ride)
+            let jsonData = try JSONEncoder().encode(match)
             request.httpBody = jsonData
         } catch {
-            print("Error encoding match: \(error)")
             completion(false)
             return
         }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error creating match: \(error)")
                 completion(false)
                 return
             }
@@ -78,15 +73,13 @@ class RidesService {
     }
     /**
      USAGE:
-     let newRide  = RideObject(id: "1, ...")
-     RidesService.shared.createRide(ride: newRide) { success in
+     let newMatch = MatchObject(id: "123", userId: "456", rideId: "789")
+     MatchesService.shared.createMatch(match: newMatch) { success in
          if success {
-             print("Ride created successfully")
+             print("Match created successfully")
          } else {
-             print("Failed to create Ride")
+             print("Failed to create match")
          }
      }
      */
 }
-
-

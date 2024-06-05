@@ -9,11 +9,9 @@ import SwiftUI
 
 @main
 struct DrivUsApp: App {
-    
     var body: some Scene {
         WindowGroup {
-                    ContentView() // Dein Hauptansicht
-                        
-                }
+            ContentView() // Dein Hauptansicht
+        }
     }
 }
