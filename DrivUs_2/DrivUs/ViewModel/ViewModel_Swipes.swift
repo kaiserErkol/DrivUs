@@ -1,23 +1,14 @@
-//
-//  ViewModel_Swipes.swift
-//  DrivUs
-//
-//  Created by Natalie Schmitzberger on 21.05.24.
-//
-
 import Foundation
 
 class ViewModel_Swipes: ObservableObject {
     @Published private(set) var model = SwipeModel()
-        
+    @Published var isLoading = false
+    
     var swipes: [SwipeObject] {
         return model.swipes
     }
     
     func getSwipes() -> [SwipeObject] {
-        print("Model Swipes")
-        print("---------------------------------")
-        print(model.swipes)
         return model.swipes
     }
     
@@ -30,9 +21,11 @@ class ViewModel_Swipes: ObservableObject {
     }
     
     func fetchSwipes() {
+        isLoading = true
         JsonService.shared.fetchSwipes { [weak self] swipes in
             DispatchQueue.main.async {
                 self?.setSwipes(swipes: swipes ?? [])
+                self?.isLoading = false
             }
         }
     }
@@ -40,8 +33,20 @@ class ViewModel_Swipes: ObservableObject {
     func acceptSwipe(swipeId: String, acceptRide: Bool, userId: String) {
         JsonService.shared.updateSwipeRideId(swipeId: swipeId, acceptRide: acceptRide, userId: userId) { success in
             if success {
+                print("Swipe updated successfully")
             } else {
+                print("Failed to update swipe")
             }
         }
+    }
+    
+    func swipe(at index: Int) -> SwipeObject? {
+        return swipes.safeElement(at: index)
+    }
+}
+
+extension Array {
+    func safeElement(at index: Int) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

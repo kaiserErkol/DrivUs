@@ -34,7 +34,7 @@ class JsonService {
             }
             
             do {
-                let loadedUsers = try JSONDecoder().decode([UserObject].self, from: data)                
+                let loadedUsers = try JSONDecoder().decode([UserObject].self, from: data)
                 completion(loadedUsers)
             } catch {
                 print("Error decoding posts: \(error)")
@@ -130,16 +130,22 @@ class JsonService {
                 return
             }
             
-            guard let data = data else {
+            // Print the HTTP response status code
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP Response Status Code: \(httpResponse.statusCode)")
+            }
+            
+            // Print raw data for debugging
+            if let data = data {
+                print("Raw Response Data: \(String(data: data, encoding: .utf8) ?? "N/A")")
+            } else {
+                print("No data received from the server")
                 completion(nil)
                 return
             }
             
             do {
-                let loadedSwipes = try JSONDecoder().decode([SwipeObject].self, from: data)
-                
-                //filter data here
-                
+                let loadedSwipes = try JSONDecoder().decode([SwipeObject].self, from: data!)
                 completion(loadedSwipes)
             } catch {
                 print("Error decoding swipes: \(error)")
@@ -198,15 +204,15 @@ class JsonService {
         var matchingRides = [RideObject]()
         
         matchingRides = manager.filterRides(rides: myRides, user: user)
- 
-
+        
+        
         //find the last id
         for swipe in mySwipes {
             index+=1
         }
         
         let userSwipes = mySwipes.filter { $0.firstUserId == user.id || $0.secondUserId == user.id }
-
+        
         
         for ride in matchingRides {
             var shouldCreateSwipe = true
@@ -226,7 +232,7 @@ class JsonService {
                     shouldCreateSwipe = false
                     break
                 }
-                 
+                
             }
             
             if shouldCreateSwipe && !duplicateSwipe{
@@ -257,7 +263,7 @@ class JsonService {
                 }
             }
         }
-         
+        
     }
     
     func postSwipe(swipe: SwipeObject,completion: @escaping (Bool) -> Void) {
@@ -271,7 +277,7 @@ class JsonService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
- 
+            
             let jsonData = try JSONEncoder().encode(swipe)
             request.httpBody = jsonData
             
@@ -354,5 +360,5 @@ class JsonService {
             }
         }
     }
-
+    
 }
