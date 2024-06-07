@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel_rides = ViewModel_Rides()
-    @ObservedObject var viewModel_user = ViewModel_User()
     
     var body: some View {
         VStack {
+            
             Image(systemName: "car.rear")
                 .resizable()
                 .frame(width: 150, height: 130)
@@ -44,13 +43,7 @@ struct HomeView: View {
                 
                 
             }
-            .padding(.top, 30)
-            
-            Spacer()
-        }
-        .task {
-            viewModel_user.fetchUsers()
-            viewModel_rides.fetchRides()
+             
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .tabItem {
@@ -58,8 +51,4 @@ struct HomeView: View {
             Text("Home")
         }
     }
-}
-
-#Preview {
-    HomeView()
 }

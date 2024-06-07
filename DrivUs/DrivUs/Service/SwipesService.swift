@@ -10,7 +10,7 @@ import Foundation
 class SwipesService {
     static let shared = SwipesService()
     
-    func fetchSwipes(completion: @escaping ([SwipeObject]?) -> Void) {
+    func fetchAllSwipes(completion: @escaping ([Model.SwipeModel.Swipe]?) -> Void) {
         guard let url = URL(string: "http://localhost:3000/swipes") else {
             completion(nil)
             return
@@ -32,7 +32,7 @@ class SwipesService {
             }
             
             do {
-                let loadedSwipes = try JSONDecoder().decode([SwipeObject].self, from: data)
+                let loadedSwipes = try JSONDecoder().decode([Model.SwipeModel.Swipe].self, from: data)
                 completion(loadedSwipes)
             } catch {
                 print("Error decoding posts: \(error)")
@@ -41,49 +41,42 @@ class SwipesService {
         }.resume()
     }
     
-    func createSwipe(swipe: SwipeObject, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/swipes") else {
-            completion(false)
+    func fetchSwipeById(byID swipeId: String, completion: @escaping (Model.SwipeModel.Swipe?) -> Void) {
+        guard var urlComponents = URLComponents(string: "http://localhost:3000/swipes") else {
+            completion(nil)
+            return
+        }
+        
+        // Append the ride ID as a query parameter
+        urlComponents.queryItems = [URLQueryItem(name: "id", value: swipeId)]
+        
+        guard let url = urlComponents.url else {
+            completion(nil)
             return
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST" // Specify POST method
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            let jsonData = try JSONEncoder().encode(swipe)
-            request.httpBody = jsonData
-        } catch {
-            print("Error encoding match: \(error)")
-            completion(false)
-            return
-        }
+        request.httpMethod = "GET" // Specify GET method
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error creating match: \(error)")
-                completion(false)
+                print("Error fetching swipe: \(error)")
+                completion(nil)
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
-                completion(false)
+            guard let data = data else {
+                completion(nil)
                 return
             }
             
-            completion(true)
+            do {
+                let loadedSwipe = try JSONDecoder().decode(Model.SwipeModel.Swipe.self, from: data)
+                completion(loadedSwipe)
+            } catch {
+                print("Error decoding swipe: \(error)")
+                completion(nil)
+            }
         }.resume()
     }
-    /**
-     USAGE:
-     let newSwipe = SwipeObject(id: "123", userId: "456", rideId: "789")
-     SwipesService.shared.createSwipe(swipe: newSipe) { success in
-         if success {
-             print("Swipe created successfully")
-         } else {
-             print("Failed to create Swipe")
-         }
-     }
-     */
 }

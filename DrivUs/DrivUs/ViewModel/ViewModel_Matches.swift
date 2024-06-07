@@ -8,29 +8,24 @@
 import Foundation
 
 class ViewModel_Matches: ObservableObject {
-    @Published private(set) var model: MatchModel
+    @Published private(set) var model: Model.MatchModel
     
-    init(model: MatchModel) {
+    init(_ model: Model.MatchModel) {
         self.model = model
     }
     
-    var matches: [MatchObject] {
+    var matches: [Model.MatchModel.Match] {
         model.matches
     }
     
-    func setMatches(matches: [MatchObject]) {
-        model.setMatches(matches)
-        print("Matches loaded: \(matches)")
-    }
-    
-    func matchesLoaded(_ matches: [MatchObject]) {
+    func setMatches(_ matches: [Model.MatchModel.Match]) {
         model.setMatches(matches)
     }
     
-    func fetchMatches() {
-        MatchesService.shared.fetchMatches { [weak self] matches in
+    func fetchAllMatches() {
+        MatchesService.shared.fetchAllMatches { [weak self] matches in
             DispatchQueue.main.async {
-                self?.setMatches(matches: matches ?? [])
+                self?.setMatches(matches ?? [])
             }
         }
     }

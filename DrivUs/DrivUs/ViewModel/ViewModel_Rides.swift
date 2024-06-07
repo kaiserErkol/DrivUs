@@ -8,27 +8,41 @@
 import Foundation
 
 class ViewModel_Rides: ObservableObject {
-    @Published private (set) var model = RideModel()
+    @Published private (set) var model: Model.RideModel
     
-    var rides: [RideObject] {
+    init(_ model: Model.RideModel) {
+        self.model = model
+    }
+    
+    var rides: [Model.RideModel.Ride] {
         model.rides
     }
     
-    func setRides(rides: [RideObject]) {
-        model.setRides(rides)
-        print("Rides loaded: \(rides)")
+    var rideById: Model.RideModel.Ride {
+        model.rideById
     }
     
-    func ridesLoaded(_ rides: [RideObject]) {
+    func setRides(_ rides: [Model.RideModel.Ride]) {
         model.setRides(rides)
     }
     
-    func fetchRides() {
-        RidesService.shared.fetchRides { [weak self] rides in
+    func setRideById(_ ride: Model.RideModel.Ride) {
+        model.setRideById(ride)
+    }
+    
+    func fetchRideById(_ id: String){
+        RidesService.shared.fetchRideById(byID: id) { [weak self] ride in
             DispatchQueue.main.async {
-                self?.setRides(rides: rides ?? [])
+                self?.setRideById(ride ?? Model.RideModel.DefaultRide.default)
             }
         }
     }
     
+    func fetchAllRides() {
+        RidesService.shared.fetchAllRides { [weak self] rides in
+            DispatchQueue.main.async {
+                self?.setRides(rides ?? [])
+            }
+        }
+    }
 }

@@ -8,50 +8,51 @@
 import Foundation
 
 class ViewModel_User: ObservableObject {
-    @Published private (set) var model = UserModel()
+    @Published private (set) var model: Model.UserModel
     
-    var users: [UserObject] {
+    init(_ model: Model.UserModel) {
+        self.model = model
+    }
+    
+    var users: [Model.UserModel.User] {
         model.users
     }
     
-    var currUser: UserObject {
-        model.curr_user
+    var loggedUser: Model.UserModel.User {
+        model.loggedUser
     }
     
-    func getCurrUser() -> UserObject {
-        return model.curr_user
+    var userById: Model.UserModel.User {
+        model.userById
     }
     
-    func setUsers(users: [UserObject]) {
-        model.setUsers(users)
-        print("Users loaded: \(users)")
-    }
-    
-    func setCurrUser(_ userId: String) {
-        model.setCurrUser(userId)
-        print("User curr : \(userId)")
-    }
-    
-    
-    func usersLoaded(_ users: [UserObject]) {
+    func setUsers(_ users: [Model.UserModel.User]) {
         model.setUsers(users)
     }
     
-    
-    func getUserById(id: String) -> UserObject {
-        for user in users {
-            if user.id == id {
-                return user
-            }
-        }
-        return StandardObject.default
+    func setLoginUser(_ userId: String) {
+        model.setLoginUser(userId)
     }
     
-    func fetchUsers() {
-        UserService.shared.fetchUsers { [weak self] users in
+    func setUserById(_ user: Model.UserModel.User) {
+        model.setUserByid(user)
+    }
+    
+    func fetchUserById(_ id: String){
+        UserService.shared.fetchUserById(byID: id) { [weak self] user in
             DispatchQueue.main.async {
-                self?.setUsers(users: users ?? [])
+                self?.setUserById(user ?? Model.UserModel.DefaultUser.default)
             }
         }
     }
+    
+    func fetchAllUsers() {
+        UserService.shared.fetchAllUsers { [weak self] users in
+            DispatchQueue.main.async {
+                self?.setUsers(users ?? [])
+            }
+        }
+    }
+    
+    
 }

@@ -10,7 +10,7 @@ import Foundation
 class MatchesService {
     static let shared = MatchesService()
     
-    func fetchMatches(completion: @escaping ([MatchObject]?) -> Void) {
+    func fetchAllMatches(completion: @escaping ([Model.MatchModel.Match]?) -> Void) {
         guard let url = URL(string: "http://localhost:3000/matches") else {
             completion(nil)
             return
@@ -32,7 +32,7 @@ class MatchesService {
             }
             
             do {
-                let loadedMatches = try JSONDecoder().decode([MatchObject].self, from: data)
+                let loadedMatches = try JSONDecoder().decode([Model.MatchModel.Match].self, from: data)
                 completion(loadedMatches)
             } catch {
                 print("Error decoding posts: \(error)")
@@ -41,7 +41,7 @@ class MatchesService {
         }.resume()
     }
     
-    func createMatch(match: MatchObject, completion: @escaping (Bool) -> Void) {
+    func createMatch(match: Model.MatchModel.Match, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "http://localhost:3000/matches") else {
             completion(false)
             return

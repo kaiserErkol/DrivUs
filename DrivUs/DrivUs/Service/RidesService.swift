@@ -10,7 +10,7 @@ import Foundation
 class RidesService {
     static let shared = RidesService()
     
-    func fetchUsers(completion: @escaping ([RideObject]?) -> Void) {
+    func fetchAllRides(completion: @escaping ([Model.RideModel.Ride]?) -> Void) {
         guard let url = URL(string: "http://localhost:3000/rides") else {
             completion(nil)
             return
@@ -32,7 +32,7 @@ class RidesService {
             }
             
             do {
-                let loadedRides = try JSONDecoder().decode([RideObject].self, from: data)
+                let loadedRides = try JSONDecoder().decode([Model.RideModel.Ride].self, from: data)
                 
                 completion(loadedRides)
             } catch {
@@ -42,7 +42,46 @@ class RidesService {
         }.resume()
     }
     
-    func createRide(ride: RideObject, completion: @escaping (Bool) -> Void) {
+    func fetchRideById(byID rideId: String, completion: @escaping (Model.RideModel.Ride?) -> Void) {
+        guard var urlComponents = URLComponents(string: "http://localhost:3000/rides") else {
+            completion(nil)
+            return
+        }
+        
+        // Append the ride ID as a query parameter
+        urlComponents.queryItems = [URLQueryItem(name: "id", value: rideId)]
+        
+        guard let url = urlComponents.url else {
+            completion(nil)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET" // Specify GET method
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error fetching ride: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+            
+            do {
+                let loadedRide = try JSONDecoder().decode(Model.RideModel.Ride.self, from: data)
+                completion(loadedRide)
+            } catch {
+                print("Error decoding ride: \(error)")
+                completion(nil)
+            }
+        }.resume()
+    }
+    
+    func createRide(ride: Model.RideModel.Ride, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "http://localhost:3000/rides") else {
             completion(false)
             return

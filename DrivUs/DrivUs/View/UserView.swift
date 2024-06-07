@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct UserView: View {
-    @ObservedObject var viewModel_rides = ViewModel_Rides()
-    @ObservedObject var viewModel_user = ViewModel_User()
+    @ObservedObject var viewModel_user: ViewModel_User
+    
     @State  var userIdInput: String = ""
-    @State  var currUser: UserObject?
     @State  var sent: Bool = false
     
     var body: some View {
@@ -26,7 +25,7 @@ struct UserView: View {
                     .cornerRadius(8)
                 
                 Button(action: {
-                    viewModel_user.setCurrUser(userIdInput)
+                    viewModel_user.setLoginUser(userIdInput)
                     sent = true
                 }) {
                     Text("einloggen")
@@ -36,9 +35,6 @@ struct UserView: View {
                         .cornerRadius(8)
                 }
             }
-            .task {
-                viewModel_user.fetchUsers()
-            }
             .padding()
         }else{
             
@@ -46,7 +42,7 @@ struct UserView: View {
             VStack {
                 //buttons
                 
-                Image("\(viewModel_user.currUser.name)")
+                Image("\(viewModel_user.loggedUser.pictureURL)")
                     .resizable()
                     .frame(width: 220, height: 220)
                     .background(Color.drivusBlue)
@@ -55,7 +51,7 @@ struct UserView: View {
                     .shadow(color: .black, radius: 10)
                     .padding(.top,50)
                     .padding(.bottom,50)
-                Text("\(viewModel_user.currUser.name)")
+                Text("\(viewModel_user.loggedUser.name)")
                     .padding(10)
                     .padding(.horizontal,80)
                     .background(.white)
@@ -63,11 +59,11 @@ struct UserView: View {
                     .cornerRadius(10)
                     .font(.title)
                     .fontWeight(.light)
-                Text("' \(viewModel_user.getCurrUser().zitat) '")
+                Text("' \(viewModel_user.loggedUser.zitat) '")
                     .padding(30)
                 
                 VStack(spacing:20){
-                    Text("age: \(viewModel_user.getCurrUser().age)")
+                    Text("age: \(viewModel_user.loggedUser.age)")
                         .padding(10)
                         .padding(.horizontal,100)
                         .background(.darkDrivusBlue)
@@ -76,7 +72,7 @@ struct UserView: View {
                         .cornerRadius(10)
                         .font(.title)
                         .fontWeight(.ultraLight)
-                    Text("wohnort: \(viewModel_user.getCurrUser().wohnort)")
+                    Text("wohnort: \(viewModel_user.loggedUser.wohnort)")
                         .padding(10)
                         .padding(.horizontal,70)
                         .background(Color.darkDrivusBlue)
@@ -85,7 +81,7 @@ struct UserView: View {
                         .cornerRadius(10)
                         .font(.title)
                         .fontWeight(.ultraLight)
-                    Text("Driver: \(viewModel_user.getCurrUser().driver ? "Yes" : "No")")
+                    Text("Driver: \(viewModel_user.loggedUser.driver ? "Yes" : "No")")
                         .padding(10)
                         .padding(.horizontal,100)
                         .background(.darkDrivusBlue)
@@ -114,14 +110,6 @@ struct UserView: View {
             
             
             Spacer()
-                .task {
-                    viewModel_user.fetchUsers()
-                }
         }
     }
-    }
-
-
-#Preview {
-    UserView()
 }

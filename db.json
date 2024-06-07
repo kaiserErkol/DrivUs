@@ -130,30 +130,7 @@
     }
   ],
   "swipes": [
-    {
-      "id": "1",
-      "rideId": "4",
-      "firstAnswer": false,
-      "firstUserId": "4",
-      "secondUserId": "1",
-      "secondAnswer": false
-    },
-    {
-      "id": "2",
-      "firstUserId": "3",
-      "secondUserId": "5",
-      "rideId": "3",
-      "firstAnswer": false,
-      "secondAnswer": false
-    },
-    {
-      "id": "3",
-      "firstUserId": "6",
-      "secondUserId": "5",
-      "rideId": "6",
-      "firstAnswer": false,
-      "secondAnswer": false
-    }
+    
   ],
   "matches": []
 }
