@@ -34,14 +34,18 @@ struct SwipeView: View {
         
         Text("This is Swipe View")
 
+        /*
         List (viewModel_swipes.swipes) { swipe in
             Text("FirstUser: \(swipe.firstUserId)")
             Text("SecondUser: \(swipe.secondUserId)")
             Text("RideId: \(swipe.rideId)")
         }
-        .task {
-            viewModel_swipes.fetchUserSwipes()
+        */
+        
+        List (viewModel_rides.rides) { ride in
+            Text("rideId: \(ride.id)")
         }
+        
         /*
          
          ZStack {
