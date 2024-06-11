@@ -22,9 +22,9 @@ struct PersonView: View {
                 }
             }
             .navigationTitle("Meine Matches")
-        } .task {
-            viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
-
+            .task {
+               viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
+           }
         }
     }
      

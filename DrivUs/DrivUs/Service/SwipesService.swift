@@ -43,22 +43,22 @@ class SwipesService {
             completion(nil)
             return
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET" // Specify GET method
-
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error fetching swipe: \(error)")
                 completion(nil)
                 return
             }
-
+            
             guard let data = data else {
                 completion(nil)
                 return
             }
-
+            
             do {
                 let loadedSwipe = try JSONDecoder().decode(Model.SwipeModel.Swipe.self, from: data)
                 completion(loadedSwipe)
@@ -68,7 +68,7 @@ class SwipesService {
             }
         }.resume()
     }
-
+    
     
     // Update a specific swipe
     func updateSwipe(_ swipeId: String, _ acceptRide: Bool, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
@@ -107,7 +107,18 @@ class SwipesService {
                     // Check if both answers are true
                     self.checkSwipeAnswers(swipeToUpdate) { bothTrue in
                         if bothTrue {
-                            self.createMatch(from: swipeToUpdate, completion: completion)
+                            
+                            self.checkMatchDuplicate(swipeToUpdate, user) { isDuplicate in
+                                
+                                if !isDuplicate {
+                                    self.createMatch(from: swipeToUpdate, completion: completion)
+                                }
+                                else {
+                                    completion(true)
+                                }
+                                
+                            }
+                            
                         } else {
                             completion(true)
                         }
@@ -158,18 +169,37 @@ class SwipesService {
     }
     
     private func checkSwipeAnswers(_ swipe: Model.SwipeModel.Swipe, completion: @escaping (Bool) -> Void) {
-            // Re-fetch the swipe to get the latest data
-            fetchSwipeById(byID: swipe.id) { updatedSwipe in
-                guard let updatedSwipe = updatedSwipe else {
-                    completion(false)
+        // Re-fetch the swipe to get the latest data
+        fetchSwipeById(byID: swipe.id) { updatedSwipe in
+            guard let updatedSwipe = updatedSwipe else {
+                completion(false)
+                return
+            }
+            
+            let bothTrue = updatedSwipe.firstAnswer == true && updatedSwipe.secondAnswer == true
+            completion(bothTrue)
+        }
+    }
+    
+    private func checkMatchDuplicate(_ swipe: Model.SwipeModel.Swipe, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
+        
+        MatchesService.shared.fetchAllMatches { matches in
+            guard let matches = matches else {
+                completion(false)
+                return
+            }
+                        
+            for match in matches {
+                if match.swipeId == swipe.id {
+                    completion(true)
                     return
                 }
-
-                let bothTrue = updatedSwipe.firstAnswer == true && updatedSwipe.secondAnswer == true
-                completion(bothTrue)
             }
+            
+            completion(false)
         }
-
+    }
+    
     private func createMatch(from swipe: Model.SwipeModel.Swipe, completion: @escaping (Bool) -> Void) {
         // Create the new match object with a new id
         print("")
@@ -188,7 +218,7 @@ class SwipesService {
             idNumber+=1
         }
         
-        let newMatch = Model.MatchModel.Match(id: String(idNumber), rideId: swipe.rideId, firstUserId: swipe.firstUserId, secondUserId: swipe.secondUserId)
+        let newMatch = Model.MatchModel.Match(id: String(idNumber), rideId: swipe.rideId, swipeId: swipe.id, firstUserId: swipe.firstUserId, secondUserId: swipe.secondUserId)
         
         // Save the new match object to the server
         guard let url = URL(string: "http://localhost:3000/matches") else {

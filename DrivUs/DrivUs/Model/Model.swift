@@ -105,6 +105,7 @@ struct Model {
         struct Match: Codable, Identifiable, Hashable {
             var id: String
             var rideId: String
+            var swipeId: String
             var firstUserId: String
             var secondUserId: String
         }

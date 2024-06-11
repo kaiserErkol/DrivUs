@@ -27,12 +27,12 @@ struct ContentView: View {
                 PersonView(viewModel_rides: viewModel_rides, viewModel_user: viewModel_users, viewModel_matches: viewModel_matches)
                     .tabItem {
                         Label("Matches", systemImage: "person.fill")
-                    }
+                    }.badge(viewModel_matches.matches.count)
                 
                 SwipeView(viewModelRides: viewModel_rides, viewModelUser: viewModel_users, viewModelSwipes: viewModel_swipes, viewModelMatches: viewModel_matches)
                     .tabItem {
                         Label("Rides", systemImage: "car.fill")
-                    }
+                    }.badge(viewModel_swipes.swipes.count)
                 
                 UserView(viewModel_user: viewModel_users)
                     .tabItem {
