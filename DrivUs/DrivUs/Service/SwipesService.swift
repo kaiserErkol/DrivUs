@@ -38,34 +38,27 @@ class SwipesService {
     
     // Fetch a specific swipe by ID
     func fetchSwipeById(byID swipeId: String, completion: @escaping (Model.SwipeModel.Swipe?) -> Void) {
-        guard var urlComponents = URLComponents(string: "http://localhost:3000/swipes") else {
+        // Create the URL with the swipe ID
+        guard let url = URL(string: "http://localhost:3000/swipes/\(swipeId)") else {
             completion(nil)
             return
         }
-        
-        // Append the swipe ID as a query parameter
-        urlComponents.queryItems = [URLQueryItem(name: "id", value: swipeId)]
-        
-        guard let url = urlComponents.url else {
-            completion(nil)
-            return
-        }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "GET" // Specify GET method
-        
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error fetching swipe: \(error)")
                 completion(nil)
                 return
             }
-            
+
             guard let data = data else {
                 completion(nil)
                 return
             }
-            
+
             do {
                 let loadedSwipe = try JSONDecoder().decode(Model.SwipeModel.Swipe.self, from: data)
                 completion(loadedSwipe)
@@ -75,6 +68,7 @@ class SwipesService {
             }
         }.resume()
     }
+
     
     // Update a specific swipe
     func updateSwipe(_ swipeId: String, _ acceptRide: Bool, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
@@ -108,7 +102,21 @@ class SwipesService {
             }
             
             // Proceed to update the found swipe
-            self.updateSwipeOnServer(swipeToUpdate, updateData ,completion: completion)
+            self.updateSwipeOnServer(swipeToUpdate, updateData) { success in
+                if success {
+                    // Check if both answers are true
+                    self.checkSwipeAnswers(swipeToUpdate) { bothTrue in
+                        if bothTrue {
+                            self.createMatch(from: swipeToUpdate, completion: completion)
+                        } else {
+                            completion(true)
+                        }
+                    }
+                } else {
+                    completion(false)
+                }
+                
+            }
         }
     }
     
@@ -141,6 +149,75 @@ class SwipesService {
             
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                 print("Failed to update swipe")
+                completion(false)
+                return
+            }
+            
+            completion(true)
+        }.resume()
+    }
+    
+    private func checkSwipeAnswers(_ swipe: Model.SwipeModel.Swipe, completion: @escaping (Bool) -> Void) {
+            // Re-fetch the swipe to get the latest data
+            fetchSwipeById(byID: swipe.id) { updatedSwipe in
+                guard let updatedSwipe = updatedSwipe else {
+                    completion(false)
+                    return
+                }
+
+                let bothTrue = updatedSwipe.firstAnswer == true && updatedSwipe.secondAnswer == true
+                completion(bothTrue)
+            }
+        }
+
+    private func createMatch(from swipe: Model.SwipeModel.Swipe, completion: @escaping (Bool) -> Void) {
+        // Create the new match object with a new id
+        print("")
+        print("creating match")
+        print("")
+        var mymatches: [Model.MatchModel.Match] = []
+        var idNumber: Int = 1
+        
+        MatchesService.shared.fetchAllMatches { matches in
+            DispatchQueue.main.async {
+                mymatches = matches ?? []
+            }
+        }
+        
+        for _ in mymatches {
+            idNumber+=1
+        }
+        
+        let newMatch = Model.MatchModel.Match(id: String(idNumber), rideId: swipe.rideId, firstUserId: swipe.firstUserId, secondUserId: swipe.secondUserId)
+        
+        // Save the new match object to the server
+        guard let url = URL(string: "http://localhost:3000/matches") else {
+            completion(false)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        do {
+            let jsonData = try JSONEncoder().encode(newMatch)
+            request.httpBody = jsonData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        } catch {
+            print("Error serializing match data: \(error)")
+            completion(false)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error creating match: \(error)")
+                completion(false)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("Failed to create match")
                 completion(false)
                 return
             }

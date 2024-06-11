@@ -40,6 +40,21 @@ class MatchManager {
         return userSwipes
     }
     
+    func filterMatchesByUser(_ matches: [Model.MatchModel.Match], _ user: Model.UserModel.User) -> [Model.MatchModel.Match] {
+        var userMatches: [Model.MatchModel.Match] = []
+        
+        for match in matches {
+            if match.firstUserId == user.id {
+                userMatches.append(match)
+            }
+            else if match.secondUserId == user.id {
+                userMatches.append(match)
+            }
+        }
+        
+        return userMatches
+    }
+    
     func filterRideById (_ rideId: String, _ rides: [Model.RideModel.Ride]) -> Model.RideModel.Ride{
         for ride in rides {
             if rideId == ride.id {

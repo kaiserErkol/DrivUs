@@ -40,7 +40,7 @@ class MatchesService {
             }
         }.resume()
     }
-    
+    /*
     func createMatch(match: Model.MatchModel.Match, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "http://localhost:3000/matches") else {
             completion(false)
@@ -75,6 +75,7 @@ class MatchesService {
             completion(true)
         }.resume()
     }
+     */
     /**
      USAGE:
      let newMatch = MatchObject(id: "123", userId: "456", rideId: "789")

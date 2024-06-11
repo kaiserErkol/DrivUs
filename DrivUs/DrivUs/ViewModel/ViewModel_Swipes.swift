@@ -51,9 +51,16 @@ class ViewModel_Swipes: ObservableObject {
     func acceptSwipe(swipeId: String, acceptRide: Bool, user: Model.UserModel.User) {
         SwipesService.shared.updateSwipe(swipeId, acceptRide, user) { success in
             if success {
-                
+                print("")
+                print("updated swipe")
+                print("")
             }
-            else {}
+            else {
+                print("")
+                print("failed at updating swipe")
+                print("")
+            }
         }
+        
     }
 }

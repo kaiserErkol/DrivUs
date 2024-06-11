@@ -30,4 +30,12 @@ class ViewModel_Matches: ObservableObject {
             }
         }
     }
+    
+    func fetchUserMatches(_ user: Model.UserModel.User) {
+        print("my logged user: \(user.id)")
+        print("")
+        print("my matches: \(matches)")
+        print("")
+        setMatches(MatchManager.shared.filterMatchesByUser(matches, user))
+    }
 }
