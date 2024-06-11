@@ -62,7 +62,7 @@ class UserService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error fetching ride: \(error)")
+                print("Error fetching user: \(error)")
                 completion(nil)
                 return
             }
@@ -76,7 +76,7 @@ class UserService {
                 let loadedUser = try JSONDecoder().decode(Model.UserModel.User.self, from: data)
                 completion(loadedUser)
             } catch {
-                print("Error decoding ride: \(error)")
+                print("Error decoding user: \(error)")
                 completion(nil)
             }
         }.resume()

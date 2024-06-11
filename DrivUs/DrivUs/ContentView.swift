@@ -29,7 +29,7 @@ struct ContentView: View {
                         Label("Matches", systemImage: "person.fill")
                     }
                 
-                SwipeView(viewModel_rides: viewModel_rides, viewModel_swipes: viewModel_swipes, viewModel_users: viewModel_users)
+                SwipeView(viewModelRides: viewModel_rides, viewModelUser: viewModel_users, viewModelSwipes: viewModel_swipes, viewModelMatches: viewModel_matches)
                     .tabItem {
                         Label("Rides", systemImage: "car.fill")
                     }
@@ -46,10 +46,10 @@ struct ContentView: View {
                 .padding(.top, 0)
                 .padding(.vertical, 0)
             .task {
+                viewModel_swipes.fetchAllSwipes()
                 viewModel_rides.fetchAllRides()
                 viewModel_users.fetchAllUsers()
                 viewModel_matches.fetchAllMatches()
-                viewModel_swipes.fetchAllSwipes()
             }
         }
     }

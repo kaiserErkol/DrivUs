@@ -74,7 +74,7 @@ struct Model {
         
         struct DefaultRide {
             static var `default`: Ride {
-                return Ride(id: "-1", user_id: "Ride Not Found", startpunkt_ort: "", startpunkt_longitude: 0.0, startpunkt_latitude: 0.0, endpunkt_ort: "", endpunkt_longitude: 0.0, endpunkt_latitude: 0.0)
+                return Ride(id: "-1", user_id: "Ride Not Found", startpunkt_ort: "Not Found", startpunkt_longitude: 0.0, startpunkt_latitude: 0.0, endpunkt_ort: "Not Found", endpunkt_longitude: 0.0, endpunkt_latitude: 0.0)
             }
         }
     }

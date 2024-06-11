@@ -9,39 +9,35 @@ import Foundation
 
 class ViewModel_Swipes: ObservableObject {
     @Published private(set) var model: Model.SwipeModel
-    @Published private(set) var model_rides : Model.RideModel
-    @Published private(set) var model_users: Model.UserModel
     
-    init(_ model: Model.SwipeModel, _ model_rides: Model.RideModel, _ model_users: Model.UserModel) {
+    init(_ model: Model.SwipeModel) {
         self.model = model
-        self.model_rides = model_rides
-        self.model_users = model_users
     }
     
     var swipes: [Model.SwipeModel.Swipe] {
         model.swipes
     }
     
-    var rides: [Model.RideModel.Ride] {
-        model_rides.rides
-    }
-    
-    var loggedUser: Model.UserModel.User {
-        model_users.loggedUser
-    }
-    
     func setSwipes(_ swipes: [Model.SwipeModel.Swipe]) {
-        print("Swipes: \(swipes)")
+        print("")
+        print("loaded Swipes: \(swipes)")
+        print("")
         model.setSwipes(swipes)
     }
     
-    func fetchUserSwipes() {
+    func fetchUserSwipes(_ user: Model.UserModel.User) {
+        
+        /*
         print("Rides in FetchUserSwipes: \(rides)")
         FilterDataService.shared.createSwipes(loggedUser, swipes, rides)
         
         fetchAllSwipes()
+        */
         
-        self.setSwipes(MatchManager.shared.filterSwipesByUser(swipes, loggedUser))
+        print("my logged user: \(user.id)")
+        
+        //ERROR user ist default
+        setSwipes(MatchManager.shared.filterSwipesByUser(swipes, user))
     }
     
     func fetchAllSwipes() {
@@ -49,6 +45,15 @@ class ViewModel_Swipes: ObservableObject {
             DispatchQueue.main.async {
                 self?.setSwipes(swipes ?? [])
             }
+        }
+    }
+    
+    func acceptSwipe(swipeId: String, acceptRide: Bool, user: Model.UserModel.User) {
+        SwipesService.shared.updateSwipe(swipeId, acceptRide, user) { success in
+            if success {
+                
+            }
+            else {}
         }
     }
 }

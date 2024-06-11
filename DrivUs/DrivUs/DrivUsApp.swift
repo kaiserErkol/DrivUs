@@ -17,7 +17,7 @@ struct DrivUsApp: App {
     
     var viewModel_rides = ViewModel_Rides(rideModel)
     var viewModel_users = ViewModel_User(userModel)
-    var viewModel_swipes = ViewModel_Swipes(swipeModel, rideModel, userModel)
+    var viewModel_swipes = ViewModel_Swipes(swipeModel)
     var viewModel_matches = ViewModel_Matches(matchModel)
     
     var body: some Scene {

@@ -129,52 +129,39 @@
       "endpunkt_latitude": 48.2082
     }
   ],
-  "rides": [
-          {"id": "1", "user_id": "1", "startpunkt_ort": "Enns", "startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Linz" ,"endpunkt_longitude": 14.2861, "endpunkt_latitude": 48.3064},
-          {"id": "2", "user_id": "2", "startpunkt_ort": "Enns" ,"startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215, "endpunkt_ort": "Linz", "endpunkt_longitude": 14.2861, "endpunkt_latitude": 48.3064},
-          {"id": "3", "user_id": "3", "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Wien","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082},
-          {"id": "4", "user_id": "4", "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Linz","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082},
-          {"id": "5", "user_id": "5", "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Wien","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082},
-          {"id": "6", "user_id": "6", "startpunkt_ort": "Enns","startpunkt_longitude": 14.4791, "startpunkt_latitude": 48.2215,"endpunkt_ort": "Wien","endpunkt_longitude": 16.3738, "endpunkt_latitude": 48.2082}
+  "swipes": [
+    {
+      "id": "1",
+      "rideId": "1",
+      "firstUserId": "1",
+      "secondUserId": "4",
+      "firstAnswer": true,
+      "secondAnswer": true
+    },
+    {
+      "id": "2",
+      "rideId": "3",
+      "firstUserId": "3",
+      "secondUserId": "5",
+      "firstAnswer": true,
+      "secondAnswer": false
+    },
+    {
+      "id": "3",
+      "rideId": "3",
+      "firstUserId": "3",
+      "secondUserId": "6",
+      "firstAnswer": true,
+      "secondAnswer": false
+    },
+    {
+      "id": "4",
+      "rideId": "5",
+      "firstUserId": "5",
+      "secondUserId": "6",
+      "firstAnswer": false,
+      "secondAnswer": false
+    }
   ],
-  "swipes":[
-          {
-              "id":"1",
-              "firstUserId":"1",
-              "secondUserId":"2",
-              "firstAnswer":true,
-              "secondAnswer":
-          },
-          {
-              "id":"2",
-              "firstUserId":"1",
-              "secondUserId":"4",
-              "firstAnswer":false,
-              "secondAnswer":
-          },
-          {
-              "id":"3",
-              "firstUserId":"3",
-              "secondUserId":"5",
-              "firstAnswer":true,
-              "secondAnswer":
-          },
-          {
-              "id":"4",
-              "firstUserId":"6",
-              "secondUserId":"5",
-              "firstAnswer":true,
-              "secondAnswer":
-          },
-          {
-              "id":"5",
-              "firstUserId":"3",
-              "secondUserId":"6",
-              "firstAnswer":true,
-              "secondAnswer":
-          }
-      ],
-      "matches": [
-
-  ]
+  "matches": []
 }

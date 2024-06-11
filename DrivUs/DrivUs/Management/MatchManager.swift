@@ -26,7 +26,36 @@ class MatchManager {
     }
     
     func filterSwipesByUser(_ swipes: [Model.SwipeModel.Swipe], _ user: Model.UserModel.User) -> [Model.SwipeModel.Swipe]{
-        return swipes.filter { $0.firstUserId == user.id || $0.secondUserId == user.id }
+        var userSwipes: [Model.SwipeModel.Swipe] = []
+        
+        for swipe in swipes {
+            if swipe.firstUserId == user.id {
+                userSwipes.append(swipe)
+            }
+            else if swipe.secondUserId == user.id {
+                userSwipes.append(swipe)
+            }
+        }
+ 
+        return userSwipes
+    }
+    
+    func filterRideById (_ rideId: String, _ rides: [Model.RideModel.Ride]) -> Model.RideModel.Ride{
+        for ride in rides {
+            if rideId == ride.id {
+                return ride
+            }
+        }
+        return Model.RideModel.DefaultRide.default
+    }
+    
+    func filterUserById(_ userId: String, _ users: [Model.UserModel.User]) -> Model.UserModel.User {
+        for user in users {
+            if userId == user.id {
+                return user
+            }
+        }
+        return Model.UserModel.DefaultUser.default
     }
 
 }
