@@ -14,7 +14,6 @@ struct ContentView: View {
     @ObservedObject var viewModel_swipes: ViewModel_Swipes
     
     var body: some View {
-        Text("this is the content view")
         
         ZStack {
              // Hintergrundfarbe der TabView

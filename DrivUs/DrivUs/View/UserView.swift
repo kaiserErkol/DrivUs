@@ -42,7 +42,7 @@ struct UserView: View {
             VStack {
                 //buttons
                 
-                Image("\(viewModel_user.loggedUser.pictureURL)")
+                Image("\(viewModel_user.loggedUser.name)")
                     .resizable()
                     .frame(width: 220, height: 220)
                     .background(Color.drivusBlue)

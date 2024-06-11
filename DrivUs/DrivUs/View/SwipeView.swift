@@ -78,8 +78,7 @@ struct SwipeView: View {
                             .padding(.bottom, 10)
                             .background(Color.drivusBlue)
                             .frame(height: UIScreen.main.bounds.height * 1.5)
-                            .cornerRadius(20)
-                            .shadow(color: .white, radius: 15, x: -0, y: -5)
+                            .cornerRadius(40)
                             .frame(width: UIScreen.main.bounds.width)
                             .gesture(
                                 DragGesture()
@@ -113,6 +112,7 @@ struct SwipeView: View {
                 Spacer()
             }
             .frame(width: UIScreen.main.bounds.width)
+            .cornerRadius(20)
             .transition(.slide)
         }
         .task() {
@@ -120,6 +120,8 @@ struct SwipeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.bottom, 20)
+        .shadow(color: .black, radius: 15, x: -0, y: -5)
+
     }
         
     

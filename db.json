@@ -143,47 +143,40 @@
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "5",
-      "firstAnswer": true,
-      "secondAnswer": true
+      "firstAnswer": false,
+      "secondAnswer": false
     },
     {
       "id": "3",
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "6",
-      "firstAnswer": true,
-      "secondAnswer": true
+      "firstAnswer": false,
+      "secondAnswer": false
     },
     {
       "id": "4",
       "rideId": "5",
       "firstUserId": "5",
       "secondUserId": "6",
-      "firstAnswer": true,
-      "secondAnswer": true
+      "firstAnswer": false,
+      "secondAnswer": false
     }
   ],
   "matches": [
     {
       "id": "1",
-      "secondUserId": "5",
-      "rideId": "3",
       "swipeId": "2",
+      "rideId": "3",
+      "secondUserId": "5",
       "firstUserId": "3"
     },
     {
       "id": "1",
-      "swipeId": "3",
-      "rideId": "3",
-      "firstUserId": "3",
-      "secondUserId": "6"
-    },
-    {
-      "id": "1",
-      "swipeId": "4",
       "firstUserId": "5",
+      "secondUserId": "6",
       "rideId": "5",
-      "secondUserId": "6"
+      "swipeId": "4"
     }
   ]
 }
