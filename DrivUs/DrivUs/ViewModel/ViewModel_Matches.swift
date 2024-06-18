@@ -19,6 +19,7 @@ class ViewModel_Matches: ObservableObject {
     }
     
     func setMatches(_ matches: [Model.MatchModel.Match]) {
+        print("matches setted\(matches)")
         model.setMatches(matches)
     }
     

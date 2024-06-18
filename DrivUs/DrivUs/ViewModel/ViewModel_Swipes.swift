@@ -20,6 +20,7 @@ class ViewModel_Swipes: ObservableObject {
     }
     
     func setSwipes(_ swipes: [Model.SwipeModel.Swipe]) {
+        print("swipes setted \(swipes)")
         model.setSwipes(swipes)
     }
     

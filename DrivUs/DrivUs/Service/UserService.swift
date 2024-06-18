@@ -12,7 +12,7 @@ class UserService {
     static let shared = UserService()
     
     func fetchAllUsers(completion: @escaping ([Model.UserModel.User]?) -> Void) {
-        guard let url = URL(string: "http://172.20.10.2:3000/users") else {
+        guard let url = URL(string: "http://localhost:3000/users") else {
             completion(nil)
             return
         }
@@ -45,7 +45,7 @@ class UserService {
     
     func fetchUserById(byID userId: String, completion: @escaping (Model.UserModel.User?) -> Void) {
         // Create the URL with the swipe ID
-        guard let url = URL(string: "http://172.20.10.2:3000/users/\(userId)") else {
+        guard let url = URL(string: "http://localhost:3000/users/\(userId)") else {
             completion(nil)
             return
         }

@@ -31,14 +31,14 @@ class ViewModel_Rides: ObservableObject {
     }
     
     func fetchRideById(_ id: String) -> Model.RideModel.Ride?{
-        RidesService.shared.fetchRideById(byID: id) { [weak self] ride in
+        /*RidesService.shared.fetchRideById(byID: id) { [weak self] ride in
             DispatchQueue.main.async {
                 self?.setRideById(ride ?? Model.RideModel.DefaultRide.default)
             }
-        }
+        }*/
         
         print("rideById: \(rideById.startpunkt_ort) - \(rideById.endpunkt_ort)")
-        return rideById
+        return MatchManager.shared.filterRideById(id, rides)
     }
     
     func fetchAllRides() {

@@ -17,7 +17,7 @@ struct UserView: View {
         VStack {
             if sent == false {
                 VStack {
-                    TextField("User ID eingeben", text: $userIdInput)
+                    TextField("User Name eingeben", text: $userIdInput)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(5)
                         .background(Color.drivusBlue)
@@ -39,9 +39,10 @@ struct UserView: View {
                 
                 
                 VStack {
+                    
                     //buttons
                     
-                    Image("\(viewModel_user.loggedUser.pictureURL)")
+                    Image("\(viewModel_user.loggedUser.name)")
                         .resizable()
                         .frame(width: 220, height: 220)
                         .background(Color.drivusBlue)
@@ -50,6 +51,16 @@ struct UserView: View {
                         .shadow(color: .black, radius: 10)
                         .padding(.top,50)
                         .padding(.bottom,50)
+                    Button(action: {
+                        viewModel_user.setLoginUser(Model.UserModel.DefaultUser.default.id)
+                        sent = false
+                    }) {
+                        Text("ausloggen")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(8)
+                    }
                     Text("\(viewModel_user.loggedUser.name)")
                         .padding(10)
                         .padding(.horizontal,80)

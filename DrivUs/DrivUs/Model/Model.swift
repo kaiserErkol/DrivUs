@@ -29,11 +29,20 @@ struct Model {
             users = loadedUsers
         }
         
+        func getUserById(_ id: String) -> User? {
+                return users.first { $0.id == id }
+        }
+        
         mutating func setLoginUser(_ userId: String) {
+            var isExistent : Bool = false
             for user in users {
-                if userId == user.id {
+                if userId == user.name {
                     loggedUser = user
+                    isExistent = true
                 }
+            }
+            if !isExistent{
+                loggedUser = DefaultUser.default
             }
         }
         
@@ -84,8 +93,8 @@ struct Model {
             var rideId: String
             var firstUserId: String
             var secondUserId: String
-            var firstAnswer: Bool
-            var secondAnswer: Bool
+            var firstAnswer: Bool?
+            var secondAnswer: Bool?
         }
         
         private (set) var swipes = [Swipe]()

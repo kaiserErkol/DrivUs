@@ -135,33 +135,35 @@
       "rideId": "1",
       "firstUserId": "1",
       "secondUserId": "4",
-      "firstAnswer": false,
-      "secondAnswer": false
+      "firstAnswer": null,
+      "secondAnswer": null
     },
     {
       "id": "2",
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "5",
-      "firstAnswer": false,
-      "secondAnswer": false
+      "firstAnswer": null,
+      "secondAnswer": null
     },
     {
       "id": "3",
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "6",
-      "firstAnswer": false,
-      "secondAnswer": false
+      "firstAnswer": null,
+      "secondAnswer": null
     },
     {
       "id": "4",
       "rideId": "5",
       "firstUserId": "5",
       "secondUserId": "6",
-      "firstAnswer": false,
-      "secondAnswer": false
+      "firstAnswer": null,
+      "secondAnswer": null
     }
   ],
-  "matches": []
+  "matches": [
+    
+  ]
 }
