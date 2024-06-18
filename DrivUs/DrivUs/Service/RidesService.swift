@@ -11,7 +11,7 @@ class RidesService {
     static let shared = RidesService()
     
     func fetchAllRides(completion: @escaping ([Model.RideModel.Ride]?) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:3000/rides") else {
+        guard let url = URL(string: "http://172.20.10.2:3000/rides") else {
             completion(nil)
             return
         }
@@ -44,7 +44,7 @@ class RidesService {
     
     func fetchRideById(byID rideId: String, completion: @escaping (Model.RideModel.Ride?) -> Void) {
         // Create the URL with the swipe ID
-        guard let url = URL(string: "http://127.0.0.1:3000/rides/\(rideId)") else {
+        guard let url = URL(string: "http://172.20.10.2:3000/rides/\(rideId)") else {
             completion(nil)
             return
         }
@@ -75,7 +75,7 @@ class RidesService {
     }
         
     func createRide(ride: Model.RideModel.Ride, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:3000/rides") else {
+        guard let url = URL(string: "http://172.20.10.2:3000/rides") else {
             completion(false)
             return
         }

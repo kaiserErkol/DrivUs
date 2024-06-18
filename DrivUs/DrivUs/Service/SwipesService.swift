@@ -5,7 +5,7 @@ class SwipesService {
     
     // Fetch all swipes
     func fetchAllSwipes(completion: @escaping ([Model.SwipeModel.Swipe]?) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:3000/swipes") else {
+        guard let url = URL(string: "http://172.20.10.2:3000/swipes") else {
             completion(nil)
             return
         }
@@ -39,7 +39,7 @@ class SwipesService {
     // Fetch a specific swipe by ID
     func fetchSwipeById(byID swipeId: String, completion: @escaping (Model.SwipeModel.Swipe?) -> Void) {
         // Create the URL with the swipe ID
-        guard let url = URL(string: "http://127.0.0.1:3000/swipes/\(swipeId)") else {
+        guard let url = URL(string: "http://172.20.10.2:3000/swipes/\(swipeId)") else {
             completion(nil)
             return
         }
@@ -132,7 +132,7 @@ class SwipesService {
     
     // Helper method to update swipe on the server
     private func updateSwipeOnServer(_ swipe: Model.SwipeModel.Swipe, _ updateData: [String:Any], completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:3000/swipes/\(swipe.id)") else {
+        guard let url = URL(string: "http://172.20.10.2:3000/swipes/\(swipe.id)") else {
             completion(false)
             return
         }
@@ -217,7 +217,7 @@ class SwipesService {
                 let newMatch = Model.MatchModel.Match(id: String(idNumber), rideId: swipe.rideId, swipeId: swipe.id, firstUserId: swipe.firstUserId, secondUserId: swipe.secondUserId)
                 
                 // Save the new match object to the server
-                guard let url = URL(string: "http://127.0.0.1:3000/matches") else {
+                guard let url = URL(string: "http://172.20.10.2:3000/matches") else {
                     completion(false)
                     return
                 }
