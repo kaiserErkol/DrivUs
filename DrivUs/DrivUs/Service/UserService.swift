@@ -12,7 +12,7 @@ class UserService {
     static let shared = UserService()
     
     func fetchAllUsers(completion: @escaping ([Model.UserModel.User]?) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/users") else {
+        guard let url = URL(string: "http://127.0.0.1:3000/users") else {
             completion(nil)
             return
         }
@@ -44,15 +44,8 @@ class UserService {
     }
     
     func fetchUserById(byID userId: String, completion: @escaping (Model.UserModel.User?) -> Void) {
-        guard var urlComponents = URLComponents(string: "http://localhost:3000/users") else {
-            completion(nil)
-            return
-        }
-        
-        // Append the ride ID as a query parameter
-        urlComponents.queryItems = [URLQueryItem(name: "id", value: userId)]
-        
-        guard let url = urlComponents.url else {
+        // Create the URL with the swipe ID
+        guard let url = URL(string: "http://127.0.0.1:3000/users/\(userId)") else {
             completion(nil)
             return
         }
@@ -62,7 +55,7 @@ class UserService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error fetching user: \(error)")
+                print("Error fetching swipe: \(error)")
                 completion(nil)
                 return
             }
@@ -76,7 +69,7 @@ class UserService {
                 let loadedUser = try JSONDecoder().decode(Model.UserModel.User.self, from: data)
                 completion(loadedUser)
             } catch {
-                print("Error decoding user: \(error)")
+                print("Error decoding swipe: \(error)")
                 completion(nil)
             }
         }.resume()

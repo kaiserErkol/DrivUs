@@ -11,7 +11,7 @@ class RidesService {
     static let shared = RidesService()
     
     func fetchAllRides(completion: @escaping ([Model.RideModel.Ride]?) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/rides") else {
+        guard let url = URL(string: "http://127.0.0.1:3000/rides") else {
             completion(nil)
             return
         }
@@ -43,15 +43,8 @@ class RidesService {
     }
     
     func fetchRideById(byID rideId: String, completion: @escaping (Model.RideModel.Ride?) -> Void) {
-        guard var urlComponents = URLComponents(string: "http://localhost:3000/rides") else {
-            completion(nil)
-            return
-        }
-        
-        // Append the ride ID as a query parameter
-        urlComponents.queryItems = [URLQueryItem(name: "id", value: rideId)]
-        
-        guard let url = urlComponents.url else {
+        // Create the URL with the swipe ID
+        guard let url = URL(string: "http://127.0.0.1:3000/rides/\(rideId)") else {
             completion(nil)
             return
         }
@@ -61,7 +54,7 @@ class RidesService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error fetching ride: \(error)")
+                print("Error fetching swipe: \(error)")
                 completion(nil)
                 return
             }
@@ -75,14 +68,14 @@ class RidesService {
                 let loadedRide = try JSONDecoder().decode(Model.RideModel.Ride.self, from: data)
                 completion(loadedRide)
             } catch {
-                print("Error decoding ride: \(error)")
+                print("Error decoding swipe: \(error)")
                 completion(nil)
             }
         }.resume()
     }
-    
+        
     func createRide(ride: Model.RideModel.Ride, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/rides") else {
+        guard let url = URL(string: "http://127.0.0.1:3000/rides") else {
             completion(false)
             return
         }

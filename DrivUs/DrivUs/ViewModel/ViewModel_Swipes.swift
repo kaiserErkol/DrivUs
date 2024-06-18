@@ -8,7 +8,8 @@
 import Foundation
 
 class ViewModel_Swipes: ObservableObject {
-    @Published private(set) var model: Model.SwipeModel
+    @Published private (set) var model: Model.SwipeModel
+    @Published var swipesCount: Int = 0
     
     init(_ model: Model.SwipeModel) {
         self.model = model
@@ -19,24 +20,10 @@ class ViewModel_Swipes: ObservableObject {
     }
     
     func setSwipes(_ swipes: [Model.SwipeModel.Swipe]) {
-        print("")
-        print("loaded Swipes: \(swipes)")
-        print("")
         model.setSwipes(swipes)
     }
     
     func fetchUserSwipes(_ user: Model.UserModel.User) {
-        
-        /*
-        print("Rides in FetchUserSwipes: \(rides)")
-        FilterDataService.shared.createSwipes(loggedUser, swipes, rides)
-        
-        fetchAllSwipes()
-        */
-        
-        print("my logged user: \(user.id)")
-        
-        //ERROR user ist default
         setSwipes(MatchManager.shared.filterSwipesByUser(swipes, user))
     }
     
@@ -46,6 +33,10 @@ class ViewModel_Swipes: ObservableObject {
                 self?.setSwipes(swipes ?? [])
             }
         }
+    }
+
+    func getSwipesCount(for userId: String) -> Int {
+        return swipes.filter { $0.firstUserId == userId || $0.secondUserId == userId }.count
     }
     
     func acceptSwipe(swipeId: String, acceptRide: Bool, user: Model.UserModel.User) {
@@ -61,6 +52,5 @@ class ViewModel_Swipes: ObservableObject {
                 print("")
             }
         }
-        
     }
 }

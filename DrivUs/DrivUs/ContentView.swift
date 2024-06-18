@@ -14,7 +14,6 @@ struct ContentView: View {
     @ObservedObject var viewModel_swipes: ViewModel_Swipes
     
     var body: some View {
-        Text("this is the content view")
         
         ZStack {
              // Hintergrundfarbe der TabView
@@ -23,16 +22,20 @@ struct ContentView: View {
                     .tabItem {
                         Label("Home", systemImage: "house.fill")
                     }
-                
                 PersonView(viewModel_rides: viewModel_rides, viewModel_user: viewModel_users, viewModel_matches: viewModel_matches)
                     .tabItem {
                         Label("Matches", systemImage: "person.fill")
-                    }.badge(viewModel_matches.matches.count)
+                        //badges: create a new variable in user which contains the current count for matches
+                    }.badge(viewModel_matches.getMatchesCount(for: viewModel_users.loggedUser.id))
                 
                 SwipeView(viewModelRides: viewModel_rides, viewModelUser: viewModel_users, viewModelSwipes: viewModel_swipes, viewModelMatches: viewModel_matches)
                     .tabItem {
                         Label("Rides", systemImage: "car.fill")
-                    }.badge(viewModel_swipes.swipes.count)
+                    }
+                    .badge(viewModel_swipes.getSwipesCount(for: viewModel_users.loggedUser.id))
+                    .onAppear {
+                        //set badge to 0
+                    }
                 
                 UserView(viewModel_user: viewModel_users)
                     .tabItem {

@@ -5,7 +5,7 @@ class SwipesService {
     
     // Fetch all swipes
     func fetchAllSwipes(completion: @escaping ([Model.SwipeModel.Swipe]?) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/swipes") else {
+        guard let url = URL(string: "http://127.0.0.1:3000/swipes") else {
             completion(nil)
             return
         }
@@ -39,7 +39,7 @@ class SwipesService {
     // Fetch a specific swipe by ID
     func fetchSwipeById(byID swipeId: String, completion: @escaping (Model.SwipeModel.Swipe?) -> Void) {
         // Create the URL with the swipe ID
-        guard let url = URL(string: "http://localhost:3000/swipes/\(swipeId)") else {
+        guard let url = URL(string: "http://127.0.0.1:3000/swipes/\(swipeId)") else {
             completion(nil)
             return
         }
@@ -68,7 +68,6 @@ class SwipesService {
             }
         }.resume()
     }
-    
     
     // Update a specific swipe
     func updateSwipe(_ swipeId: String, _ acceptRide: Bool, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
@@ -133,7 +132,7 @@ class SwipesService {
     
     // Helper method to update swipe on the server
     private func updateSwipeOnServer(_ swipe: Model.SwipeModel.Swipe, _ updateData: [String:Any], completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/swipes/\(swipe.id)") else {
+        guard let url = URL(string: "http://127.0.0.1:3000/swipes/\(swipe.id)") else {
             completion(false)
             return
         }
@@ -188,7 +187,7 @@ class SwipesService {
                 completion(false)
                 return
             }
-                        
+            
             for match in matches {
                 if match.swipeId == swipe.id {
                     completion(true)
@@ -211,48 +210,47 @@ class SwipesService {
         MatchesService.shared.fetchAllMatches { matches in
             DispatchQueue.main.async {
                 mymatches = matches ?? []
+                for _ in mymatches {
+                    idNumber += 1
+                }
+                
+                let newMatch = Model.MatchModel.Match(id: String(idNumber), rideId: swipe.rideId, swipeId: swipe.id, firstUserId: swipe.firstUserId, secondUserId: swipe.secondUserId)
+                
+                // Save the new match object to the server
+                guard let url = URL(string: "http://127.0.0.1:3000/matches") else {
+                    completion(false)
+                    return
+                }
+                
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                
+                do {
+                    let jsonData = try JSONEncoder().encode(newMatch)
+                    request.httpBody = jsonData
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                } catch {
+                    print("Error serializing match data: \(error)")
+                    completion(false)
+                    return
+                }
+                
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    if let error = error {
+                        print("Error creating match: \(error)")
+                        completion(false)
+                        return
+                    }
+                    
+                    guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                        print("Failed to create match")
+                        completion(false)
+                        return
+                    }
+                    
+                    completion(true)
+                }.resume()
             }
         }
-        
-        for _ in mymatches {
-            idNumber+=1
-        }
-        
-        let newMatch = Model.MatchModel.Match(id: String(idNumber), rideId: swipe.rideId, swipeId: swipe.id, firstUserId: swipe.firstUserId, secondUserId: swipe.secondUserId)
-        
-        // Save the new match object to the server
-        guard let url = URL(string: "http://localhost:3000/matches") else {
-            completion(false)
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        do {
-            let jsonData = try JSONEncoder().encode(newMatch)
-            request.httpBody = jsonData
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        } catch {
-            print("Error serializing match data: \(error)")
-            completion(false)
-            return
-        }
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error creating match: \(error)")
-                completion(false)
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Failed to create match")
-                completion(false)
-                return
-            }
-            
-            completion(true)
-        }.resume()
     }
 }

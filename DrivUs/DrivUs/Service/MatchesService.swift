@@ -11,7 +11,7 @@ class MatchesService {
     static let shared = MatchesService()
     
     func fetchAllMatches(completion: @escaping ([Model.MatchModel.Match]?) -> Void) {
-        guard let url = URL(string: "http://localhost:3000/matches") else {
+        guard let url = URL(string: "http://127.0.0.1:3000/matches") else {
             completion(nil)
             return
         }

@@ -64,7 +64,6 @@ struct Model {
         private (set) var rideById = DefaultRide.default
         
         mutating func setRides(_ loadedRides: [Ride]) {
-            print("loadedRides: \(loadedRides)")
             rides = loadedRides
         }
         
@@ -114,23 +113,6 @@ struct Model {
         
         mutating func setMatches(_ loadedMatches: [Match]) {
             matches = loadedMatches
-        }
-    }
-    
-    struct FilterDataByLoginModel {
-        var swipes: [SwipeModel.Swipe]
-        var rides: [RideModel.Ride]
-        
-        init(swipes: [SwipeModel.Swipe] = [], rides: [RideModel.Ride] = []) {
-            self.swipes = swipes
-            self.rides = rides
-        }
-        
-        func filterSwipesByRides() -> [SwipeModel.Swipe] {
-            
-            //let rideUserIds = Set(rides.map { $0.userId })
-            //return swipes.filter { rideUserIds.contains($0.firstUserId) || rideUserIds.contains($0.secondUserId) }
-            return []
         }
     }
 }

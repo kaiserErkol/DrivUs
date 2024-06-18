@@ -27,14 +27,10 @@ class ViewModel_User: ObservableObject {
     }
     
     func setUsers(_ users: [Model.UserModel.User]) {
-        print("loaded users: \(users)")
-        print("")
         model.setUsers(users)
     }
     
     func setLoginUser(_ userId: String) {
-        print("login user: \(userId)")
-        print("")
         model.setLoginUser(userId)
     }
     
@@ -42,15 +38,15 @@ class ViewModel_User: ObservableObject {
         model.setUserByid(user)
     }
     
-    func fetchUserById(_ id: String) -> Model.UserModel.User{
-        /*
+    func fetchUserById(_ id: String) -> Model.UserModel.User?{
         UserService.shared.fetchUserById(byID: id) { [weak self] user in
             DispatchQueue.main.async {
                 self?.setUserById(user ?? Model.UserModel.DefaultUser.default)
             }
-        }*/
+        }
+        print("userById: \(userById.name)")
         
-        MatchManager.shared.filterUserById(id, users)
+        return userById
     }
     
     func fetchAllUsers() {

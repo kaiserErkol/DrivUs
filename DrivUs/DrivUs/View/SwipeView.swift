@@ -68,7 +68,7 @@ struct SwipeView: View {
                                     .foregroundColor(.white)
                                     .kerning(7)
                                 
-                                Text("User: \(userById.name)")
+                                Text("User: \(userById!.name)")
                                     .padding(5)
                                     .foregroundColor(.white)
                             }
@@ -155,6 +155,7 @@ struct UserLocation: Identifiable, Hashable {
         return lhs.id == rhs.id
     }
 }
+
 
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView

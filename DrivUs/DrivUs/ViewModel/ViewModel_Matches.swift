@@ -19,7 +19,6 @@ class ViewModel_Matches: ObservableObject {
     }
     
     func setMatches(_ matches: [Model.MatchModel.Match]) {
-        print("loaded Matches: \(matches)")
         model.setMatches(matches)
     }
     
@@ -31,11 +30,11 @@ class ViewModel_Matches: ObservableObject {
         }
     }
     
+    func getMatchesCount(for userId: String) -> Int {
+        return matches.filter { $0.firstUserId == userId || $0.secondUserId == userId }.count
+    }
+    
     func fetchUserMatches(_ user: Model.UserModel.User) {
-        print("my logged user: \(user.id)")
-        print("")
-        print("my matches: \(matches)")
-        print("")
         setMatches(MatchManager.shared.filterMatchesByUser(matches, user))
     }
 }
