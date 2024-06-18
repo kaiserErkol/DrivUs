@@ -20,7 +20,6 @@ class ViewModel_Swipes: ObservableObject {
     }
     
     func setSwipes(_ swipes: [Model.SwipeModel.Swipe]) {
-        print("swipes setted \(swipes)")
         model.setSwipes(swipes)
     }
     
@@ -40,8 +39,8 @@ class ViewModel_Swipes: ObservableObject {
         return swipes.filter { $0.firstUserId == userId || $0.secondUserId == userId }.count
     }
     
-    func acceptSwipe(swipeId: String, acceptRide: Bool, user: Model.UserModel.User) {
-        SwipesService.shared.updateSwipe(swipeId, acceptRide, user) { success in
+    func answerSwipe(swipeId: String, answer: Bool, user: Model.UserModel.User) {
+        SwipesService.shared.updateSwipe(swipeId, answer, user) { success in
             if success {
                 print("")
                 print("updated swipe")

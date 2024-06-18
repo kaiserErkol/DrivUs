@@ -70,7 +70,7 @@ class SwipesService {
     }
     
     // Update a specific swipe
-    func updateSwipe(_ swipeId: String, _ acceptRide: Bool, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
+    func updateSwipe(_ swipeId: String, _ answer: Bool, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
         fetchAllSwipes { swipes in
             guard let swipes = swipes else {
                 completion(false)
@@ -89,10 +89,10 @@ class SwipesService {
             var updateData: [String: Any] = [:]
             
             if swipeToUpdate.firstUserId == user.id {
-                updateData["firstAnswer"] = acceptRide
+                updateData["firstAnswer"] = answer
                 updateData["firstUserId"] = user.id
             } else if swipeToUpdate.secondUserId == user.id {
-                updateData["secondAnswer"] = acceptRide
+                updateData["secondAnswer"] = answer
                 updateData["secondUserId"] = user.id
             } else {
                 // If neither ID matches, there's a logic error

@@ -41,7 +41,7 @@ struct SwipeView: View {
                                 // Buttons
                                 HStack(spacing: 100) {
                                     Button(action: {
-                                        rejectRide()
+                                        rejectRide(swipe)
                                     }) {
                                         Image(systemName: "xmark")
                                             .padding()
@@ -85,7 +85,7 @@ struct SwipeView: View {
                                     .onEnded { gesture in
                                         if gesture.translation.width < -100 {
                                             // Swipe Left
-                                            rejectRide()
+                                            rejectRide(swipe)
                                         } else if gesture.translation.width > 100 {
                                             // Swipe Right
                                             acceptSwipe(swipe)
@@ -126,18 +126,18 @@ struct SwipeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.bottom, 20)
         .shadow(color: .black, radius: 15, x: -0, y: -5).opacity(0.5)
-
     }
-        
     
     private func acceptSwipe(_ swipe: Model.SwipeModel.Swipe) {
-        viewModelSwipes.acceptSwipe(swipeId: swipe.id, acceptRide: true, user: viewModelUser.loggedUser)
+        viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: true, user: viewModelUser.loggedUser)
         
         showSwipeByIndex += 1
         print("swipe index: \(showSwipeByIndex)")
     }
     
-    private func rejectRide() {
+    private func rejectRide(_ swipe: Model.SwipeModel.Swipe) {
+        viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: false, user: viewModelUser.loggedUser)
+
         showSwipeByIndex += 1
         print("swipe index: \(showSwipeByIndex)")
     }

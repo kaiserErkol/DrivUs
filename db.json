@@ -135,8 +135,8 @@
       "rideId": "1",
       "firstUserId": "1",
       "secondUserId": "4",
-      "firstAnswer": null,
-      "secondAnswer": null
+      "firstAnswer": true,
+      "secondAnswer": true
     },
     {
       "id": "2",
@@ -164,6 +164,12 @@
     }
   ],
   "matches": [
-    
+    {
+      "id": "1",
+      "rideId": "1",
+      "swipeId": "1",
+      "secondUserId": "4",
+      "firstUserId": "1"
+    }
   ]
 }

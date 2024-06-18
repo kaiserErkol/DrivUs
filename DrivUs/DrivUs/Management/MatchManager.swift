@@ -30,13 +30,20 @@ class MatchManager {
         
         for swipe in swipes {
             if swipe.firstUserId == user.id {
-                userSwipes.append(swipe)
+                if (swipe.firstAnswer == nil && swipe.secondAnswer == true) || (swipe.firstAnswer == nil && swipe.secondAnswer == nil){
+                    print("I check wos nil ist firstuserid")
+                    userSwipes.append(swipe)
+                }
             }
             else if swipe.secondUserId == user.id {
-                userSwipes.append(swipe)
+                if (swipe.secondAnswer == nil && swipe.firstAnswer == true) || (swipe.secondAnswer == nil && swipe.firstAnswer == nil){
+                    print("I check wos nil ist seconduserid")
+                    userSwipes.append(swipe)
+                }
             }
         }
  
+        print("filtered user swipes: \(userSwipes)")
         return userSwipes
     }
     
