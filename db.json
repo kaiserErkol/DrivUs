@@ -164,6 +164,23 @@
     }
   ],
   "matches": [
+<<<<<<< HEAD
 
+=======
+    {
+      "id": "1",
+      "swipeId": "2",
+      "rideId": "3",
+      "secondUserId": "5",
+      "firstUserId": "3"
+    },
+    {
+      "id": "1",
+      "firstUserId": "5",
+      "secondUserId": "6",
+      "rideId": "5",
+      "swipeId": "4"
+    }
+>>>>>>> 2b871d9776d57d8bda368e9a45d460af46afea6f
   ]
 }
