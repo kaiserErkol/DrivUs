@@ -125,7 +125,7 @@ struct SwipeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.bottom, 20)
-        .shadow(color: .black, radius: 15, x: -0, y: -5).opacity(0.5)
+        .shadow(color: .gray, radius: 15, x: -0, y: -5)
     }
     
     private func acceptSwipe(_ swipe: Model.SwipeModel.Swipe) {

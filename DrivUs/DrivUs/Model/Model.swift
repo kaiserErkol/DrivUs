@@ -80,6 +80,10 @@ struct Model {
             rideById = loadedRide
         }
         
+        func getRideById(_ id: String) -> Ride? {
+                return rides.first { $0.id == id }
+        }
+        
         struct DefaultRide {
             static var `default`: Ride {
                 return Ride(id: "-1", user_id: "Ride Not Found", startpunkt_ort: "Not Found", startpunkt_longitude: 0.0, startpunkt_latitude: 0.0, endpunkt_ort: "Not Found", endpunkt_longitude: 0.0, endpunkt_latitude: 0.0)

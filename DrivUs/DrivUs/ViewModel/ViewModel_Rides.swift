@@ -30,6 +30,10 @@ class ViewModel_Rides: ObservableObject {
         model.setRideById(ride)
     }
     
+    func getRideById(_ id: String) -> Model.RideModel.Ride? {
+            return model.getRideById(id)
+    }
+    
     func fetchRideById(_ id: String) -> Model.RideModel.Ride?{
         /*RidesService.shared.fetchRideById(byID: id) { [weak self] ride in
             DispatchQueue.main.async {

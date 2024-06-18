@@ -14,14 +14,26 @@ struct PersonView: View {
     var body: some View {
         NavigationView {
             List(viewModel_matches.matches) { match in
-                VStack(alignment: .leading) {
-                    Text(" \(viewModel_user.getUserById(match.rideId)?.name ?? "Unknown")")
-                    Text("Ride Nr.: \(match.rideId)")
-                    Text("firstUser: \(match.firstUserId)")
-                    Text("secUser: \(match.secondUserId)")
-                    .font(.body)
-                    .foregroundColor(.white)
+                HStack{
+                    Image("\(viewModel_user.getUserById(match.rideId)?.name ?? "Unknown")")
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                        .background(Color.drivusBlue)
+                        .foregroundColor(.white)
+                        .clipShape(Circle())
+                        .padding(.top,2)
+                        .padding(.bottom,2)
+                    
+                    VStack(alignment: .leading) {
+                        Text(" \(viewModel_user.getUserById(match.rideId)?.name ?? "Unknown")")
+                            .foregroundColor(.white)
+                            .font(.title)
+                        Text("   \(viewModel_rides.getRideById(match.rideId)?.startpunkt_ort ?? "Unknown") - \(viewModel_rides.getRideById(match.rideId)?.endpunkt_ort ?? "Unknown")")
+                        .font(.body)
+                        .foregroundColor(.black)
+                    }
                 }
+                
                 .padding(10)
                 .background(Color(UIColor.drivusBlue))
                 .cornerRadius(10)
@@ -31,7 +43,7 @@ struct PersonView: View {
             .padding(.top,10)
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Meine Matches")
-            .task {
+            .onAppear {
                viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
            }
         }.navigationViewStyle(StackNavigationViewStyle())
