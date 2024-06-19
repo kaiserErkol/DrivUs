@@ -10,6 +10,7 @@ import Foundation
 class ViewModel_Swipes: ObservableObject {
     @Published private (set) var model: Model.SwipeModel
     @Published var swipesCount: Int = 0
+    @Published var newMatch: Model.MatchModel.Match?
     
     init(_ model: Model.SwipeModel) {
         self.model = model
@@ -39,17 +40,10 @@ class ViewModel_Swipes: ObservableObject {
         return swipes.filter { $0.firstUserId == userId || $0.secondUserId == userId }.count
     }
     
-    func answerSwipe(swipeId: String, answer: Bool, user: Model.UserModel.User) {
-        SwipesService.shared.updateSwipe(swipeId, answer, user) { success in
-            if success {
-                print("")
-                print("updated swipe")
-                print("")
-            }
-            else {
-                print("")
-                print("failed at updating swipe")
-                print("")
+    func answerSwipe(swipeId: String, answer: Bool, user: Model.UserModel.User){
+        SwipesService.shared.updateSwipe(swipeId, answer, user) { [weak self] newMatch in
+            DispatchQueue.main.async {
+                self?.newMatch = newMatch
             }
         }
     }

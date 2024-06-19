@@ -38,4 +38,11 @@ class ViewModel_Matches: ObservableObject {
     func fetchUserMatches(_ user: Model.UserModel.User) {
         setMatches(MatchManager.shared.filterMatchesByUser(matches, user))
     }
+    
+    func addNewMatchToAlreadyExistingMatches(_ newMatch: Model.MatchModel.Match) {
+        var newMatches: [Model.MatchModel.Match] = matches
+        newMatches.append(newMatch)
+        
+        setMatches(newMatches)
+    }
 }

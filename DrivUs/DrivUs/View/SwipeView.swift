@@ -130,16 +130,20 @@ struct SwipeView: View {
     
     private func acceptSwipe(_ swipe: Model.SwipeModel.Swipe) {
         viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: true, user: viewModelUser.loggedUser)
+                
+//        if viewModelSwipes.newMatch != nil {
+//            
+//            viewModelMatches.addNewMatchToAlreadyExistingMatches(viewModelSwipes.newMatch!)
+//        }
         
         showSwipeByIndex += 1
-        print("swipe index: \(showSwipeByIndex)")
     }
     
     private func rejectRide(_ swipe: Model.SwipeModel.Swipe) {
         viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: false, user: viewModelUser.loggedUser)
+        viewModelMatches.addNewMatchToAlreadyExistingMatches(viewModelSwipes.newMatch!)
 
         showSwipeByIndex += 1
-        print("swipe index: \(showSwipeByIndex)")
     }
     
 }

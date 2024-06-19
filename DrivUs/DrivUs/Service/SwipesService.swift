@@ -2,7 +2,7 @@ import Foundation
 
 class SwipesService {
     static let shared = SwipesService()
-    
+        
     // Fetch all swipes
     func fetchAllSwipes(completion: @escaping ([Model.SwipeModel.Swipe]?) -> Void) {
         guard let url = URL(string: "http://localhost:3000/swipes") else {
@@ -70,10 +70,10 @@ class SwipesService {
     }
     
     // Update a specific swipe
-    func updateSwipe(_ swipeId: String, _ answer: Bool, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
+    func updateSwipe(_ swipeId: String, _ answer: Bool, _ user: Model.UserModel.User, completion: @escaping (Model.MatchModel.Match?) -> Void) {
         fetchAllSwipes { swipes in
             guard let swipes = swipes else {
-                completion(false)
+                completion(nil)
                 return
             }
             
@@ -81,7 +81,7 @@ class SwipesService {
             
             // Find the swipe to update
             guard let swipeToUpdate = filteredSwipes.first(where: { $0.id == swipeId }) else {
-                completion(false)
+                completion(nil)
                 return
             }
             
@@ -96,7 +96,7 @@ class SwipesService {
                 updateData["secondUserId"] = user.id
             } else {
                 // If neither ID matches, there's a logic error
-                completion(false)
+                completion(nil)
                 return
             }
             
@@ -110,20 +110,22 @@ class SwipesService {
                             self.checkMatchDuplicate(swipeToUpdate, user) { isDuplicate in
                                 
                                 if !isDuplicate {
-                                    self.createMatch(from: swipeToUpdate, completion: completion)
+                                    self.createMatch(from: swipeToUpdate) { match in
+                                        completion(match)
+                                    }
                                 }
                                 else {
-                                    completion(true)
+                                    completion(nil)
                                 }
                                 
                             }
                             
                         } else {
-                            completion(true)
+                            completion(nil)
                         }
                     }
                 } else {
-                    completion(false)
+                    completion(nil)
                 }
                 
             }
@@ -199,7 +201,7 @@ class SwipesService {
         }
     }
     
-    private func createMatch(from swipe: Model.SwipeModel.Swipe, completion: @escaping (Bool) -> Void) {
+    private func createMatch(from swipe: Model.SwipeModel.Swipe, completion: @escaping (Model.MatchModel.Match?) -> Void) {
         // Create the new match object with a new id
         print("")
         print("creating match")
@@ -218,7 +220,7 @@ class SwipesService {
                 
                 // Save the new match object to the server
                 guard let url = URL(string: "http://localhost:3000/matches") else {
-                    completion(false)
+                    completion(nil)
                     return
                 }
                 
@@ -231,24 +233,24 @@ class SwipesService {
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 } catch {
                     print("Error serializing match data: \(error)")
-                    completion(false)
+                    completion(nil)
                     return
                 }
                 
                 URLSession.shared.dataTask(with: request) { data, response, error in
                     if let error = error {
                         print("Error creating match: \(error)")
-                        completion(false)
+                        completion(nil)
                         return
                     }
                     
                     guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                         print("Failed to create match")
-                        completion(false)
+                        completion(nil)
                         return
                     }
                     
-                    completion(true)
+                    completion(newMatch)
                 }.resume()
             }
         }

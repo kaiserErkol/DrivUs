@@ -164,12 +164,6 @@
     }
   ],
   "matches": [
-    {
-      "id": "1",
-      "swipeId": "2",
-      "firstUserId": "3",
-      "secondUserId": "5",
-      "rideId": "3"
-    }
+
   ]
 }

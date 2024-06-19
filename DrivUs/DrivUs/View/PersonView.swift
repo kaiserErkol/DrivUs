@@ -43,7 +43,7 @@ struct PersonView: View {
             .padding(.top,10)
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Meine Matches")
-            .onAppear {
+            .task {
                viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
            }
         }.navigationViewStyle(StackNavigationViewStyle())
