@@ -45,6 +45,10 @@ class ViewModel_Rides: ObservableObject {
         return MatchManager.shared.filterRideById(id, rides)
     }
     
+    func fetchRideByUser(_ id: String) -> Model.RideModel.Ride?{
+        return MatchManager.shared.filterRideByUser(id, rides)
+    }
+    
     func fetchAllRides() {
         RidesService.shared.fetchAllRides { [weak self] rides in
             DispatchQueue.main.async {

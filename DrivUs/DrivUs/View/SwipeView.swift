@@ -30,7 +30,7 @@ struct SwipeView: View {
                 if showSwipeByIndex < viewModelSwipes.swipes.count {
                     let swipe = viewModelSwipes.swipes[showSwipeByIndex]
                     
-                    if let rideByCurrSwipe = viewModelRides.fetchRideById(swipe.rideId) {
+                    if let rideByCurrSwipe = viewModelRides.fetchRideByUser(swipe.secondUserId) {
 
                         let userById = viewModelUser.fetchUserById(rideByCurrSwipe.user_id)
 

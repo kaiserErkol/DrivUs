@@ -71,6 +71,15 @@ class MatchManager {
         return Model.RideModel.DefaultRide.default
     }
     
+    func filterRideByUser(_ user_id: String, _ rides: [Model.RideModel.Ride]) -> Model.RideModel.Ride {
+        for ride in rides {
+            if user_id == ride.user_id {
+                return ride
+            }
+        }
+        return Model.RideModel.DefaultRide.default
+    }
+    
     func filterUserById(_ userId: String, _ users: [Model.UserModel.User]) -> Model.UserModel.User {
         for user in users {
             if userId == user.id {

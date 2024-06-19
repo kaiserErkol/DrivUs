@@ -136,22 +136,22 @@
       "firstUserId": "1",
       "secondUserId": "4",
       "firstAnswer": null,
-      "secondAnswer": true
+      "secondAnswer": null
     },
     {
       "id": "2",
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "5",
-      "firstAnswer": true,
-      "secondAnswer": true
+      "firstAnswer": null,
+      "secondAnswer": null
     },
     {
       "id": "3",
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "6",
-      "firstAnswer": true,
+      "firstAnswer": null,
       "secondAnswer": null
     },
     {
@@ -159,7 +159,7 @@
       "rideId": "5",
       "firstUserId": "5",
       "secondUserId": "6",
-      "firstAnswer": true,
+      "firstAnswer": null,
       "secondAnswer": null
     }
   ],
