@@ -1,9 +1,3 @@
-//
-//  SwipeView.swift
-//  DrivUs
-//
-//  Created by Natalie Schmitzberger on 02.04.24.
-//
 import SwiftUI
 import MapKit
 
@@ -30,11 +24,17 @@ struct SwipeView: View {
                 if showSwipeByIndex < viewModelSwipes.swipes.count {
                     let swipe = viewModelSwipes.swipes[showSwipeByIndex]
                     
-                    if let rideByCurrSwipe = viewModelRides.fetchRideByUser(swipe.secondUserId) {
+                    if let rideByCurrSwipe = viewModelRides.fetchRideById(swipe.rideId),
+                       let userById = viewModelUser.fetchUserById(rideByCurrSwipe.user_id) {
 
-                        let userById = viewModelUser.fetchUserById(rideByCurrSwipe.user_id)
-
-                        MapView(sp_latitude: rideByCurrSwipe.startpunkt_latitude, sp_longitude: rideByCurrSwipe.startpunkt_longitude, ep_latitude: rideByCurrSwipe.endpunkt_latitude, ep_longitude: rideByCurrSwipe.endpunkt_longitude)
+                        MapView(
+                            sp_latitude: rideByCurrSwipe.startpunkt_latitude,
+                            sp_longitude: rideByCurrSwipe.startpunkt_longitude,
+                            ep_latitude: rideByCurrSwipe.endpunkt_latitude,
+                            ep_longitude: rideByCurrSwipe.endpunkt_longitude,
+                            startName: rideByCurrSwipe.startpunkt_ort,
+                            endName: rideByCurrSwipe.endpunkt_ort
+                        )
                         
                         Color.drivusBlue.overlay(
                             VStack {
@@ -68,18 +68,14 @@ struct SwipeView: View {
                                     .foregroundColor(.white)
                                     .kerning(7)
                                 
-                                Text("User: \(userById!.name)")
+                                Text("User: \(userById.name)")
                                     .padding(5)
                                     .foregroundColor(.white)
                             }
                             .frame(width: UIScreen.main.bounds.width)
-                            .animation(.easeInOut, value: showSwipeByIndex)
-                            .transition(.slide)
                             .padding(.bottom, 10)
                             .background(Color.drivusBlue)
-                            .frame(height: UIScreen.main.bounds.height * 1.5)
                             .cornerRadius(40)
-                            .frame(width: UIScreen.main.bounds.width)
                             .gesture(
                                 DragGesture()
                                     .onEnded { gesture in
@@ -92,10 +88,6 @@ struct SwipeView: View {
                                         }
                                     }
                             )
-                            .animation(.easeInOut, value: showSwipeByIndex)
-                            .transition(.slide)
-                            .frame(height: UIScreen.main.bounds.height / 3)
-                            .indexViewStyle(.page(backgroundDisplayMode: .never))
                         )
                         
                     } else {
@@ -107,20 +99,17 @@ struct SwipeView: View {
                     Text("No available Rides found")
                         .padding()
                         .foregroundColor(.white)
-                        .transition(.slide)
                         .background(Color.drivusBlue)
-                        .frame(width: UIScreen.main.bounds.width)
-                        .padding(.top, 350)
                         .cornerRadius(70)
+                        .padding(.top, 350)
                 }
                 
                 Spacer()
             }
             .frame(width: UIScreen.main.bounds.width)
             .cornerRadius(20)
-            .transition(.slide)
         }
-        .task() {
+        .task {
             viewModelSwipes.fetchUserSwipes(viewModelUser.loggedUser)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -130,27 +119,16 @@ struct SwipeView: View {
     
     private func acceptSwipe(_ swipe: Model.SwipeModel.Swipe) {
         viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: true, user: viewModelUser.loggedUser)
-                
-//        if viewModelSwipes.newMatch != nil {
-//            
-//            viewModelMatches.addNewMatchToAlreadyExistingMatches(viewModelSwipes.newMatch!)
-//        }
-        
+        if let newMatch = viewModelSwipes.newMatch {
+            print("new match: \(newMatch)")
+            viewModelMatches.addNewMatchToAlreadyExistingMatches(newMatch)
+        }
         showSwipeByIndex += 1
     }
     
     private func rejectRide(_ swipe: Model.SwipeModel.Swipe) {
         viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: false, user: viewModelUser.loggedUser)
-        viewModelMatches.addNewMatchToAlreadyExistingMatches(viewModelSwipes.newMatch!)
-
         showSwipeByIndex += 1
-    }
-    
-}
-
-extension CLLocationCoordinate2D {
-    static var userLocation: CLLocationCoordinate2D {
-        return .init(latitude: 48.2590, longitude: 14.2439)
     }
 }
 
@@ -167,15 +145,15 @@ struct UserLocation: Identifiable, Hashable {
     }
 }
 
-
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     
-    //@Binding var directions: [String]
     let sp_latitude: Double
     let sp_longitude: Double
     let ep_latitude: Double
     let ep_longitude: Double
+    let startName: String
+    let endName: String
     
     func makeCoordinator() -> MapViewCoordinator {
         return MapViewCoordinator()
@@ -185,17 +163,25 @@ struct MapView: UIViewRepresentable {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+        // Initial region setup
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: sp_latitude, longitude: sp_longitude),
                                         latitudinalMeters: 10000000, longitudinalMeters: 5000000)
         mapView.setRegion(region, animated: true)
         
-        let newHeight = UIScreen.main.bounds.height / 2
-        let newWidth = UIScreen.main.bounds.width / 3
-        mapView.frame = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+        return mapView
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        // Remove existing annotations and overlays
+        uiView.removeAnnotations(uiView.annotations)
+        uiView.removeOverlays(uiView.overlays)
         
+        // Update map with new coordinates and route
+        let startCoordinate = CLLocationCoordinate2D(latitude: sp_latitude, longitude: sp_longitude)
+        let endCoordinate = CLLocationCoordinate2D(latitude: ep_latitude, longitude: ep_longitude)
         
-        let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: sp_latitude, longitude: sp_longitude))
-        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: ep_latitude, longitude: sp_longitude))
+        let p1 = MKPlacemark(coordinate: startCoordinate)
+        let p2 = MKPlacemark(coordinate: endCoordinate)
         
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: p1)
@@ -207,19 +193,20 @@ struct MapView: UIViewRepresentable {
         directions.calculate { response, error in
             DispatchQueue.main.async {
                 guard let route = response?.routes.first, error == nil else { return }
-                mapView.addOverlay(route.polyline)
-                mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                uiView.addOverlay(route.polyline)
+                uiView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                 
-                let annotations = [p1, p2].compactMap{MKPlacemark(placemark: $0)}
-                mapView.addAnnotations(annotations)
+                let startAnnotation = MKPointAnnotation()
+                startAnnotation.coordinate = p1.coordinate
+                startAnnotation.title = startName
+                uiView.addAnnotation(startAnnotation)
+                
+                let endAnnotation = MKPointAnnotation()
+                endAnnotation.coordinate = p2.coordinate
+                endAnnotation.title = endName
+                uiView.addAnnotation(endAnnotation)
             }
         }
-        
-        return mapView
-    }
-    
-    func updateUIView(_ uiView: MKMapView, context: Context) {
-        // Update the view
     }
 }
 
@@ -230,5 +217,4 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         renderer.lineWidth = 3
         return renderer
     }
-    
 }

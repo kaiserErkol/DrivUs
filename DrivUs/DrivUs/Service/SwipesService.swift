@@ -111,6 +111,11 @@ class SwipesService {
                                 
                                 if !isDuplicate {
                                     self.createMatch(from: swipeToUpdate) { match in
+                                        print("")
+                                        print("------------------------------")
+                                        print("ITS A MATCH!!")
+                                        print("------------------------------")
+                                        print("")
                                         completion(match)
                                     }
                                 }

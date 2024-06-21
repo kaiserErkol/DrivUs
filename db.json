@@ -9,7 +9,8 @@
       "name": "Yasin",
       "pos_longitude": 0,
       "pos_latitude": 0,
-      "driver": true
+      "driver": true,
+      "swipeCount": 1
     },
     {
       "id": "2",
@@ -20,7 +21,8 @@
       "name": "Nati",
       "pos_longitude": 0,
       "pos_latitude": 0,
-      "driver": true
+      "driver": true,
+      "swipeCount": 2
     },
     {
       "id": "3",
@@ -31,7 +33,8 @@
       "name": "Tommy",
       "pos_longitude": 0,
       "pos_latitude": 0,
-      "driver": true
+      "driver": true,
+      "swipeCount": 3
     },
     {
       "id": "4",
@@ -42,7 +45,8 @@
       "name": "Felix",
       "pos_longitude": 0,
       "pos_latitude": 0,
-      "driver": false
+      "driver": false,
+      "swipeCount": 4
     },
     {
       "id": "5",
@@ -53,7 +57,8 @@
       "name": "Andrei",
       "pos_longitude": 0,
       "pos_latitude": 0,
-      "driver": false
+      "driver": false,
+      "swipeCount": 5
     },
     {
       "id": "6",
@@ -64,7 +69,8 @@
       "name": "Raphi",
       "pos_longitude": 0,
       "pos_latitude": 0,
-      "driver": true
+      "driver": true,
+      "swipeCount": 6
     }
   ],
   "rides": [
@@ -72,61 +78,61 @@
       "id": "1",
       "user_id": "1",
       "startpunkt_ort": "Enns",
-      "startpunkt_longitude": 14.4791,
-      "startpunkt_latitude": 48.2215,
+      "startpunkt_longitude": 14.476733958190223,
+      "startpunkt_latitude":  48.21291540515809,
       "endpunkt_ort": "Linz",
-      "endpunkt_longitude": 14.2861,
-      "endpunkt_latitude": 48.3064
+      "endpunkt_longitude": 14.281450431693248,
+      "endpunkt_latitude": 48.305305288205766
     },
     {
       "id": "2",
       "user_id": "2",
       "startpunkt_ort": "Thening",
-      "startpunkt_longitude": 14.4791,
-      "startpunkt_latitude": 48.2215,
+      "startpunkt_longitude": 14.168704526363227,
+      "startpunkt_latitude": 48.254951876530086,
       "endpunkt_ort": "Linz",
-      "endpunkt_longitude": 14.2861,
-      "endpunkt_latitude": 48.3064
+      "endpunkt_longitude": 14.281450431693248,
+      "endpunkt_latitude": 48.305305288205766
     },
     {
       "id": "3",
       "user_id": "3",
       "startpunkt_ort": "Enns",
-      "startpunkt_longitude": 14.4791,
-      "startpunkt_latitude": 48.2215,
+      "startpunkt_longitude": 14.476733958190223,
+      "startpunkt_latitude":  48.21291540515809,
       "endpunkt_ort": "Wien",
-      "endpunkt_longitude": 16.3738,
-      "endpunkt_latitude": 48.2082
+      "endpunkt_longitude": 16.368643432001416,
+      "endpunkt_latitude": 48.20959194079323
     },
     {
       "id": "4",
       "user_id": "4",
       "startpunkt_ort": "Enns",
-      "startpunkt_longitude": 14.4791,
-      "startpunkt_latitude": 48.2215,
+      "startpunkt_longitude": 14.476733958190223,
+      "startpunkt_latitude":  48.21291540515809,
       "endpunkt_ort": "Linz",
-      "endpunkt_longitude": 16.3738,
-      "endpunkt_latitude": 48.2082
+      "endpunkt_longitude": 14.281450431693248,
+      "endpunkt_latitude": 48.305305288205766
     },
     {
       "id": "5",
       "user_id": "5",
       "startpunkt_ort": "Enns",
-      "startpunkt_longitude": 14.4791,
-      "startpunkt_latitude": 48.2215,
+      "startpunkt_longitude": 14.476733958190223,
+      "startpunkt_latitude":  48.21291540515809,
       "endpunkt_ort": "Wien",
-      "endpunkt_longitude": 16.3738,
-      "endpunkt_latitude": 48.2082
+      "endpunkt_longitude": 16.368643432001416,
+      "endpunkt_latitude": 48.20959194079323
     },
     {
       "id": "6",
       "user_id": "6",
       "startpunkt_ort": "Enns",
-      "startpunkt_longitude": 14.4791,
-      "startpunkt_latitude": 48.2215,
+      "startpunkt_longitude": 14.476733958190223,
+      "startpunkt_latitude":  48.21291540515809,
       "endpunkt_ort": "Wien",
-      "endpunkt_longitude": 16.3738,
-      "endpunkt_latitude": 48.2082
+      "endpunkt_longitude": 16.368643432001416,
+      "endpunkt_latitude": 48.20959194079323
     }
   ],
   "swipes": [

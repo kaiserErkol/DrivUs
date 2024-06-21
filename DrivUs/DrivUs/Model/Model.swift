@@ -19,6 +19,7 @@ struct Model {
             var pos_longitude: Double
             var pos_latitude: Double
             var driver: Bool
+            var swipeCount: Int
         }
         
         private (set) var users = [User]()
@@ -52,7 +53,7 @@ struct Model {
         
         struct DefaultUser {
             static var `default`: User {
-                return User(id: "-1",age: 12,wohnort: "",zitat: "",pictureURL: "./", name: "No User Found", pos_longitude: 0.0, pos_latitude: 0.0, driver: false)
+                return User(id: "-1",age: 12,wohnort: "",zitat: "",pictureURL: "./", name: "No User Found", pos_longitude: 0.0, pos_latitude: 0.0, driver: false, swipeCount: 0)
             }
         }
     }

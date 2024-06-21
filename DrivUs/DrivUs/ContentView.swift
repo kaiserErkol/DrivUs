@@ -32,6 +32,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("Rides", systemImage: "car.fill")
                     }
+//                    .badge(viewModel_users.loggedUser.swipeCount)
                     .badge(viewModel_swipes.getSwipesCount(for: viewModel_users.loggedUser.id))
                     .onAppear {
                         //set badge to 0
