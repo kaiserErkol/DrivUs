@@ -23,8 +23,10 @@ struct SwipeView: View {
             VStack(spacing: 0) {
                 if showSwipeByIndex < viewModelSwipes.swipes.count {
                     let swipe = viewModelSwipes.swipes[showSwipeByIndex]
+                    let loggedUserId = viewModelUser.loggedUser.id
+                    let userSwipeId = (swipe.firstUserId != loggedUserId) ? swipe.firstUserId : swipe.secondUserId
                     
-                    if let rideByCurrSwipe = viewModelRides.fetchRideById(swipe.rideId),
+                    if let rideByCurrSwipe = viewModelRides.fetchRideByUser(userSwipeId),
                        let userById = viewModelUser.fetchUserById(rideByCurrSwipe.user_id) {
 
                         MapView(
