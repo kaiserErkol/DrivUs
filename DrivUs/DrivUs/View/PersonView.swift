@@ -10,6 +10,7 @@ struct PersonView: View {
     @ObservedObject var viewModel_rides: ViewModel_Rides
     @ObservedObject var viewModel_user: ViewModel_User
     @ObservedObject var viewModel_matches: ViewModel_Matches
+    @ObservedObject var viewModel_swipes: ViewModel_Swipes
     
     var body: some View {
         NavigationView {
@@ -46,6 +47,16 @@ struct PersonView: View {
             .task {
                viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
            }
+            .onAppear {
+                if viewModel_swipes.newMatch {
+                    viewModel_matches.fetchAllMatches()
+                    viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
+                    print("Bruder neuer Swipe aber kein Anzeigen weil ja")
+                }
+                else {
+                    print("kein neueer Swipe Bruder")
+                }
+            }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
      

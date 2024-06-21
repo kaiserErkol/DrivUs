@@ -121,10 +121,7 @@ struct SwipeView: View {
     
     private func acceptSwipe(_ swipe: Model.SwipeModel.Swipe) {
         viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: true, user: viewModelUser.loggedUser)
-        if let newMatch = viewModelSwipes.newMatch {
-            print("new match: \(newMatch)")
-            viewModelMatches.addNewMatchToAlreadyExistingMatches(newMatch)
-        }
+ 
         showSwipeByIndex += 1
     }
     

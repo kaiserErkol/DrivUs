@@ -10,7 +10,7 @@ import Foundation
 class ViewModel_Swipes: ObservableObject {
     @Published private (set) var model: Model.SwipeModel
     @Published var swipesCount: Int = 0
-    @Published var newMatch: Model.MatchModel.Match?
+    @Published var newMatch: Bool = false
     
     init(_ model: Model.SwipeModel) {
         self.model = model
@@ -41,9 +41,9 @@ class ViewModel_Swipes: ObservableObject {
     }
     
     func answerSwipe(swipeId: String, answer: Bool, user: Model.UserModel.User){
-        SwipesService.shared.updateSwipe(swipeId, answer, user) { [weak self] newMatch in
+        SwipesService.shared.updateSwipe(swipeId, answer, user) { [weak self] success in
             DispatchQueue.main.async {
-                self?.newMatch = newMatch
+                self?.newMatch = success
             }
         }
     }

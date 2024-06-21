@@ -22,7 +22,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("Home", systemImage: "house.fill")
                     }
-                PersonView(viewModel_rides: viewModel_rides, viewModel_user: viewModel_users, viewModel_matches: viewModel_matches)
+                PersonView(viewModel_rides: viewModel_rides, viewModel_user: viewModel_users, viewModel_matches: viewModel_matches, viewModel_swipes: viewModel_swipes)
                     .tabItem {
                         Label("Matches", systemImage: "person.fill")
                         //badges: create a new variable in user which contains the current count for matches

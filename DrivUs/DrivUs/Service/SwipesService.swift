@@ -70,10 +70,10 @@ class SwipesService {
     }
     
     // Update a specific swipe
-    func updateSwipe(_ swipeId: String, _ answer: Bool, _ user: Model.UserModel.User, completion: @escaping (Model.MatchModel.Match?) -> Void) {
+    func updateSwipe(_ swipeId: String, _ answer: Bool, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
         fetchAllSwipes { swipes in
             guard let swipes = swipes else {
-                completion(nil)
+                completion(false)
                 return
             }
             
@@ -81,7 +81,7 @@ class SwipesService {
             
             // Find the swipe to update
             guard let swipeToUpdate = filteredSwipes.first(where: { $0.id == swipeId }) else {
-                completion(nil)
+                completion(false)
                 return
             }
             
@@ -96,7 +96,7 @@ class SwipesService {
                 updateData["secondUserId"] = user.id
             } else {
                 // If neither ID matches, there's a logic error
-                completion(nil)
+                completion(false)
                 return
             }
             
@@ -110,28 +110,33 @@ class SwipesService {
                             self.checkMatchDuplicate(swipeToUpdate, user) { isDuplicate in
                                 
                                 if !isDuplicate {
-                                    self.createMatch(from: swipeToUpdate) { match in
-                                        print("")
-                                        print("------------------------------")
-                                        print("ITS A MATCH!!")
-                                        print("\(match ?? nil)")
-                                        print("------------------------------")
-                                        print("")
-                                        completion(match)
+                                    self.createMatch(from: swipeToUpdate) { createdMatch in
+                                        if createdMatch {
+                                            print("")
+                                            print("------------------------------")
+                                            print("ITS A MATCH!!")
+                                            print("------------------------------")
+                                            print("")
+                                            
+                                            completion(true)
+                                        }
+                                        else {
+                                            completion(false)
+                                        }
                                     }
                                 }
                                 else {
-                                    completion(nil)
+                                    completion(false)
                                 }
                                 
                             }
                             
                         } else {
-                            completion(nil)
+                            completion(false)
                         }
                     }
                 } else {
-                    completion(nil)
+                    completion(false)
                 }
                 
             }
@@ -207,7 +212,7 @@ class SwipesService {
         }
     }
     
-    private func createMatch(from swipe: Model.SwipeModel.Swipe, completion: @escaping (Model.MatchModel.Match?) -> Void) {
+    private func createMatch(from swipe: Model.SwipeModel.Swipe, completion: @escaping (Bool) -> Void) {
         // Create the new match object with a new id
         print("")
         print("creating match")
@@ -226,7 +231,7 @@ class SwipesService {
                 
                 // Save the new match object to the server
                 guard let url = URL(string: "http://localhost:3000/matches") else {
-                    completion(nil)
+                    completion(false)
                     return
                 }
                 
@@ -239,24 +244,24 @@ class SwipesService {
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 } catch {
                     print("Error serializing match data: \(error)")
-                    completion(nil)
+                    completion(false)
                     return
                 }
                 
                 URLSession.shared.dataTask(with: request) { data, response, error in
                     if let error = error {
                         print("Error creating match: \(error)")
-                        completion(nil)
+                        completion(false)
                         return
                     }
                     
                     guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                         print("Failed to create match")
-                        completion(nil)
+                        completion(false)
                         return
                     }
                     
-                    completion(newMatch)
+                    completion(true)
                 }.resume()
             }
         }
