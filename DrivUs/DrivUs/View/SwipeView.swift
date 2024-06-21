@@ -21,6 +21,13 @@ struct SwipeView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+                if viewModelSwipes.newMatch {
+                    //ITS A MATCH VIEW ANZEIGEN LASSEN
+                    Text("IT A MATCH")
+                }
+            }
+            
+            VStack(spacing: 0) {
                 if showSwipeByIndex < viewModelSwipes.swipes.count {
                     let swipe = viewModelSwipes.swipes[showSwipeByIndex]
                     let loggedUserId = viewModelUser.loggedUser.id
