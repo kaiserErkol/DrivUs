@@ -114,6 +114,7 @@ class SwipesService {
                                         print("")
                                         print("------------------------------")
                                         print("ITS A MATCH!!")
+                                        print("\(match ?? nil)")
                                         print("------------------------------")
                                         print("")
                                         completion(match)

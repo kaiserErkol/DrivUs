@@ -79,7 +79,7 @@
       "user_id": "1",
       "startpunkt_ort": "Enns",
       "startpunkt_longitude": 14.476733958190223,
-      "startpunkt_latitude":  48.21291540515809,
+      "startpunkt_latitude": 48.21291540515809,
       "endpunkt_ort": "Linz",
       "endpunkt_longitude": 14.281450431693248,
       "endpunkt_latitude": 48.305305288205766
@@ -99,7 +99,7 @@
       "user_id": "3",
       "startpunkt_ort": "Enns",
       "startpunkt_longitude": 14.476733958190223,
-      "startpunkt_latitude":  48.21291540515809,
+      "startpunkt_latitude": 48.21291540515809,
       "endpunkt_ort": "Wien",
       "endpunkt_longitude": 16.368643432001416,
       "endpunkt_latitude": 48.20959194079323
@@ -109,7 +109,7 @@
       "user_id": "4",
       "startpunkt_ort": "Enns",
       "startpunkt_longitude": 14.476733958190223,
-      "startpunkt_latitude":  48.21291540515809,
+      "startpunkt_latitude": 48.21291540515809,
       "endpunkt_ort": "Linz",
       "endpunkt_longitude": 14.281450431693248,
       "endpunkt_latitude": 48.305305288205766
@@ -119,7 +119,7 @@
       "user_id": "5",
       "startpunkt_ort": "Enns",
       "startpunkt_longitude": 14.476733958190223,
-      "startpunkt_latitude":  48.21291540515809,
+      "startpunkt_latitude": 48.21291540515809,
       "endpunkt_ort": "Wien",
       "endpunkt_longitude": 16.368643432001416,
       "endpunkt_latitude": 48.20959194079323
@@ -129,7 +129,7 @@
       "user_id": "6",
       "startpunkt_ort": "Enns",
       "startpunkt_longitude": 14.476733958190223,
-      "startpunkt_latitude":  48.21291540515809,
+      "startpunkt_latitude": 48.21291540515809,
       "endpunkt_ort": "Wien",
       "endpunkt_longitude": 16.368643432001416,
       "endpunkt_latitude": 48.20959194079323
