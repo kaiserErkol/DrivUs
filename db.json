@@ -172,10 +172,10 @@
   "matches": [
     {
       "id": "1",
-      "swipeId": "1",
-      "firstUserId": "1",
       "secondUserId": "4",
-      "rideId": "1"
+      "rideId": "1",
+      "firstUserId": "1",
+      "swipeId": "1"
     }
   ]
 }

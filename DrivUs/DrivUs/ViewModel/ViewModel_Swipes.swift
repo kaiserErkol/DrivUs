@@ -40,9 +40,14 @@ class ViewModel_Swipes: ObservableObject {
         return swipes.filter { $0.firstUserId == userId || $0.secondUserId == userId }.count
     }
     
-    func answerSwipe(swipeId: String, answer: Bool, user: Model.UserModel.User){
+    func answerSwipe(swipeId: String, answer: Bool, user: Model.UserModel.User, fetchAllMatches: (() -> Void)? = nil, fetchUserMatches: ((Model.UserModel.User) -> Void)? = nil){
+        
         SwipesService.shared.updateSwipe(swipeId, answer, user) { [weak self] success in
             DispatchQueue.main.async {
+                if success {
+                    fetchAllMatches?()
+                    fetchUserMatches?(user)
+                }
                 self?.newMatch = success
             }
         }

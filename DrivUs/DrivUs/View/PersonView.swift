@@ -55,14 +55,7 @@ struct PersonView: View {
                     viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
                 }
                 .onAppear {
-                    if viewModel_swipes.newMatch {
-                        viewModel_matches.fetchAllMatches()
-                        viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
-                        print("Bruder neuer Swipe aber kein Anzeigen weil ja")
-                    }
-                    else {
-                        print("kein neueer Swipe Bruder")
-                    }
+                    
                 }
             }.navigationViewStyle(StackNavigationViewStyle())
         }

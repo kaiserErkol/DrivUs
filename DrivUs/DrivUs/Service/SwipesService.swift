@@ -70,7 +70,8 @@ class SwipesService {
     }
     
     // Update a specific swipe
-    func updateSwipe(_ swipeId: String, _ answer: Bool, _ user: Model.UserModel.User, completion: @escaping (Bool) -> Void) {
+    func updateSwipe(_ swipeId: String, _ answer: Bool, _ user: Model.UserModel.User, fetchAllMatches: (() -> Void)? = nil, fetchUserMatches: ((Model.UserModel.User) -> Void)? = nil, completion: @escaping (Bool) -> Void) {
+        
         fetchAllSwipes { swipes in
             guard let swipes = swipes else {
                 completion(false)
@@ -112,6 +113,8 @@ class SwipesService {
                                 if !isDuplicate {
                                     self.createMatch(from: swipeToUpdate) { createdMatch in
                                         if createdMatch {
+                                            fetchAllMatches?()
+                                            fetchUserMatches?(user)
                                             print("")
                                             print("------------------------------")
                                             print("ITS A MATCH!!")

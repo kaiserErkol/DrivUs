@@ -120,8 +120,8 @@ struct SwipeView: View {
     }
     
     private func acceptSwipe(_ swipe: Model.SwipeModel.Swipe) {
-        viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: true, user: viewModelUser.loggedUser)
- 
+        viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: true, user: viewModelUser.loggedUser, fetchAllMatches: viewModelMatches.fetchAllMatches, fetchUserMatches: viewModelMatches.fetchUserMatches)
+            
         showSwipeByIndex += 1
     }
     
