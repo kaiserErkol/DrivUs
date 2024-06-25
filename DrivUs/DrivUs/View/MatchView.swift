@@ -7,12 +7,17 @@
 import SwiftUI
 
 struct MatchView: View {
-    //let carpool: Carpool
-    let onClose: () -> Void
-    let onNext: () -> Void // Methode, um zum nächsten Eintrag zu gehen
-    
+//    let carpool: Carpool
+//    let onClose: () -> Void
+//    let onNext: () -> Void // Methode, um zum nächsten Eintrag zu gehen
+    /*
+    @ObservedObject var viewModelRides: ViewModel_Rides
+    @ObservedObject var viewModelUser: ViewModel_User
+    @ObservedObject var viewModelSwipes: ViewModel_Swipes
+    @ObservedObject var viewModelMatches: ViewModel_Matches
+    */
     var body: some View {
-        Text("MatchView")
+        Text("")
         /*
         VStack {
             Text("IT'S A MATCH!")
@@ -49,6 +54,7 @@ struct MatchView: View {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        */
+         */
     }
+    
 }

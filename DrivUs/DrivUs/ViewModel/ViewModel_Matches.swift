@@ -9,6 +9,7 @@ import Foundation
 
 class ViewModel_Matches: ObservableObject {
     @Published private(set) var model: Model.MatchModel
+    @Published private (set) var newMatchFound: Model.MatchModel.Match? = nil
     
     init(_ model: Model.MatchModel) {
         self.model = model

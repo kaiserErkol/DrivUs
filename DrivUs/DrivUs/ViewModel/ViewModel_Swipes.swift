@@ -12,6 +12,7 @@ class ViewModel_Swipes: ObservableObject {
     @Published var swipesCount: Int = 0
     @Published var newMatch: Bool = false
     
+    
     init(_ model: Model.SwipeModel) {
         self.model = model
     }
