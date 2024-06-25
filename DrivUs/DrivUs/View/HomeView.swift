@@ -5,16 +5,13 @@ struct HomeView: View {
     var body: some View {
         VStack {
             
-            Image(systemName: "car.rear")
+            Image("Logo_font_bright")
                 .resizable()
-                .frame(width: 150, height: 130)
-                .padding(50)
-                .background(Color.drivusBlue)
+                .frame(width: 300, height: 300)
+                .padding(.bottom, -70)
                 .foregroundColor(.white)
-                .clipShape(Circle())
-                .padding(.top, 80)
-                .padding(.vertical, 20)
-                .shadow(color: .black, radius: -15, x: 5, y: 5)
+                .padding(.top, 10)
+                .shadow(color: .white, radius: -15, x: 5, y: 5)
                 
             VStack(spacing: -15) {
                 Button("NACHHAUSE") {
@@ -22,8 +19,8 @@ struct HomeView: View {
                 }
                 .padding(.horizontal, 80)
                 .padding(.vertical, 20)
-                .background(Color.gray)
-                .foregroundColor(.black)
+                .background(.drivusBlue)
+                .foregroundColor(.white)
                 .cornerRadius(20)
                 .shadow(color: .black, radius: 3, x: 3, y: 3)
                 .frame(width: UIScreen.main.bounds.width / 1)

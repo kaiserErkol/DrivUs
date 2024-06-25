@@ -16,23 +16,49 @@ struct UserView: View {
     var body: some View {
         VStack {
             if sent == false {
-                VStack {
-                    TextField("User Name eingeben", text: $userIdInput)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding(5)
-                        .background(Color.drivusBlue)
-                        .cornerRadius(8)
+                Image("logodesi2")
+                    .resizable()
+                    .frame(width: 400, height: 230)
+                    .padding(.top,-150)
                     
-                    Button(action: {
-                        viewModel_user.setLoginUser(userIdInput)
-                        sent = true
-                    }) {
-                        Text("einloggen")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.drivusBlue)
-                            .cornerRadius(8)
+                VStack (spacing: 2){
+                    Text("Willkommen !")
+                        .foregroundColor(.drivusBlue)
+                        .padding(.horizontal,10)
+                        .padding(.vertical,10)
+                        .cornerRadius(20)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding(.bottom, -15)
+                        .padding(.top,60)
+                    Text("logge dich bitte ein um fortzufahren")
+                        .foregroundColor(.black)
+                        .padding(.horizontal,10)
+                        .padding(.vertical,10)
+                        .font(.caption)
+                        .cornerRadius(20)
+                        .padding(.bottom, 35)
+                    VStack(spacing:20){
+                        TextField("User Name eingeben", text: $userIdInput)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(3)
+                            .background(Color.darkDrivusBlue)
+                            .cornerRadius(5)
+                            .frame(width: 280)
+                        
+                        Button(action: {
+                            viewModel_user.setLoginUser(userIdInput)
+                            sent = true
+                        }) {
+                            Text("einloggen")
+                                .foregroundColor(.white)
+                                .padding(.horizontal,10)
+                                .padding(.vertical,10)
+                                .background(Color.darkDrivusBlue)
+                                .cornerRadius(20)
+                        }
                     }
+                    
                 }
                 .padding()
             }else{

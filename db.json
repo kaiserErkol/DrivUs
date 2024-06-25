@@ -141,7 +141,7 @@
       "rideId": "1",
       "firstUserId": "1",
       "secondUserId": "4",
-      "firstAnswer": true,
+      "firstAnswer": t,
       "secondAnswer": true
     },
     {
@@ -149,15 +149,15 @@
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "5",
-      "firstAnswer": true,
-      "secondAnswer": true
+      "firstAnswer": null,
+      "secondAnswer": null
     },
     {
       "id": "3",
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "6",
-      "firstAnswer": true,
+      "firstAnswer": null,
       "secondAnswer": null
     },
     {
@@ -166,7 +166,7 @@
       "firstUserId": "5",
       "secondUserId": "6",
       "firstAnswer": null,
-      "secondAnswer": true
+      "secondAnswer": null
     }
   ],
   "matches": [
@@ -174,15 +174,8 @@
       "id": "1",
       "secondUserId": "4",
       "swipeId": "1",
-      "firstUserId": "1",
-      "rideId": "1"
-    },
-    {
-      "id": "2",
-      "rideId": "3",
-      "secondUserId": "5",
-      "swipeId": "2",
-      "firstUserId": "3"
+      "rideId": "1",
+      "firstUserId": "1"
     }
   ]
 }
