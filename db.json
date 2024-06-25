@@ -4,7 +4,7 @@
       "id": "1",
       "age": 18,
       "wohnort": "Enns",
-      "zitat": "yolo ride",
+      "zitat": "You'll always get home safely",
       "pictureURL": "../assets/images/yasin.jpg",
       "name": "Yasin",
       "pos_longitude": 0,
@@ -16,7 +16,7 @@
       "id": "2",
       "age": 18,
       "wohnort": "Thening",
-      "zitat": "go fast or go home",
+      "zitat": "Go fast or go home",
       "pictureURL": "./assets/images/nati.jpeg",
       "name": "Nati",
       "pos_longitude": 0,
@@ -28,7 +28,7 @@
       "id": "3",
       "age": 18,
       "wohnort": "Enns",
-      "zitat": "überholspur einzige spur",
+      "zitat": "Überholspur is einzige Spur",
       "pictureURL": "./assets/images/tommy.jpeg",
       "name": "Tommy",
       "pos_longitude": 0,
@@ -40,7 +40,7 @@
       "id": "4",
       "age": 18,
       "wohnort": "Enns",
-      "zitat": "langsam is besser",
+      "zitat": "Langsamer is besser",
       "pictureURL": "./assets/images/felix.jpeg",
       "name": "Felix",
       "pos_longitude": 0,
@@ -52,7 +52,7 @@
       "id": "5",
       "age": 25,
       "wohnort": "Enns",
-      "zitat": "zitter nicht",
+      "zitat": "Zitter nicht",
       "pictureURL": "./assets/images/andrei.jpg",
       "name": "Andrei",
       "pos_longitude": 0,
@@ -64,7 +64,7 @@
       "id": "6",
       "age": 21,
       "wohnort": "Enns",
-      "zitat": "lieber verspätet als tot",
+      "zitat": "Lieber verspätet als tot",
       "pictureURL": "./assets/images/raphi.jpg",
       "name": "Raphi",
       "pos_longitude": 0,
@@ -150,7 +150,7 @@
       "firstUserId": "3",
       "secondUserId": "5",
       "firstAnswer": true,
-      "secondAnswer": true
+      "secondAnswer": null
     },
     {
       "id": "3",
@@ -172,24 +172,17 @@
   "matches": [
     {
       "id": "1",
-      "secondUserId": "4",
-      "swipeId": "1",
-      "rideId": "1",
-      "firstUserId": "1"
+      "firstUserId": "3",
+      "swipeId": "3",
+      "secondUserId": "6",
+      "rideId": "3"
     },
     {
       "id": "2",
-      "rideId": "3",
-      "firstUserId": "3",
-      "swipeId": "2",
-      "secondUserId": "5"
-    },
-    {
-      "id": "3",
-      "rideId": "3",
-      "secondUserId": "6",
-      "firstUserId": "3",
-      "swipeId": "3"
+      "rideId": "1",
+      "swipeId": "1",
+      "secondUserId": "4",
+      "firstUserId": "1"
     }
   ]
 }

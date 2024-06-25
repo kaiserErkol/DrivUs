@@ -42,7 +42,7 @@ struct PersonDetailView: View {
                             Text("Anfrage senden")
                                 .foregroundColor(.white)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.darkDrivusBlue)
                                 .cornerRadius(10)
                         }
 
