@@ -149,33 +149,54 @@
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "5",
-      "firstAnswer": null,
-      "secondAnswer": null
+      "firstAnswer": true,
+      "secondAnswer": true
     },
     {
       "id": "3",
       "rideId": "3",
       "firstUserId": "3",
       "secondUserId": "6",
-      "firstAnswer": null,
-      "secondAnswer": null
+      "firstAnswer": true,
+      "secondAnswer": true
     },
     {
       "id": "4",
       "rideId": "5",
       "firstUserId": "5",
       "secondUserId": "6",
-      "firstAnswer": null,
-      "secondAnswer": null
+      "firstAnswer": true,
+      "secondAnswer": true
     }
   ],
   "matches": [
     {
       "id": "1",
+      "firstUserId": "1",
       "rideId": "1",
       "swipeId": "1",
-      "firstUserId": "1",
       "secondUserId": "4"
+    },
+    {
+      "id": "2",
+      "secondUserId": "5",
+      "swipeId": "2",
+      "firstUserId": "3",
+      "rideId": "3"
+    },
+    {
+      "id": "3",
+      "rideId": "3",
+      "swipeId": "3",
+      "firstUserId": "3",
+      "secondUserId": "6"
+    },
+    {
+      "id": "4",
+      "swipeId": "4",
+      "rideId": "5",
+      "firstUserId": "5",
+      "secondUserId": "6"
     }
   ]
 }

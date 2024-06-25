@@ -23,6 +23,7 @@
 		FA6D79662B97A9DD0054535A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D79652B97A9DD0054535A /* LocationManager.swift */; };
 		FA8251472C13A5DE00ADD1AF /* MatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8251462C13A5DE00ADD1AF /* MatchManager.swift */; };
 		FAC3495C2C05BBA900A1F247 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3495B2C05BBA900A1F247 /* UserService.swift */; };
+		FAE1E4272C2ADD300037DBAE /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1E4262C2ADD300037DBAE /* PersonDetailView.swift */; };
 		FAF6E6072B970BF600CAAD7E /* DrivUsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E6062B970BF600CAAD7E /* DrivUsApp.swift */; };
 		FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6E6082B970BF600CAAD7E /* ContentView.swift */; };
 		FAF6E60B2B970BF800CAAD7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF6E60A2B970BF800CAAD7E /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		FA6D79652B97A9DD0054535A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FA8251462C13A5DE00ADD1AF /* MatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchManager.swift; sourceTree = "<group>"; };
 		FAC3495B2C05BBA900A1F247 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		FAE1E4262C2ADD300037DBAE /* PersonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailView.swift; sourceTree = "<group>"; };
 		FAF6E6032B970BF600CAAD7E /* DrivUs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrivUs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF6E6062B970BF600CAAD7E /* DrivUsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivUsApp.swift; sourceTree = "<group>"; };
 		FAF6E6082B970BF600CAAD7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				E01329E42BBD014C007D6F30 /* MatchView.swift */,
 				E01573C82BC61241009588A1 /* SwipeView.swift */,
 				E0E5CF3B2C08944F005730C3 /* UserView.swift */,
+				FAE1E4262C2ADD300037DBAE /* PersonDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				FA6BF4162BE0CC6900D08CF7 /* RidesService.swift in Sources */,
 				E0E5CF3C2C08944F005730C3 /* UserView.swift in Sources */,
 				FAC3495C2C05BBA900A1F247 /* UserService.swift in Sources */,
+				FAE1E4272C2ADD300037DBAE /* PersonDetailView.swift in Sources */,
 				FAF6E6092B970BF600CAAD7E /* ContentView.swift in Sources */,
 				E04703112BFD043F0071131C /* SwipesService.swift in Sources */,
 				E01573C92BC61241009588A1 /* SwipeView.swift in Sources */,
