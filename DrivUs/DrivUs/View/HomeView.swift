@@ -10,7 +10,7 @@ struct HomeView: View {
                 .frame(width: 300, height: 300)
                 .padding(.bottom, -70)
                 .foregroundColor(.white)
-                .padding(.top, 10)
+                .padding(.top, -10)
                 .shadow(color: .white, radius: -15, x: 5, y: 5)
                 
             VStack(spacing: -15) {

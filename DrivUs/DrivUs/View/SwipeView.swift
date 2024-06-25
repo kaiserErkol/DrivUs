@@ -64,6 +64,7 @@ struct SwipeView: View {
                             .clipShape(Circle())
                     }
                 }
+                .shadow(radius: 0)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.darkDrivusBlue.edgesIgnoringSafeArea(.all))
             } else {
@@ -117,9 +118,11 @@ struct SwipeView: View {
                                     Text("\(rideByCurrSwipe.startpunkt_ort) - \(rideByCurrSwipe.endpunkt_ort)")
                                         .padding(.top, 20)
                                         .foregroundColor(.white)
+                                        .fontWeight(.bold)
+                                        .font(.title2)
                                         .kerning(7)
                                     
-                                    Text("User: \(userById.name)")
+                                    Text("\(userById.name)")
                                         .padding(5)
                                         .foregroundColor(.white)
                                 }

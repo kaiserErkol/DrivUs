@@ -27,40 +27,35 @@ struct PersonView: View {
                             Image("\(userById?.name ?? "Unknown")")
                                 .resizable()
                                 .frame(width: 70, height: 70)
-                                .background(Color.drivusBlue)
-                                .foregroundColor(.white)
+                                .foregroundColor(.darkDrivusBlue)
                                 .clipShape(Circle())
                                 .padding(.top,2)
                                 .padding(.bottom,2)
                             
                             VStack(alignment: .leading) {
                                 Text(" \(userById?.name ?? "Unknown")")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.darkDrivusBlue)
                                     .font(.title)
-                                Text("   \(viewModel_rides.getRideById(match.rideId)?.startpunkt_ort ?? "Unknown") - \(viewModel_rides.getRideById(match.rideId)?.endpunkt_ort ?? "Unknown")")
+                                Text("\(viewModel_rides.getRideById(match.rideId)?.startpunkt_ort ?? "Unknown") - \(viewModel_rides.getRideById(match.rideId)?.endpunkt_ort ?? "Unknown")")
                                     .font(.body)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.drivusBlue)
                             }
                         }
-                        
-                        .padding(10)
-                        .background(Color(UIColor.drivusBlue))
                         .cornerRadius(10)
-                        .shadow(color: Color.darkDrivusBlue.opacity(0.1), radius: 5, x: 0, y: 2)
-                         
                     }
                 }
                 .navigationTitle("Meine Matches")
-                .padding(.top,10)
-                .listStyle(InsetGroupedListStyle())
+                .foregroundColor(.drivusBlue)
+                .padding(.top,30)
                 .navigationTitle("Meine Matches")
+                .foregroundColor(.drivusBlue)
                 .task {
                     viewModel_matches.fetchUserMatches(viewModel_user.loggedUser)
                 }
                 .navigationDestination(for: Model.MatchModel.Match.self, destination: { match in
                     PersonDetailView(viewModelRides: viewModel_rides, match: match)
                 })
-            }.navigationViewStyle(StackNavigationViewStyle())
+            }
         }
     }
 }

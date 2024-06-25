@@ -29,10 +29,10 @@ struct UserView: View {
                         .cornerRadius(20)
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .padding(.bottom, -15)
+                        .padding(.bottom, -20)
                         .padding(.top,60)
                     Text("logge dich bitte ein um fortzufahren")
-                        .foregroundColor(.black)
+                        .foregroundColor(.drivusBlue)
                         .padding(.horizontal,10)
                         .padding(.vertical,10)
                         .font(.caption)
@@ -67,77 +67,80 @@ struct UserView: View {
                 VStack {
                     
                     //buttons
+                    VStack{
+                        Button(action: {viewModel_user.setLoginUser(Model.UserModel.DefaultUser.default.id)
+                            sent = false
+                        }) {
+                            Text("ausloggen")
+                                .foregroundColor(.darkDrivusBlue)
+                                .padding(6)
+                                .background(Color.white)
+                                .cornerRadius(8)
+                        }.shadow(color: .darkDrivusBlue, radius: 2, y: 2).padding(.trailing, 250).padding(.top,-50)
+                        
+                        Image("\(viewModel_user.loggedUser.name)")
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                            .background(Color.drivusBlue)
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .padding(.top,-20)
+                            .padding(.bottom,0)
+                        
+                        Text("\(viewModel_user.loggedUser.name)")
+                            .padding(6)
+                            .padding(.horizontal,60)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .font(.largeTitle)
+                        
+                        Text("\(viewModel_user.loggedUser.zitat)")
+                            .padding(.bottom,30)
+                            .padding(.top,10)
+                            .foregroundColor(.white)
+                            .fontWeight(.light)
+                    }.background(
+                        Image("Userback")
+                            .resizable()
+                            .frame(width: 400, height: 430)
+                    )
                     
-                    Image("\(viewModel_user.loggedUser.name)")
-                        .resizable()
-                        .frame(width: 200, height: 200)
-                        .background(Color.drivusBlue)
-                        .foregroundColor(.white)
-                        .clipShape(Circle())
-                        .padding(.top,50)
-                        .padding(.bottom,10)
                     
-                    Text("\(viewModel_user.loggedUser.name)")
-                        .padding(5)
-                        .padding(.horizontal,60)
-                        .background(.white)
-                        .foregroundColor(.darkDrivusBlue)
-                        .cornerRadius(10)
-                        .font(.title)
-                    
-                    Text("' \(viewModel_user.loggedUser.zitat) '")
-                        .padding(.bottom,30)
-                        .padding(.top,10)
-                        .foregroundColor(.black)
-                    
-                    VStack(spacing:20){
+                    VStack(spacing: 10) {
                         Text("Alter: \(viewModel_user.loggedUser.age)")
                             .padding(10)
-                        
-                            .background(.darkDrivusBlue)
+                            .background(Color.darkDrivusBlue)
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 10, y: 10)
                             .cornerRadius(10)
                             .font(.subheadline)
-                            .frame(minWidth: 300, maxWidth: 450)
-                            .frame(idealHeight: 100)
+                            .frame(width: 1000)
+
                         
                         Text("Wohnort: \(viewModel_user.loggedUser.wohnort)")
                             .padding(10)
-                            .background(.darkDrivusBlue)
-                        
+                            .background(Color.darkDrivusBlue)
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 10, y: 10)
                             .cornerRadius(10)
                             .font(.subheadline)
-                            .frame(minWidth: 300, maxWidth: 450)
-                            .frame(idealHeight: 100)
+                            .frame(width: 1000)
                         
-                        Text("Fahrer: \(viewModel_user.loggedUser.driver ? "Gelegentlich" : "Nein")")
+                        Text("Fahrer: \(viewModel_user.loggedUser.driver ? "Ja" : "Nein")")
                             .padding(10)
-                        
-                            .background(.darkDrivusBlue)
+                            .background(Color.darkDrivusBlue)
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 10, y: 10)
                             .cornerRadius(10)
                             .font(.subheadline)
-                            .frame(minWidth: 300, maxWidth: 450)
-                            .frame(idealHeight: 100)
-                        
-                    }.padding(.bottom,50)
-                    
+                            .frame(width: 1000)
+
+                    }
+                    .padding(.top, 100)
                     
                     // check or x
                     
-                    Button(action: {viewModel_user.setLoginUser(Model.UserModel.DefaultUser.default.id)
-                        sent = false
-                    }) {
-                        Text("ausloggen")
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .background(Color.drivusBlue)
-                            .cornerRadius(8)
-                    }.shadow(color: .darkDrivusBlue, radius: 2, y: 2)
+                    
                 }
             }
         }
