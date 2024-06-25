@@ -44,84 +44,77 @@ struct UserView: View {
                     
                     Image("\(viewModel_user.loggedUser.name)")
                         .resizable()
-                        .frame(width: 220, height: 220)
+                        .frame(width: 200, height: 200)
                         .background(Color.drivusBlue)
                         .foregroundColor(.white)
                         .clipShape(Circle())
                         .padding(.top,50)
-                        .padding(.bottom,30)
-                    Button(action: {
-                        viewModel_user.setLoginUser(Model.UserModel.DefaultUser.default.id)
-                        sent = false
-                    }) {
-                        Text("ausloggen")
-                            .foregroundColor(.white)
-                            .padding(6)
-                            .background(Color.drivusBlue)
-                            .cornerRadius(8)
-                    }
+                        .padding(.bottom,10)
+                    
                     Text("\(viewModel_user.loggedUser.name)")
                         .padding(5)
                         .padding(.horizontal,60)
                         .background(.white)
-                        .foregroundColor(.black)
+                        .foregroundColor(.darkDrivusBlue)
                         .cornerRadius(10)
                         .font(.title)
-                        .fontWeight(.light)
+                    
                     Text("' \(viewModel_user.loggedUser.zitat) '")
-                        .padding(30)
+                        .padding(.bottom,30)
+                        .padding(.top,10)
                         .foregroundColor(.black)
                     
                     VStack(spacing:20){
-                        Text("age: \(viewModel_user.loggedUser.age)")
+                        Text("Alter: \(viewModel_user.loggedUser.age)")
                             .padding(10)
-                            .padding(.horizontal,100)
-                            .background(.darkDrivusBlue)
-                            .foregroundColor(.white)
-                            .shadow(color: .black, radius: 10, y: 10)
-                            .cornerRadius(10)
-                            .font(.subheadline)
-                            .fontWeight(.ultraLight)
-                        Text("wohnort: \(viewModel_user.loggedUser.wohnort)")
-                            .padding(10)
-                            .padding(.horizontal,70)
-                            .background(Color.darkDrivusBlue)
-                            .foregroundColor(.white)
-                            .shadow(color: .black, radius: 10, y: 10)
-                            .cornerRadius(10)
-                            .font(.subheadline)                    .fontWeight(.ultraLight)
-                        Text("Driver: \(viewModel_user.loggedUser.driver ? "Yes" : "No")")
-                            .padding(10)
-                            .padding(.horizontal,100)
-                            .background(.darkDrivusBlue)
-                            .foregroundColor(.white)
-                            .shadow(color: .black, radius: 20, y: 10)
-                            .cornerRadius(10)
-                            .font(.subheadline)
-                            .fontWeight(.ultraLight)
                         
-                    }.frame(width: 400)
-
+                            .background(.darkDrivusBlue)
+                            .foregroundColor(.white)
+                            .shadow(color: .black, radius: 10, y: 10)
+                            .cornerRadius(10)
+                            .font(.subheadline)
+                            .frame(minWidth: 300, maxWidth: 450)
+                            .frame(idealHeight: 100)
+                        
+                        Text("Wohnort: \(viewModel_user.loggedUser.wohnort)")
+                            .padding(10)
+                            .background(.darkDrivusBlue)
+                        
+                            .foregroundColor(.white)
+                            .shadow(color: .black, radius: 10, y: 10)
+                            .cornerRadius(10)
+                            .font(.subheadline)
+                            .frame(minWidth: 300, maxWidth: 450)
+                            .frame(idealHeight: 100)
+                        
+                        Text("Fahrer: \(viewModel_user.loggedUser.driver ? "Gelegentlich" : "Nein")")
+                            .padding(10)
+                        
+                            .background(.darkDrivusBlue)
+                            .foregroundColor(.white)
+                            .shadow(color: .black, radius: 10, y: 10)
+                            .cornerRadius(10)
+                            .font(.subheadline)
+                            .frame(minWidth: 300, maxWidth: 450)
+                            .frame(idealHeight: 100)
+                        
+                    }.padding(.bottom,50)
+                    
+                    
                     // check or x
                     
+                    Button(action: {viewModel_user.setLoginUser(Model.UserModel.DefaultUser.default.id)
+                        sent = false
+                    }) {
+                        Text("ausloggen")
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .background(Color.drivusBlue)
+                            .cornerRadius(8)
+                    }.shadow(color: .darkDrivusBlue, radius: 2, y: 2)
                 }
-                .foregroundColor(.white)
-                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                .padding(150)
-                .padding(.bottom,150)
-                .padding(.top,100)
-                .background(.white)
-                .frame(height: UIScreen.main.bounds.height*1.5)
-                .ignoresSafeArea()
-                .cornerRadius(20)
-                .shadow(color: .white, radius: 15,x:-0,y:-5)
-                .frame(width: UIScreen.main.bounds.width)
-                
-                
-                Spacer()
             }
         }
-        
         
     }
 }
