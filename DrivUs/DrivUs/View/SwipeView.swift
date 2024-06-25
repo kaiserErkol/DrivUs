@@ -8,6 +8,7 @@ struct SwipeView: View {
     @ObservedObject var viewModelMatches: ViewModel_Matches
     
     @State private var showSwipeByIndex: Int = 0
+    @State private var matchfinished = false
     
     @StateObject var locationManager = LocationManager()
     @State var userLocations: [UserLocation] = []
@@ -20,106 +21,127 @@ struct SwipeView: View {
     
     var body: some View {
         ZStack {
-            VStack(spacing: 0) {
-                if viewModelSwipes.newMatch {
-                    //ITS A MATCH VIEW ANZEIGEN LASSEN
-                    Text("IT A MATCH")
-                }
-            }
-            
-            VStack(spacing: 0) {
-                if showSwipeByIndex < viewModelSwipes.swipes.count {
-                    let swipe = viewModelSwipes.swipes[showSwipeByIndex]
-                    let loggedUserId = viewModelUser.loggedUser.id
-                    let userSwipeId = (swipe.firstUserId != loggedUserId) ? swipe.firstUserId : swipe.secondUserId
+            if viewModelSwipes.newMatch && !matchfinished {
+                VStack {
+                    Text("It's a Match!")
+                        .font(.largeTitle)
+                        .padding()
                     
-                    if let rideByCurrSwipe = viewModelRides.fetchRideByUser(userSwipeId),
-                       let userById = viewModelUser.fetchUserById(rideByCurrSwipe.user_id) {
-
-                        MapView(
-                            sp_latitude: rideByCurrSwipe.startpunkt_latitude,
-                            sp_longitude: rideByCurrSwipe.startpunkt_longitude,
-                            ep_latitude: rideByCurrSwipe.endpunkt_latitude,
-                            ep_longitude: rideByCurrSwipe.endpunkt_longitude,
-                            startName: rideByCurrSwipe.startpunkt_ort,
-                            endName: rideByCurrSwipe.endpunkt_ort
-                        )
+                    Button(action: {
+                        matchfinished = true
+                    }) {
+                        Image(systemName: "xmark")
+                            .padding()
+                            .background(Color.white)
+                            .foregroundColor(.black)
+                            .clipShape(Circle())
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black.opacity(0.5).edgesIgnoringSafeArea(.all))
+            } else {
+                VStack(spacing: 0) {
+                    if showSwipeByIndex < viewModelSwipes.swipes.count {
+                        let swipe = viewModelSwipes.swipes[showSwipeByIndex]
+                        let loggedUserId = viewModelUser.loggedUser.id
+                        let userSwipeId = (swipe.firstUserId != loggedUserId) ? swipe.firstUserId : swipe.secondUserId
                         
-                        Color.drivusBlue.overlay(
-                            VStack {
-                                // Buttons
-                                HStack(spacing: 100) {
-                                    Button(action: {
-                                        rejectRide(swipe)
-                                    }) {
-                                        Image(systemName: "xmark")
-                                            .padding()
-                                            .background(Color.white)
-                                            .foregroundColor(.black)
-                                            .clipShape(Circle())
-                                    }
-                                    
-                                    Button(action: {
-                                        acceptSwipe(swipe)
-                                    }) {
-                                        Image(systemName: "checkmark")
-                                            .padding()
-                                            .background(Color.white)
-                                            .foregroundColor(.black)
-                                            .clipShape(Circle())
-                                    }
-                                }
-                                .padding(.top, 5)
-                                .background(Color.drivusBlue)
-                                
-                                Text("\(rideByCurrSwipe.startpunkt_ort) - \(rideByCurrSwipe.endpunkt_ort)")
-                                    .padding(.top, 20)
-                                    .foregroundColor(.white)
-                                    .kerning(7)
-                                
-                                Text("User: \(userById.name)")
-                                    .padding(5)
-                                    .foregroundColor(.white)
-                            }
-                            .frame(width: UIScreen.main.bounds.width)
-                            .padding(.bottom, 10)
-                            .background(Color.drivusBlue)
-                            .cornerRadius(40)
-                            .gesture(
-                                DragGesture()
-                                    .onEnded { gesture in
-                                        if gesture.translation.width < -100 {
-                                            // Swipe Left
+                        if let rideByCurrSwipe = viewModelRides.fetchRideByUser(userSwipeId),
+                           let userById = viewModelUser.fetchUserById(rideByCurrSwipe.user_id) {
+                            
+                            MapView(
+                                sp_latitude: rideByCurrSwipe.startpunkt_latitude,
+                                sp_longitude: rideByCurrSwipe.startpunkt_longitude,
+                                ep_latitude: rideByCurrSwipe.endpunkt_latitude,
+                                ep_longitude: rideByCurrSwipe.endpunkt_longitude,
+                                startName: rideByCurrSwipe.startpunkt_ort,
+                                endName: rideByCurrSwipe.endpunkt_ort
+                            )
+                            
+                            Color.drivusBlue.overlay(
+                                VStack {
+                                    // Buttons
+                                    HStack(spacing: 100) {
+                                        Button(action: {
                                             rejectRide(swipe)
-                                        } else if gesture.translation.width > 100 {
-                                            // Swipe Right
+                                        }) {
+                                            Image(systemName: "xmark")
+                                                .padding()
+                                                .background(Color.white)
+                                                .foregroundColor(.black)
+                                                .clipShape(Circle())
+                                        }
+                                        
+                                        Button(action: {
                                             acceptSwipe(swipe)
+                                        }) {
+                                            Image(systemName: "checkmark")
+                                                .padding()
+                                                .background(Color.white)
+                                                .foregroundColor(.black)
+                                                .clipShape(Circle())
                                         }
                                     }
+                                    .padding(.top, 5)
+                                    .background(Color.drivusBlue)
+                                    
+                                    Text("\(rideByCurrSwipe.startpunkt_ort) - \(rideByCurrSwipe.endpunkt_ort)")
+                                        .padding(.top, 20)
+                                        .foregroundColor(.white)
+                                        .kerning(7)
+                                    
+                                    Text("User: \(userById.name)")
+                                        .padding(5)
+                                        .foregroundColor(.white)
+                                }
+                                .frame(width: UIScreen.main.bounds.width)
+                                .padding(.bottom, 10)
+                                .background(Color.drivusBlue)
+                                .cornerRadius(40)
+                                .gesture(
+                                    DragGesture()
+                                        .onEnded { gesture in
+                                            if gesture.translation.width < -100 {
+                                                // Swipe Left
+                                                rejectRide(swipe)
+                                            } else if gesture.translation.width > 100 {
+                                                // Swipe Right
+                                                acceptSwipe(swipe)
+                                            }
+                                        }
+                                )
                             )
-                        )
-                        
+                            
+                        } else {
+                            Text("No ride found")
+                                .padding()
+                                .foregroundColor(.white)
+                        }
                     } else {
-                        Text("No ride found")
+                        Text("No available Rides found")
                             .padding()
                             .foregroundColor(.white)
+                            .background(Color.drivusBlue)
+                            .cornerRadius(70)
+                            .padding(.top, 350)
                     }
-                } else {
-                    Text("No available Rides found")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.drivusBlue)
-                        .cornerRadius(70)
-                        .padding(.top, 350)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .cornerRadius(20)
             }
-            .frame(width: UIScreen.main.bounds.width)
-            .cornerRadius(20)
         }
         .task {
             viewModelSwipes.fetchUserSwipes(viewModelUser.loggedUser)
+            if viewModelSwipes.newMatch {
+                matchfinished = false
+            }
+        }
+        .onChange(of: viewModelSwipes.newMatch) { newValue in
+            if newValue {
+                matchfinished = false
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.bottom, 20)
@@ -128,7 +150,7 @@ struct SwipeView: View {
     
     private func acceptSwipe(_ swipe: Model.SwipeModel.Swipe) {
         viewModelSwipes.answerSwipe(swipeId: swipe.id, answer: true, user: viewModelUser.loggedUser, fetchAllMatches: viewModelMatches.fetchAllMatches, fetchUserMatches: viewModelMatches.fetchUserMatches)
-            
+        
         showSwipeByIndex += 1
     }
     
