@@ -9,6 +9,9 @@ struct SwipeView: View {
     
     @State private var showSwipeByIndex: Int = 0
     @State private var matchfinished = false
+    @State private var firstname = "user1"
+    @State private var secondname = "user2"
+
     
     @StateObject var locationManager = LocationManager()
     @State var userLocations: [UserLocation] = []
@@ -22,11 +25,35 @@ struct SwipeView: View {
     var body: some View {
         ZStack {
             if viewModelSwipes.newMatch && !matchfinished {
+
                 VStack {
                     Text("It's a Match!")
                         .font(.largeTitle)
                         .padding()
-                    
+                        .foregroundColor(.white)
+                    HStack(spacing: 20){
+                        if let lastMatch = viewModelMatches.matches.last {
+                                                    Image("\(viewModelUser.getUserById(lastMatch.firstUserId)?.name ?? "user1")")
+                                                        .resizable()
+                                                        .frame(width: 120, height: 120)
+                                                        .background(Color.drivusBlue)
+                                                        .foregroundColor(.white)
+                                                        .clipShape(Circle())
+                                                        .padding(.top, 20)
+                                                        .padding(.bottom, 20)
+                                                    Image("\(viewModelUser.getUserById(lastMatch.secondUserId)?.name ?? "user2")")
+                                                        .resizable()
+                                                        .frame(width: 120, height: 120)
+                                                        .background(Color.drivusBlue)
+                                                        .foregroundColor(.white)
+                                                        .clipShape(Circle())
+                                                        .padding(.top, 20)
+                                                        .padding(.bottom, 20)
+                                                } else {
+                                                    Text("No matches available")
+                                                        .foregroundColor(.white)
+                                                }
+                    }
                     Button(action: {
                         matchfinished = true
                     }) {
@@ -38,13 +65,15 @@ struct SwipeView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.black.opacity(0.5).edgesIgnoringSafeArea(.all))
+                .background(Color.darkDrivusBlue.edgesIgnoringSafeArea(.all))
             } else {
                 VStack(spacing: 0) {
                     if showSwipeByIndex < viewModelSwipes.swipes.count {
                         let swipe = viewModelSwipes.swipes[showSwipeByIndex]
                         let loggedUserId = viewModelUser.loggedUser.id
                         let userSwipeId = (swipe.firstUserId != loggedUserId) ? swipe.firstUserId : swipe.secondUserId
+                        
+                        //for ITS A MATCH
                         
                         if let rideByCurrSwipe = viewModelRides.fetchRideByUser(userSwipeId),
                            let userById = viewModelUser.fetchUserById(rideByCurrSwipe.user_id) {
